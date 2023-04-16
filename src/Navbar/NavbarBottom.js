@@ -586,7 +586,7 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 									منتجاتنا
 								</span>
 							) : (
-								"Our Products"
+								"Our Products Ahowan"
 							)}
 						</Link>
 					</li>
