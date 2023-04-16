@@ -38,8 +38,6 @@ const Home = ({ chosenLanguage }) => {
 					),
 				);
 
-				console.log(data, "Ahowan");
-
 				//Categories Unique
 				var categoriesArray = data
 					.filter(
@@ -74,7 +72,8 @@ const Home = ({ chosenLanguage }) => {
 					.filter(
 						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
 					)
-					.map((ii) => ii.gender);
+					.map((ii) => ii.gender)
+					.filter((iii) => iii !== null);
 
 				let uniqueGenders = [
 					...new Map(

@@ -511,6 +511,7 @@ export const gettingAllProducts = (
 				var categoriesArray = requiredProducts2
 					.filter(
 						(iii) =>
+							iii.gender &&
 							iii.gender.genderName.toLowerCase() === urlFilters.toLowerCase(),
 					)
 					.filter((i) => i.activeProduct === true)
@@ -587,7 +588,8 @@ export const gettingAllProducts = (
 
 			//Gender Unique
 			var genderUnique =
-				requiredProducts2 && requiredProducts2.map((ii) => ii.gender);
+				requiredProducts2 &&
+				requiredProducts2.map((ii) => ii.gender).filter((iii) => iii !== null);
 
 			let uniqueGenders = [
 				...new Map(

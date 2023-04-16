@@ -79,7 +79,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 					.filter(
 						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
 					)
-					.map((ii) => ii.gender);
+					.map((ii) => ii.gender)
+					.filter((iii) => iii !== null);
 
 				let uniqueGenders = [
 					...new Map(
@@ -95,8 +96,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						(i) =>
 							i.activeProduct === true &&
 							i.storeName.storeName !== "ace" &&
-							genderClicked.genderName.toLowerCase() ===
-								i.gender.genderName.toLowerCase(),
+							genderClicked.genderName.toLowerCase() === i.gender &&
+							i.gender.genderName.toLowerCase(),
 					)
 					.map((ii) => ii.category);
 
@@ -127,8 +128,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						(i) =>
 							i.activeProduct === true &&
 							i.storeName.storeName !== "ace" &&
-							genderClicked.genderName.toLowerCase() ===
-								i.gender.genderName.toLowerCase(),
+							genderClicked.genderName.toLowerCase() === i.gender &&
+							i.gender.genderName.toLowerCase(),
 					)
 					.map((ii) => ii.category);
 
