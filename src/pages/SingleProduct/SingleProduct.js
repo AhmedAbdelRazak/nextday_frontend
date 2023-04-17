@@ -612,42 +612,6 @@ const SingleProduct = (props) => {
 
 	return (
 		<SingleEmp className='mx-auto'>
-			<Helmet itemscope itemtype='http://schema.org/Product'>
-				<script type='application/ld+json'>
-					{`
-            {
-              "@context": "http://schema.org/",
-              "@type": "Product",
-              "name":  ${Product.productName},
-              "image": ${productImage},
-              "description": ${Product.description},
-              "brand": {
-                "@type": ${mainCategoryName},
-                "name": ${mainStoreName}
-              },
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "EGP",
-                "price": ${Number(mainProductPrice)},
-                "itemCondition": "https://schema.org/NewCondition",
-                "availability": "https://schema.org/InStock"
-              }
-            }
-          `}
-				</script>
-				<meta charSet='utf-8' />
-				<title>{titleName}</title>
-
-				<meta name='description' content={Product.description} />
-				<link
-					rel='stylesheet'
-					href='http://fonts.googleapis.com/earlyaccess/droidarabickufi.css'
-				/>
-				<link
-					rel='canonical'
-					href={`https://acesportive.com${window.location.pathname}`}
-				/>
-			</Helmet>
 			{loading && !Product ? (
 				<>
 					<div
@@ -662,6 +626,40 @@ const SingleProduct = (props) => {
 				</>
 			) : (
 				<>
+					<Helmet itemscope itemtype='http://schema.org/Product'>
+						<script type='application/ld+json'>
+							{`
+            {
+              "@context": "http://schema.org/",
+              "@type": "Product",
+              "name":  ${Product.productName},
+			  "id": ${Product._id},
+              "image": ${productImage},
+              "description": ${Product.description},
+              "brand": {
+                "@type": ${mainCategoryName},
+                "name": ${mainStoreName}
+              },
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "EGP",
+                "price": ${Number(mainProductPrice)},
+				"availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          `}
+						</script>
+						<meta charSet='utf-8' />
+						<title>{titleName}</title>
+
+						<meta name='description' content={Product.description} />
+						<link
+							rel='stylesheet'
+							href='http://fonts.googleapis.com/earlyaccess/droidarabickufi.css'
+						/>
+					</Helmet>
 					<SizeChartModal
 						modalVisible2={modalVisible2}
 						setModalVisible2={setModalVisible2}
