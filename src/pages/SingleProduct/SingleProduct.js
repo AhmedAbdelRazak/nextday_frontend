@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import ReactPixel from "react-facebook-pixel";
+import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import {
 	userlike,
@@ -574,18 +574,18 @@ const SingleProduct = (props) => {
 
 	// console.log(window.location.search.split("=")[1], "window.location.search");
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
@@ -594,9 +594,42 @@ const SingleProduct = (props) => {
 		// eslint-disable-next-line
 	}, [window.location.pathname, window.location.search]);
 
+	const productImage =
+		Product &&
+		Product.thumbnailImage &&
+		Product.thumbnailImage[0] &&
+		Product.thumbnailImage[0].images[0].url;
+
+	const mainProductPrice =
+		Product &&
+		Product.productAttributes &&
+		Product.productAttributes.map((i) => i.priceAfterDiscount)[0];
+
 	return (
 		<SingleEmp className='mx-auto'>
 			<Helmet itemscope itemtype='http://schema.org/Product'>
+				<script type='application/ld+json'>
+					{`
+            {
+              "@context": "http://schema.org/",
+              "@type": "Product",
+              "name":  ${Product.productName},
+              "image": ${productImage},
+              "description": ${Product.description},
+              "brand": {
+                "@type": ${Product.category.categoryName},
+                "name": ${Product.storeName.storeName}
+              },
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "EGP",
+                "price": ${Number(mainProductPrice)},
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          `}
+				</script>
 				<meta charSet='utf-8' />
 				<title>{titleName}</title>
 
@@ -612,41 +645,6 @@ const SingleProduct = (props) => {
 			</Helmet>
 			{loading && !Product ? (
 				<>
-					<div itemscope itemtype='http://schema.org/Product'>
-						<meta itemprop='brand' content='Ace Sports Wear' />
-						<meta itemprop='name' content={Product.productName} />
-						<meta itemprop='description' content={Product.description} />
-						<meta itemprop='productID' content={Product.productSKU} />
-						<meta
-							itemprop='url'
-							content={`https://acesportive.com${window.location.pathname}`}
-						/>
-						<meta
-							itemprop='image'
-							content={
-								Product &&
-								Product.thumbnailImage &&
-								Product.thumbnailImage[0] &&
-								Product.thumbnailImage[0].images
-									? Product.thumbnailImage[0].images[0].url
-									: null
-							}
-						/>
-
-						<div itemprop='offers' itemscope itemtype='http://schema.org/Offer'>
-							<link itemprop='availability' href='available' />
-							<link itemprop='itemCondition' href='New' />
-							<meta
-								itemprop='price'
-								content={
-									Product &&
-									Product.productAttributes &&
-									Product.productAttributes.map((i) => i.priceAfterDiscount)[0]
-								}
-							/>
-							<meta itemprop='priceCurrency' content='EGP' />
-						</div>
-					</div>
 					<div
 						style={{
 							marginTop: "20%",
@@ -668,41 +666,7 @@ const SingleProduct = (props) => {
 						modalVisible3={modalVisible3}
 						setModalVisible3={setModalVisible3}
 					/>
-					<div itemscope itemtype='http://schema.org/Product'>
-						<meta itemprop='brand' content='Ace Sports Wear' />
-						<meta itemprop='name' content={Product.productName} />
-						<meta itemprop='description' content={Product.description} />
-						<meta itemprop='productID' content={Product.productSKU} />
-						<meta
-							itemprop='url'
-							content={`https://acesportive.com${window.location.pathname}`}
-						/>
-						<meta
-							itemprop='image'
-							content={
-								Product &&
-								Product.thumbnailImage &&
-								Product.thumbnailImage[0] &&
-								Product.thumbnailImage[0].images
-									? Product.thumbnailImage[0].images[0].url
-									: null
-							}
-						/>
 
-						<div itemprop='offers' itemscope itemtype='http://schema.org/Offer'>
-							<link itemprop='availability' href='available' />
-							<link itemprop='itemCondition' href='New' />
-							<meta
-								itemprop='price'
-								content={
-									Product &&
-									Product.productAttributes &&
-									Product.productAttributes.map((i) => i.priceAfterDiscount)[0]
-								}
-							/>
-							<meta itemprop='priceCurrency' content='EGP' />
-						</div>
-					</div>
 					<div className='row'>
 						<div className='col-md-7 text-center imageWrapper  mt-3'>
 							<DisplayImages
