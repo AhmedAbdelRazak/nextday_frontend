@@ -605,6 +605,11 @@ const SingleProduct = (props) => {
 		Product.productAttributes &&
 		Product.productAttributes.map((i) => i.priceAfterDiscount)[0];
 
+	const mainCategoryName =
+		Product && Product.category && Product.category.categoryName;
+	const mainStoreName =
+		Product && Product.storeName && Product.storeName.storeName;
+
 	return (
 		<SingleEmp className='mx-auto'>
 			<Helmet itemscope itemtype='http://schema.org/Product'>
@@ -617,8 +622,8 @@ const SingleProduct = (props) => {
               "image": ${productImage},
               "description": ${Product.description},
               "brand": {
-                "@type": ${Product.category.categoryName},
-                "name": ${Product.storeName.storeName}
+                "@type": ${mainCategoryName},
+                "name": ${mainStoreName}
               },
               "offers": {
                 "@type": "Offer",
