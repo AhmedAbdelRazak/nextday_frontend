@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useEffect, useState} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 import {Route, BrowserRouter, Switch} from "react-router-dom";
 import "./App.css";
 import {ToastContainer} from "react-toastify";
@@ -73,7 +73,7 @@ import NavbarAds from "./Navbar/NavbarAds";
 import {getAllAds} from "./Admin/apiAdmin";
 import AddHeroComp from "./Admin/OnlineStore/AddHeroComp";
 
-import SingleProduct from "./pages/SingleProduct/SingleProduct";
+// import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import ShopPageMain from "./pages/ShopPage/ShopPageMain";
 import Cart from "./Checkout/Cart";
 import InvoicePDF from "./Admin/Orders/InvoicePDF";
@@ -105,6 +105,9 @@ import ReturnOrExchangeOfflineStore from "./Admin/OnlineStore/ReturnAndExchange/
 import AceReceivingOffline from "./Admin/OnlineStore/AceReceiving/AceReceivingOffline";
 import InventoryOfflineStore from "./Admin/OnlineStore/Inventory/InventoryOfflineStore";
 import Test2 from "./Admin/OnlineStore/OnsiteOrderTaking/Test2";
+import {Spin} from "antd";
+
+const SingleProduct = lazy(() => import("./pages/SingleProduct/SingleProduct"));
 
 const App = () => {
 	// eslint-disable-next-line
@@ -207,11 +210,12 @@ const App = () => {
 					exact
 					component={() => <Home chosenLanguage={language} />}
 				/>
-				<Route
-					path='/product/:categoryslug/:slug/:productId'
-					exact
-					component={SingleProduct}
-				/>
+				<Suspense fallback={<Spin className='spinning-loader' size='large' />}>
+					<Route
+						path='/product/:categoryslug/:slug/:productId'
+						component={SingleProduct}
+					/>
+				</Suspense>
 				<Route path='/privacy-policy' exact component={PrivacyPolicy} />
 				<Route path='/cookie-policy' exact component={CookiePolicy} />
 				<Route path='/return-exchange-policy' exact component={RetExchPolicy} />

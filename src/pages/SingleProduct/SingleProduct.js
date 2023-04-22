@@ -627,31 +627,38 @@ const SingleProduct = (props) => {
 					<Helmet itemscope itemtype='http://schema.org/Product'>
 						<script type='application/ld+json'>
 							{`
-            {
-              "@context": "http://schema.org/",
-              "@type": "Product",
-              "name":  ${Product.productName},
-			  "id": ${Product._id},
-              "image": ${productImage},
-              "description": ${Product.description},
-              "brand": {
-                "@type": ${mainCategoryName},
-                "name": ${mainStoreName}
-              },
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "EGP",
-                "price": ${Number(mainProductPrice)},
-				"availability": "https://schema.org/InStock",
-                "itemCondition": "https://schema.org/NewCondition",
-                "availability": "https://schema.org/InStock"
-              }
-            }
-          `}
+      {
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "name": "${Product.productName}",
+        "id": "${Product._id}",
+        "image": "${productImage}",
+        "description": "${Product.description}",
+        "brand": {
+          "@type": "${mainCategoryName}",
+          "name": "${mainStoreName}"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EGP",
+          "price": "${Number(mainProductPrice)}",
+          "availability": "InStock",
+          "itemCondition": "NewCondition"
+        }
+      }
+    `}
 						</script>
+						<meta property='og:title' content={titleName} />
+						<meta property='og:description' content={Product.description} />
+						<meta property='og:image' content={productImage} />
+						<meta property='og:url' content={window.location.href} />
+						<meta property='og:type' content='product' />
+						<meta property='product:price:amount' content={mainProductPrice} />
+						<meta property='product:price:currency' content='EGP' />
+						<meta property='product:availability' content='instock' />
+						<meta property='product:condition' content='new' />
 						<meta charSet='utf-8' />
 						<title>{titleName}</title>
-
 						<meta name='description' content={Product.description} />
 						<link
 							rel='stylesheet'

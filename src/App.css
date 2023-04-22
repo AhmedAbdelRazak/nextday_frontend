@@ -187,3 +187,9 @@ body {
 .arabicFonts {
 	font-family: "Droid Arabic Kufi";
 }
+
+.spinning-loader {
+	margin-bottom: 550px !important;
+	margin-top: 150px !important;
+	margin-left: 50% !important;
+}
