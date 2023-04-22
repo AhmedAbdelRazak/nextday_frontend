@@ -1,13 +1,13 @@
 /** @format */
 
-import React, { Fragment, useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, {Fragment, useEffect, useState} from "react";
+import {Link, withRouter} from "react-router-dom";
 // eslint-disable-next-line
-import { FaTrash, FaMinus, FaPlus, FaTimes, FaRegHeart } from "react-icons/fa";
-import { BsBag } from "react-icons/bs";
-import { signout, isAuthenticated } from "../auth";
+import {FaTrash, FaMinus, FaPlus, FaTimes, FaRegHeart} from "react-icons/fa";
+import {BsBag} from "react-icons/bs";
+import {signout, isAuthenticated} from "../auth";
 import styled from "styled-components";
-import { useCartContext } from "../Checkout/cart_context";
+import {useCartContext} from "../Checkout/cart_context";
 import DarkBackground from "./DarkBackground";
 import {
 	allLoyaltyPointsAndStoreStatus,
@@ -22,7 +22,7 @@ import SigninModal from "../pages/SingleProduct/SigninModal/SigninModal";
 // import logo from "../pagesImgs/Sinai-I-Logo.jpg";
 // import myLogo from "../GeneralImages/MainLogo.png";
 
-const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
+const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 	const {
 		cart,
 		total_items,
@@ -48,7 +48,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 	const [allGenders, setAllGenders] = useState([]);
 	const [allCategories, setAllCategories] = useState([]);
 	const [modalVisible3, setModalVisible3] = useState(false);
-	const [genderClicked, setGenderClicked] = useState({ genderName: "men" });
+	const [genderClicked, setGenderClicked] = useState({genderName: "men"});
 
 	const getOnlineStoreName = () => {
 		allLoyaltyPointsAndStoreStatus().then((data) => {
@@ -60,10 +60,10 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						data[data.length - 1] &&
 						data[data.length - 1].addStoreLogo &&
 						data[data.length - 1].addStoreLogo[0] &&
-						data[data.length - 1].addStoreLogo[0],
+						data[data.length - 1].addStoreLogo[0]
 				);
 				setOnlineStoreName(
-					data && data[data.length - 1] && data[data.length - 1].addStoreName,
+					data && data[data.length - 1] && data[data.length - 1].addStoreName
 				);
 			}
 		});
@@ -76,15 +76,13 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 			} else {
 				//Gender Unique
 				var genderUnique = data
-					.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-					)
+					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.gender)
 					.filter((iii) => iii !== null);
 
 				let uniqueGenders = [
 					...new Map(
-						genderUnique.map((item) => [item["genderName"], item]),
+						genderUnique.map((item) => [item["genderName"], item])
 					).values(),
 				];
 				setAllGenders(uniqueGenders);
@@ -95,15 +93,14 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 					.filter(
 						(i) =>
 							i.activeProduct === true &&
-							i.storeName.storeName !== "ace" &&
 							genderClicked.genderName.toLowerCase() === i.gender &&
-							i.gender.genderName.toLowerCase(),
+							i.gender.genderName.toLowerCase()
 					)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -127,15 +124,14 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 					.filter(
 						(i) =>
 							i.activeProduct === true &&
-							i.storeName.storeName !== "ace" &&
 							genderClicked.genderName.toLowerCase() === i.gender &&
-							i.gender.genderName.toLowerCase(),
+							i.gender.genderName.toLowerCase()
 					)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -182,7 +178,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 				<div
 					onClick={closeSidebar}
 					className='float-right mr-3'
-					style={{ fontSize: "20px", color: "#c60e0e", cursor: "pointer" }}>
+					style={{fontSize: "20px", color: "#c60e0e", cursor: "pointer"}}
+				>
 					<FaTimes />
 				</div>
 				<div
@@ -191,18 +188,20 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						fontWeight: "bold",
 						fontSize: "1rem",
 						textDecoration: "underline",
-					}}>
+					}}
+				>
 					Shopping Bag
 				</div>
 
 				{cart && cart.length === 0 ? (
-					<div style={{ marginTop: "80px" }}>
+					<div style={{marginTop: "80px"}}>
 						<h3
 							style={{
 								textAlign: "center",
 								fontWeight: "bolder",
 								color: "darkcyan",
-							}}>
+							}}
+						>
 							Your Cart Is Empty
 						</h3>
 					</div>
@@ -211,7 +210,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						{cart.map((i, k) => {
 							var productColors =
 								i.allProductDetailsIncluded.productAttributes.map(
-									(iii) => iii.color,
+									(iii) => iii.color
 								);
 							var uniqueProductColors = [
 								...new Map(productColors.map((item) => [item, item])).values(),
@@ -219,7 +218,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 
 							var productSizes =
 								i.allProductDetailsIncluded.productAttributes.map(
-									(iii) => iii.size,
+									(iii) => iii.size
 								);
 							var uniqueProductSizes = [
 								...new Map(productSizes.map((item) => [item, item])).values(),
@@ -227,7 +226,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 
 							var chosenAttribute =
 								i.allProductDetailsIncluded.productAttributes.filter(
-									(iii) => iii.color === i.color && iii.size === i.size,
+									(iii) => iii.color === i.color && iii.size === i.size
 								)[0];
 
 							if (i.allProductDetailsIncluded.activeBackorder) {
@@ -250,7 +249,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 												<img
 													src={i.image}
 													alt={i.name}
-													style={{ width: "80px", height: "80px" }}
+													style={{width: "80px", height: "80px"}}
 												/>
 											</span>
 										</div>
@@ -262,7 +261,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginLeft: "14px",
 													textTransform: "capitalize",
 													color: "#545454",
-												}}>
+												}}
+											>
 												{i.name}
 											</div>
 											<div
@@ -273,7 +273,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginTop: "3px",
 													textTransform: "capitalize",
 													color: "#545454",
-												}}>
+												}}
+											>
 												{i.categoryName}
 											</div>
 
@@ -286,7 +287,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginLeft: "14px",
 													textTransform: "capitalize",
 													color: "#7b7b7b",
-												}}>
+												}}
+											>
 												Size:{" "}
 												<select
 													className='w-50 ml-2'
@@ -300,17 +302,18 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 																(iii) =>
 																	iii.color === i.color &&
 																	iii.size.toLowerCase() ===
-																		e.target.value.toLowerCase(),
+																		e.target.value.toLowerCase()
 															)[0];
 														changeSize(
 															i.id,
 															e.target.value,
 															i.color,
 															chosenAttribute2.quantity,
-															i.size,
+															i.size
 														);
-													}}>
-													<option style={{ textTransform: "capitalize" }}>
+													}}
+												>
+													<option style={{textTransform: "capitalize"}}>
 														{i.size}
 													</option>
 
@@ -333,7 +336,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginLeft: "14px",
 													textTransform: "capitalize",
 													color: "#7b7b7b",
-												}}>
+												}}
+											>
 												Color:{" "}
 												<select
 													className='w-50'
@@ -344,7 +348,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													onChange={(e) => {
 														var chosenColorImageHelper =
 															i.allProductDetailsIncluded.productAttributes.filter(
-																(iii) => iii.color === e.target.value,
+																(iii) => iii.color === e.target.value
 															)[0];
 
 														var chosenColorImage =
@@ -358,7 +362,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 																(iii) =>
 																	iii.color.toLowerCase() ===
 																		e.target.value.toLowerCase() &&
-																	iii.size.toLowerCase() === i.size,
+																	iii.size.toLowerCase() === i.size
 															)[0];
 														changeColor(
 															i.id,
@@ -366,10 +370,11 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 															i.size,
 															chosenColorImage,
 															chosenAttribute2.quantity,
-															i.color,
+															i.color
 														);
-													}}>
-													<option style={{ textTransform: "capitalize" }}>
+													}}
+												>
+													<option style={{textTransform: "capitalize"}}>
 														{allColors &&
 															allColors[
 																allColors.map((ii) => ii.hexa).indexOf(i.color)
@@ -403,7 +408,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginLeft: "14px",
 													textTransform: "capitalize",
 													color: "#7b7b7b",
-												}}>
+												}}
+											>
 												{Number(i.priceAfterDiscount * i.amount).toFixed(2)} EGP
 											</div>
 											<div
@@ -414,13 +420,12 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													marginTop: "10px",
 													textTransform: "capitalize",
 													color: "darkgreen",
-												}}>
+												}}
+											>
 												{i.allProductDetailsIncluded
 													.activeBackorder ? null : chosenAttribute.quantity >=
 												  i.amount ? null : (
-													<span style={{ color: "red" }}>
-														Unavailable Stock
-													</span>
+													<span style={{color: "red"}}>Unavailable Stock</span>
 												)}
 											</div>
 											{chosenLanguage === "Arabic" ? (
@@ -433,7 +438,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 														marginTop: "10px",
 														textTransform: "capitalize",
 														color: "darkgreen",
-													}}>
+													}}
+												>
 													<button
 														type='button'
 														className='amount-btn'
@@ -443,7 +449,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 															color: "darkgrey",
 															padding: "8px 13px",
 														}}
-														onClick={decrease}>
+														onClick={decrease}
+													>
 														<FaMinus />
 													</button>
 													<span
@@ -453,7 +460,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 															backgroundColor: "white",
 															color: "black",
 															padding: "9px 14px 11px 14px",
-														}}>
+														}}
+													>
 														{i.amount}
 													</span>
 													<button
@@ -465,7 +473,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 														}}
 														type='button'
 														className='amount-btn'
-														onClick={increase}>
+														onClick={increase}
+													>
 														<FaPlus />
 													</button>
 												</div>
@@ -479,7 +488,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 														marginTop: "10px",
 														textTransform: "capitalize",
 														color: "darkgreen",
-													}}>
+													}}
+												>
 													<button
 														type='button'
 														className='amount-btn'
@@ -489,7 +499,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 															color: "darkgrey",
 															padding: "8px 13px",
 														}}
-														onClick={decrease}>
+														onClick={decrease}
+													>
 														<FaMinus />
 													</button>
 													<span
@@ -499,7 +510,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 															backgroundColor: "white",
 															color: "black",
 															padding: "9px 14px 11px 14px",
-														}}>
+														}}
+													>
 														{i.amount}
 													</span>
 													<button
@@ -511,7 +523,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 														}}
 														type='button'
 														className='amount-btn'
-														onClick={increase}>
+														onClick={increase}
+													>
 														<FaPlus />
 													</button>
 												</div>
@@ -527,7 +540,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 													fontWeight: "bold",
 													fontSize: "0.8rem",
 												}}
-												onClick={() => removeItem(i.id, i.size, i.color)}>
+												onClick={() => removeItem(i.id, i.size, i.color)}
+											>
 												Remove
 											</button>
 										</div>
@@ -546,7 +560,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 								marginLeft: "14px",
 								marginTop: "3px",
 								textTransform: "capitalize",
-							}}>
+							}}
+						>
 							<div className='col-6'>TOTAL AMOUNT</div>
 							<div className='col-6'>{Number(total_amount).toFixed(2)} EGP</div>
 						</div>
@@ -555,24 +570,22 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 						<div className='link-container' onClick={closeSidebar}>
 							<div className='link-btn-wrapper'>
 								<Link
-									style={{ background: "#007db5" }}
+									style={{background: "#007db5"}}
 									to='/cart'
 									className='link-btn btn-block w-75 mx-auto text-center py-2'
-									onClick={() =>
-										window.scrollTo({ top: 0, behavior: "smooth" })
-									}>
+									onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+								>
 									Check Out
 								</Link>
 							</div>
 
 							<div className='link-btn-wrapper mt-2'>
 								<Link
-									style={{ background: "#5d5d5d" }}
+									style={{background: "#5d5d5d"}}
 									to='/our-products'
 									className='link-btn btn-block w-75 mx-auto text-center py-2'
-									onClick={() =>
-										window.scrollTo({ top: 0, behavior: "smooth" })
-									}>
+									onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+								>
 									continue shopping
 								</Link>
 							</div>
@@ -586,7 +599,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 	return (
 		<Nav
 			className=' navbar  navbar-expand-sm nav-center py-0'
-			style={{ backgroundColor: "white" }}>
+			style={{backgroundColor: "white"}}
+		>
 			{isSidebarOpen ? <DarkBackground isSidebarOpen={isSidebarOpen} /> : null}
 			{isSidebarOpen2 ? (
 				<DarkBackground2 isSidebarOpen2={isSidebarOpen2} />
@@ -604,8 +618,9 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 				<Link
 					to='/'
 					onClick={() => {
-						window.scrollTo({ top: 0, behavior: "smooth" });
-					}}>
+						window.scrollTo({top: 0, behavior: "smooth"});
+					}}
+				>
 					<div className='infiniteAppsLogo'>
 						<img className='imgLogo' src={finalLogoUrl} alt='Next Day Logo' />
 					</div>
@@ -620,7 +635,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 								className='nav-link'
 								to='/user/dashboard'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({top: 0, behavior: "smooth"});
 								}}
 								style={{
 									color: "black",
@@ -628,17 +643,19 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									// fontWeight: "bold",
 									marginRight: "20px",
 									// fontStyle: "italic",
-								}}>
+								}}
+							>
 								<svg
 									className='Styles__AccountIcon-d7nzgu-1 pWXnP'
 									width='17'
 									height='17'
-									style={{ marginRight: "5px", marginBottom: "2px" }}
+									style={{marginRight: "5px", marginBottom: "2px"}}
 									viewBox='0 0 20 20'
 									fill='none'
 									xmlns='http://www.w3.org/2000/svg'
 									role='img'
-									aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
+									aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'
+								>
 									<title id='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
 										Account
 									</title>
@@ -646,7 +663,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 										fillRule='evenodd'
 										clipRule='evenodd'
 										d='M13.5 4.79092C13.5 2.53192 11.4849 0.700012 9 0.700012L8.782 0.704731C6.39831 0.808141 4.5 2.59836 4.5 4.79092V5.6091C4.5 7.8681 6.5151 9.70001 9 9.70001L9.218 9.69529C11.6017 9.59188 13.5 7.80166 13.5 5.6091V4.79092ZM8.84702 2.20332L9.014 2.19901L9.18583 2.20488C10.7822 2.28873 12 3.44567 12 4.79092V5.6091L11.9946 5.76395C11.9049 7.04676 10.7094 8.12918 9.15298 8.1967L8.96754 8.20036L8.78519 8.19546C7.21783 8.1113 6 6.95435 6 5.6091V4.79092L6.0054 4.63607C6.09507 3.35326 7.29059 2.27084 8.84702 2.20332ZM15.3594 12.6468C13.6548 12.1815 11.3274 11.7 9 11.7C6.6726 11.7 4.3452 12.1815 2.6406 12.6468C1.0773 13.0725 0 14.4972 0 16.1172V18H18V16.1172L17.9949 15.9238C17.913 14.3848 16.8602 13.0555 15.3594 12.6468ZM3.03471 14.0941C5.07704 13.5366 7.12428 13.2 9 13.2C10.8757 13.2 12.923 13.5366 14.9644 14.0939L15.1214 14.1434C15.9428 14.4386 16.5 15.2247 16.5 16.1172V16.499H1.5V16.1172L1.50646 15.9512C1.57496 15.0735 2.1823 14.3262 3.03471 14.0941Z'
-										fill='black'></path>
+										fill='black'
+									></path>
 								</svg>
 								Hello {isAuthenticated().user.name}
 							</Link>
@@ -658,7 +676,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 								className='nav-link'
 								to='/admin/dashboard'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({top: 0, behavior: "smooth"});
 								}}
 								style={{
 									color: "black",
@@ -666,17 +684,19 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									// fontWeight: "bold",
 									marginRight: "20px",
 									// fontStyle: "italic",
-								}}>
+								}}
+							>
 								<svg
 									className='Styles__AccountIcon-d7nzgu-1 pWXnP'
 									width='17'
 									height='17'
-									style={{ marginRight: "5px", marginBottom: "2px" }}
+									style={{marginRight: "5px", marginBottom: "2px"}}
 									viewBox='0 0 20 20'
 									fill='none'
 									xmlns='http://www.w3.org/2000/svg'
 									role='img'
-									aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
+									aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'
+								>
 									<title id='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
 										Account
 									</title>
@@ -684,7 +704,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 										fillRule='evenodd'
 										clipRule='evenodd'
 										d='M13.5 4.79092C13.5 2.53192 11.4849 0.700012 9 0.700012L8.782 0.704731C6.39831 0.808141 4.5 2.59836 4.5 4.79092V5.6091C4.5 7.8681 6.5151 9.70001 9 9.70001L9.218 9.69529C11.6017 9.59188 13.5 7.80166 13.5 5.6091V4.79092ZM8.84702 2.20332L9.014 2.19901L9.18583 2.20488C10.7822 2.28873 12 3.44567 12 4.79092V5.6091L11.9946 5.76395C11.9049 7.04676 10.7094 8.12918 9.15298 8.1967L8.96754 8.20036L8.78519 8.19546C7.21783 8.1113 6 6.95435 6 5.6091V4.79092L6.0054 4.63607C6.09507 3.35326 7.29059 2.27084 8.84702 2.20332ZM15.3594 12.6468C13.6548 12.1815 11.3274 11.7 9 11.7C6.6726 11.7 4.3452 12.1815 2.6406 12.6468C1.0773 13.0725 0 14.4972 0 16.1172V18H18V16.1172L17.9949 15.9238C17.913 14.3848 16.8602 13.0555 15.3594 12.6468ZM3.03471 14.0941C5.07704 13.5366 7.12428 13.2 9 13.2C10.8757 13.2 12.923 13.5366 14.9644 14.0939L15.1214 14.1434C15.9428 14.4386 16.5 15.2247 16.5 16.1172V16.499H1.5V16.1172L1.50646 15.9512C1.57496 15.0735 2.1823 14.3262 3.03471 14.0941Z'
-										fill='black'></path>
+										fill='black'
+									></path>
 								</svg>
 								Hello {isAuthenticated().user.name}
 							</Link>
@@ -696,7 +717,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 								className='nav-link '
 								to='/admin/dashboard'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({top: 0, behavior: "smooth"});
 								}}
 								style={{
 									color: "black",
@@ -704,7 +725,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									// fontWeight: "bold",
 									marginRight: "20px",
 									// fontStyle: "italic",
-								}}>
+								}}
+							>
 								Hello {isAuthenticated().user.name}
 							</Link>
 						</li>
@@ -716,7 +738,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									className='nav-link  '
 									to='/signin'
 									onClick={() => {
-										window.scrollTo({ top: 0, behavior: "smooth" });
+										window.scrollTo({top: 0, behavior: "smooth"});
 									}}
 									style={{
 										color: "black",
@@ -724,17 +746,19 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 										// fontWeight: "bold",
 										marginRight: "20px",
 										// fontStyle: "italic",
-									}}>
+									}}
+								>
 									<svg
 										className='Styles__AccountIcon-d7nzgu-1 pWXnP'
 										width='17'
 										height='17'
-										style={{ marginRight: "5px", marginBottom: "2px" }}
+										style={{marginRight: "5px", marginBottom: "2px"}}
 										viewBox='0 0 20 20'
 										fill='none'
 										xmlns='http://www.w3.org/2000/svg'
 										role='img'
-										aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
+										aria-labelledby='00ea8e94-2216-4b64-acff-4d2fb3126ffb'
+									>
 										<title id='00ea8e94-2216-4b64-acff-4d2fb3126ffb'>
 											Account
 										</title>
@@ -742,7 +766,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 											fill-rule='evenodd'
 											clip-rule='evenodd'
 											d='M13.5 4.79092C13.5 2.53192 11.4849 0.700012 9 0.700012L8.782 0.704731C6.39831 0.808141 4.5 2.59836 4.5 4.79092V5.6091C4.5 7.8681 6.5151 9.70001 9 9.70001L9.218 9.69529C11.6017 9.59188 13.5 7.80166 13.5 5.6091V4.79092ZM8.84702 2.20332L9.014 2.19901L9.18583 2.20488C10.7822 2.28873 12 3.44567 12 4.79092V5.6091L11.9946 5.76395C11.9049 7.04676 10.7094 8.12918 9.15298 8.1967L8.96754 8.20036L8.78519 8.19546C7.21783 8.1113 6 6.95435 6 5.6091V4.79092L6.0054 4.63607C6.09507 3.35326 7.29059 2.27084 8.84702 2.20332ZM15.3594 12.6468C13.6548 12.1815 11.3274 11.7 9 11.7C6.6726 11.7 4.3452 12.1815 2.6406 12.6468C1.0773 13.0725 0 14.4972 0 16.1172V18H18V16.1172L17.9949 15.9238C17.913 14.3848 16.8602 13.0555 15.3594 12.6468ZM3.03471 14.0941C5.07704 13.5366 7.12428 13.2 9 13.2C10.8757 13.2 12.923 13.5366 14.9644 14.0939L15.1214 14.1434C15.9428 14.4386 16.5 15.2247 16.5 16.1172V16.499H1.5V16.1172L1.50646 15.9512C1.57496 15.0735 2.1823 14.3262 3.03471 14.0941Z'
-											fill='black'></path>
+											fill='black'
+										></path>
 									</svg>
 									Login
 								</Link>
@@ -753,7 +778,7 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									className='nav-link '
 									to='/signup'
 									onClick={() => {
-										window.scrollTo({ top: 0, behavior: "smooth" });
+										window.scrollTo({top: 0, behavior: "smooth"});
 									}}
 									style={{
 										color: "black",
@@ -761,7 +786,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 										// fontWeight: "bold",
 										marginRight: "100px",
 										// fontStyle: "italic",
-									}}>
+									}}
+								>
 									Register
 								</Link>
 							</li>
@@ -784,9 +810,10 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 										history.push("/");
 										localStorage.removeItem("userHistoryPurchases");
 										localStorage.removeItem("order");
-										window.scrollTo({ top: 0, behavior: "smooth" });
+										window.scrollTo({top: 0, behavior: "smooth"});
 									})
-								}>
+								}
+							>
 								Signout
 							</span>
 						</li>
@@ -797,8 +824,9 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 							// border: "1px solid black",
 							width: "90px",
 							height: "30px",
-						}}>
-						<span className='' style={{ padding: "0px" }}>
+						}}
+					>
+						<span className='' style={{padding: "0px"}}>
 							{language === "English" ? (
 								<span
 									// style={{
@@ -810,7 +838,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									onClick={() => {
 										setLanguage("Arabic");
 										// window.location.reload(false);
-									}}>
+									}}
+								>
 									{" "}
 									<img className='flags' src={EgyptianFlag} alt='Arabic' />
 									<span>Arabic</span>
@@ -822,7 +851,8 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									onClick={() => {
 										setLanguage("English");
 										// window.location.reload(false);
-									}}>
+									}}
+								>
 									<img className='flags' src={AmericanFlag} alt='English' />{" "}
 									English
 								</span>
@@ -839,19 +869,23 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 				{isSidebarOpen2 ? (
 					<div
 						className='col-1 my-auto'
-						onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+						onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+					>
 						<i
 							className='fas fa-times nav-icon2 faaa-bars'
-							style={{ color: "#c60e0e" }}></i>
+							style={{color: "#c60e0e"}}
+						></i>
 					</div>
 				) : null}
 				{!isSidebarOpen2 ? (
 					<div
 						className='col-1 my-auto'
-						onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+						onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+					>
 						<i
 							className='fa fa-bars nav-icon2 faaa-bars'
-							style={{ color: "#676767" }}></i>
+							style={{color: "#676767"}}
+						></i>
 					</div>
 				) : null}
 
@@ -868,10 +902,11 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 					// className='col-7 my-auto'
 					className={
 						window.screen.width >= 363 ? "col-7 my-auto" : "col-6 my-auto ml-4"
-					}>
+					}
+				>
 					<div className='row mx-auto '>
 						<div className='col-1 mx-auto my-auto iconsCellPhone'>
-							<Link to='/user/dashboard' style={{ color: "#676767" }}>
+							<Link to='/user/dashboard' style={{color: "#676767"}}>
 								<i className='fa-regular fa-user  nav-icon2 faaa-bars'></i>
 								{/* <i className='fa-thin fa-user  nav-icon2 faaa-bars'></i> */}
 							</Link>
@@ -879,8 +914,9 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 
 						<div className='col-1 mx-auto my-auto iconsCellPhone'>
 							<i
-								style={{ color: "#676767" }}
-								className='fa-solid fa-magnifying-glass nav-icon2 faaa-bars '></i>
+								style={{color: "#676767"}}
+								className='fa-solid fa-magnifying-glass nav-icon2 faaa-bars '
+							></i>
 						</div>
 
 						<div
@@ -890,23 +926,26 @@ const NavbarTop = ({ history, language, setLanguage, chosenLanguage }) => {
 									setModalVisible3(true);
 								} else {
 									window.location.replace(
-										`${process.env.REACT_APP_MAIN_URL}/user/wishlist`,
+										`${process.env.REACT_APP_MAIN_URL}/user/wishlist`
 									);
 								}
-							}}>
+							}}
+						>
 							<span
-								style={{ color: "#676767" }}
-								className='fa-regular fa-heart nav-icon2 faaa-bars'></span>
+								style={{color: "#676767"}}
+								className='fa-regular fa-heart nav-icon2 faaa-bars'
+							></span>
 						</div>
 
 						<div className='col-1 mx-auto my-auto nav-cart faaa-bars nav-icon2'>
 							<div
 								onClick={isSidebarOpen ? closeSidebar : openSidebar}
-								style={{ cursor: "pointer" }}>
+								style={{cursor: "pointer"}}
+							>
 								<sup>
 									<small className='cart-badge'>{total_items}</small>
 								</sup>
-								<span className='nav-icon2' style={{ fontSize: "1.3rem" }}>
+								<span className='nav-icon2' style={{fontSize: "1.3rem"}}>
 									<BsBag />
 								</span>
 								{/* <i className='fa fa-cart-plus ' aria-hidden='true'></i> */}
