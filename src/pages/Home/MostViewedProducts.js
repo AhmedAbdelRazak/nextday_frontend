@@ -1,12 +1,12 @@
 /** @format */
 
-import React, { useEffect, useState, Fragment } from "react";
+import React, {useEffect, useState, Fragment} from "react";
 import styled from "styled-components";
 import CardInHomePage from "./CardInHomePage";
 import Slider from "react-slick";
-import { getSortedProducts } from "../../apiCore";
+import {getSortedProducts} from "../../apiCore";
 
-const MostViewedProducts = ({ chosenLanguage }) => {
+const MostViewedProducts = ({chosenLanguage}) => {
 	const [productsByMostViews, setProductsByMostViews] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -18,16 +18,13 @@ const MostViewedProducts = ({ chosenLanguage }) => {
 			} else {
 				setProductsByMostViews(
 					data
-						.filter(
-							(i) =>
-								i.activeProduct === true && i.storeName.storeName !== "ace",
-						)
+						.filter((i) => i.activeProduct === true)
 						.map((ii) => {
 							return {
 								...ii,
 								quantity: 12,
 							};
-						}),
+						})
 				);
 			}
 			setLoading(false);
@@ -83,11 +80,13 @@ const MostViewedProducts = ({ chosenLanguage }) => {
 						<div
 							className={
 								chosenLanguage === "Arabic" ? "titleArabic mb-2" : "title mb-2"
-							}>
+							}
+						>
 							<h1
 								className={
 									chosenLanguage === "Arabic" ? "titleArabic" : "title"
-								}>
+								}
+							>
 								{chosenLanguage === "Arabic"
 									? "المنتجات الأكثر مشاهدة"
 									: "Most Viewed!"}{" "}

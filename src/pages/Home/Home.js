@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-// import ReactPixel from "react-facebook-pixel";
+import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 import HeroComponent from "./HeroComponent";
-import { getProducts } from "../../apiCore";
+import {getProducts} from "../../apiCore";
 // eslint-disable-next-line
 import CategoryWrapperComp from "./CategoryWrapperComp";
 import FeaturedProducts from "./FeaturedProducts";
@@ -15,10 +15,10 @@ import GenderLinks from "./GenderLinks";
 import HeroComponent2 from "./HeroComponent2";
 import HeroComponent3 from "./HeroComponent3";
 import GenderNav from "../../Navbar/GenderNav";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import MostViewedProducts from "./MostViewedProducts";
 
-const Home = ({ chosenLanguage }) => {
+const Home = ({chosenLanguage}) => {
 	// eslint-disable-next-line
 	const [allProducts, setAllProducts] = useState([]);
 	// eslint-disable-next-line
@@ -32,52 +32,42 @@ const Home = ({ chosenLanguage }) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				setAllProducts(
-					data.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-					),
-				);
+				setAllProducts(data.filter((i) => i.activeProduct === true));
 
 				//Categories Unique
 				var categoriesArray = data
-					.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-					)
+					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
 
 				//Subcategories Unique
 				var SubcategoriesArray = data
-					.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-					)
+					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.subcategory);
 
 				var mergedSubcategories = [].concat.apply([], SubcategoriesArray);
 				let uniqueSubcategories = [
 					...new Map(
-						mergedSubcategories.map((item) => [item["SubcategoryName"], item]),
+						mergedSubcategories.map((item) => [item["SubcategoryName"], item])
 					).values(),
 				];
 				setAllSubcategories(uniqueSubcategories);
 
 				//Gender Unique
 				var genderUnique = data
-					.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-					)
+					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.gender)
 					.filter((iii) => iii !== null);
 
 				let uniqueGenders = [
 					...new Map(
-						genderUnique.map((item) => [item["genderName"], item]),
+						genderUnique.map((item) => [item["genderName"], item])
 					).values(),
 				];
 				setAllGenders(uniqueGenders);
@@ -99,18 +89,18 @@ const Home = ({ chosenLanguage }) => {
 		// eslint-disable-next-line
 	}, []);
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
@@ -125,9 +115,9 @@ const Home = ({ chosenLanguage }) => {
 				<meta charSet='utf-8' />
 				<title>Next Day | ONLINE SHOP</title>
 
-				<meta name='description' content='Ace Online Shop' />
+				<meta name='description' content='Next Day Online Shop' />
 				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='https://acesportive.com' />
+				<link rel='canonical' href='https://nextdayegy.com' />
 			</Helmet>
 			<>
 				<GenderNav />

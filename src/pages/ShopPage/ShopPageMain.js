@@ -1,22 +1,22 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-// import ReactPixel from "react-facebook-pixel";
-import { getColors, gettingAllProducts } from "../../apiCore";
+import ReactPixel from "react-facebook-pixel";
+import {getColors, gettingAllProducts} from "../../apiCore";
 import MainFilter from "./Filters/MainFilter";
 import CardForShop from "./CardForShop";
 // eslint-disable-next-line
-import { Link } from "react-router-dom";
-import { useCartContext } from "../../Checkout/cart_context";
+import {Link} from "react-router-dom";
+import {useCartContext} from "../../Checkout/cart_context";
 import SidebarFilters from "./Filters/SidebarFilters";
 import DarkBackground from "./Filters/DarkBackground";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import ReactGA from "react-ga4";
 
 // import { FilterTwoTone } from "@ant-design/icons";
 
-const ShopPageMain = ({ chosenLanguage }) => {
+const ShopPageMain = ({chosenLanguage}) => {
 	const [allProducts, setAllProducts] = useState([]);
 	const [allCategories, setAllCategories] = useState([]);
 
@@ -34,8 +34,7 @@ const ShopPageMain = ({ chosenLanguage }) => {
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
 
-	const { openSideFilter, closeSideFilter, isSideFilterOpen } =
-		useCartContext();
+	const {openSideFilter, closeSideFilter, isSideFilterOpen} = useCartContext();
 
 	//getting filters from URL
 	const filterPath = window.location.search;
@@ -45,12 +44,12 @@ const ShopPageMain = ({ chosenLanguage }) => {
 		.toLowerCase();
 
 	const urlFilters = urlFiltersHelper.substring(
-		urlFiltersHelper.indexOf("=") + 1,
+		urlFiltersHelper.indexOf("=") + 1
 	);
 
 	const filterBy = filterPath.substring(
 		filterPath.indexOf("=") + 1,
-		filterPath.indexOf("&"),
+		filterPath.indexOf("&")
 	);
 
 	const gettingAllColors = () => {
@@ -76,7 +75,7 @@ const ShopPageMain = ({ chosenLanguage }) => {
 			setSelectedPriceRange,
 			setMinPrice,
 			setMaxPrice,
-			usedFilters,
+			usedFilters
 		);
 		gettingAllColors();
 
@@ -95,18 +94,18 @@ const ShopPageMain = ({ chosenLanguage }) => {
 		// eslint-disable-next-line
 	}, [usedFilters]);
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
@@ -121,9 +120,9 @@ const ShopPageMain = ({ chosenLanguage }) => {
 				<meta charSet='utf-8' />
 				<title>Next Day Online Shop | Our Products</title>
 
-				<meta name='description' content='Ace Online Shop' />
+				<meta name='description' content='Next Day Online Shop' />
 				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='https://acesportive.com/our-products' />
+				<link rel='canonical' href='https://nextdayegy.com/our-products' />
 			</Helmet>
 			{isSideFilterOpen ? (
 				<DarkBackground isSideFilterOpen={isSideFilterOpen} />
@@ -162,19 +161,22 @@ const ShopPageMain = ({ chosenLanguage }) => {
 					setUsedFilters={setUsedFilters}
 					allColors={allColors}
 				/>
-				<div style={{ display: allGenders.length === 1 ? "none" : "" }}>
+				<div style={{display: allGenders.length === 1 ? "none" : ""}}>
 					<div className='row mx-auto'>
 						<div
 							onClick={isSideFilterOpen ? closeSideFilter : openSideFilter}
 							className={"col-6 mx-auto filterSort"}
-							style={{ textTransform: "uppercase" }}>
+							style={{textTransform: "uppercase"}}
+						>
 							<span>FILTER</span>
 						</div>
 						<div
 							className={"col-6 mx-auto filterSort"}
-							style={{ textTransform: "uppercase" }}>
+							style={{textTransform: "uppercase"}}
+						>
 							<span
-								onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+								onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+							>
 								SORT
 							</span>
 						</div>
@@ -193,7 +195,8 @@ const ShopPageMain = ({ chosenLanguage }) => {
 							allProducts && allProducts.length === 1
 								? "col-md-3"
 								: "grid-container"
-						}>
+						}
+					>
 						{allProducts &&
 							allProducts.map((product, i) => (
 								<CardForShop

@@ -57,7 +57,7 @@ export const getSortedProducts = (sortBy) => {
 		`${process.env.REACT_APP_API_URL}/products?sortBy=${sortBy}&order=desc&limit=8`,
 		{
 			method: "GET",
-		},
+		}
 	)
 		.then((response) => {
 			return response.json();
@@ -147,7 +147,7 @@ export const userlike = (userId, token, productId) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId }),
+		body: JSON.stringify({userId, productId}),
 	})
 		.then((response) => {
 			return response.json();
@@ -163,7 +163,7 @@ export const userunlike = (userId, token, productId) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId }),
+		body: JSON.stringify({userId, productId}),
 	})
 		.then((response) => {
 			return response.json();
@@ -192,8 +192,8 @@ export const productStar = (productId, star, token, email, userId) => {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify({ productId, star, email, userId }),
-		},
+			body: JSON.stringify({productId, star, email, userId}),
+		}
 	)
 		.then((response) => {
 			return response.json();
@@ -209,7 +209,7 @@ export const comment = (userId, token, productId, comment, commentsPhotos) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId, comment, commentsPhotos }),
+		body: JSON.stringify({userId, productId, comment, commentsPhotos}),
 	})
 		.then((response) => {
 			return response.json();
@@ -225,7 +225,7 @@ export const uncomment = (userId, token, productId, comment) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId, comment }),
+		body: JSON.stringify({userId, productId, comment}),
 	})
 		.then((response) => {
 			return response.json();
@@ -241,7 +241,7 @@ export const like = (userId, token, productId) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId }),
+		body: JSON.stringify({userId, productId}),
 	})
 		.then((response) => {
 			return response.json();
@@ -257,7 +257,7 @@ export const unlike = (userId, token, productId) => {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ userId, productId }),
+		body: JSON.stringify({userId, productId}),
 	})
 		.then((response) => {
 			return response.json();
@@ -272,7 +272,7 @@ export const views = (productId) => {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ productId }),
+		body: JSON.stringify({productId}),
 	})
 		.then((response) => {
 			return response.json();
@@ -287,7 +287,7 @@ export const viewsCounter = (productId, counter) => {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ productId, counter }),
+		body: JSON.stringify({productId, counter}),
 	})
 		.then((response) => {
 			return response.json();
@@ -323,19 +323,15 @@ export const gettingAllProducts = (
 	setSelectedPriceRange,
 	setMinPrice,
 	setMaxPrice,
-	usedFilters,
+	usedFilters
 ) => {
 	getProducts().then((data) => {
 		if (data.error) {
 			console.log(data.error);
 		} else {
-			const requiredProductsInitial = data.filter(
-				(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-			);
+			const requiredProductsInitial = data;
 
-			const requiredProducts2 = data.filter(
-				(i) => i.activeProduct === true && i.storeName.storeName !== "ace",
-			);
+			const requiredProducts2 = data;
 
 			var allProductsAdded =
 				requiredProductsInitial &&
@@ -367,7 +363,7 @@ export const gettingAllProducts = (
 					...i,
 					productAttributes: i.productAttributes,
 					clickedProductAttribute: i.productAttributes.filter(
-						(ii) => PK.indexOf(ii.PK) !== -1,
+						(ii) => PK.indexOf(ii.PK) !== -1
 					),
 				};
 			});
@@ -390,7 +386,7 @@ export const gettingAllProducts = (
 							quantity: ii.quantity,
 							size: ii.size,
 						};
-					}),
+					})
 				);
 
 			var mergedFinalOfFinal = [].concat.apply([], finalOfFinal1);
@@ -405,7 +401,7 @@ export const gettingAllProducts = (
 					(i) =>
 						i.productImages &&
 						i.productImages[0] &&
-						i.productImages[0].url !== undefined,
+						i.productImages[0].url !== undefined
 				);
 
 			function shuffle(array) {
@@ -434,7 +430,7 @@ export const gettingAllProducts = (
 				const genderFilter = requiredProducts.filter(
 					(iii) =>
 						iii.gender &&
-						iii.gender.genderName.toLowerCase() === urlFilters.toLowerCase(),
+						iii.gender.genderName.toLowerCase() === urlFilters.toLowerCase()
 				);
 
 				if (
@@ -448,9 +444,9 @@ export const gettingAllProducts = (
 							genderFilter.filter(
 								(i) =>
 									usedFilters[usedFilters.length - 1].filterByType.indexOf(
-										i.size.toLowerCase(),
-									) !== -1,
-							),
+										i.size.toLowerCase()
+									) !== -1
+							)
 					);
 				} else if (
 					usedFilters &&
@@ -463,9 +459,9 @@ export const gettingAllProducts = (
 							genderFilter.filter(
 								(i) =>
 									usedFilters[usedFilters.length - 1].filterByType.indexOf(
-										i.color.toLowerCase(),
-									) !== -1,
-							),
+										i.color.toLowerCase()
+									) !== -1
+							)
 					);
 				} else if (
 					usedFilters &&
@@ -478,9 +474,9 @@ export const gettingAllProducts = (
 							genderFilter.filter(
 								(i) =>
 									usedFilters[usedFilters.length - 1].filterByType.indexOf(
-										i.category.categorySlug,
-									) !== -1,
-							),
+										i.category.categorySlug
+									) !== -1
+							)
 					);
 				} else {
 					setAllProducts(genderFilter);
@@ -490,8 +486,8 @@ export const gettingAllProducts = (
 					requiredProducts.filter(
 						(iii) =>
 							iii.category.categorySlug.toLowerCase() ===
-							urlFilters.toLowerCase(),
-					),
+							urlFilters.toLowerCase()
+					)
 				);
 			} else if (filterBy === "subcategory") {
 				setAllProducts(
@@ -499,8 +495,8 @@ export const gettingAllProducts = (
 						(iii) =>
 							iii.subcategory
 								.map((iiii) => iiii.SubcategorySlug)
-								.indexOf(urlFilters.toLowerCase()) !== -1,
-					),
+								.indexOf(urlFilters.toLowerCase()) !== -1
+					)
 				);
 			} else {
 				setAllProducts(requiredProducts);
@@ -512,14 +508,14 @@ export const gettingAllProducts = (
 					.filter(
 						(iii) =>
 							iii.gender &&
-							iii.gender.genderName.toLowerCase() === urlFilters.toLowerCase(),
+							iii.gender.genderName.toLowerCase() === urlFilters.toLowerCase()
 					)
 					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -529,14 +525,14 @@ export const gettingAllProducts = (
 					.filter(
 						(iii) =>
 							iii.category.categorySlug.toLowerCase() ===
-							urlFilters.toLowerCase(),
+							urlFilters.toLowerCase()
 					)
 					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -547,14 +543,14 @@ export const gettingAllProducts = (
 						(iii) =>
 							iii.subcategory
 								.map((iiii) => iiii.SubcategorySlug)
-								.indexOf(urlFilters.toLowerCase()) !== -1,
+								.indexOf(urlFilters.toLowerCase()) !== -1
 					)
 					.filter((i) => i.activeProduct === true)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
 					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item]),
+						categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -566,7 +562,7 @@ export const gettingAllProducts = (
 				let uniqueCategories = [
 					...new Map(
 						categoriesArray &&
-							categoriesArray.map((item) => [item["categoryName"], item]),
+							categoriesArray.map((item) => [item["categoryName"], item])
 					).values(),
 				];
 				setAllCategories(uniqueCategories);
@@ -581,7 +577,7 @@ export const gettingAllProducts = (
 			var mergedSubcategories = [].concat.apply([], SubcategoriesArray);
 			let uniqueSubcategories = [
 				...new Map(
-					mergedSubcategories.map((item) => [item["SubcategoryName"], item]),
+					mergedSubcategories.map((item) => [item["SubcategoryName"], item])
 				).values(),
 			];
 			setAllSubcategories(uniqueSubcategories);
@@ -593,8 +589,7 @@ export const gettingAllProducts = (
 
 			let uniqueGenders = [
 				...new Map(
-					genderUnique &&
-						genderUnique.map((item) => [item["genderName"], item]),
+					genderUnique && genderUnique.map((item) => [item["genderName"], item])
 				).values(),
 			];
 			setAllGenders(uniqueGenders);
@@ -628,14 +623,14 @@ export const gettingAllProducts = (
 			const allPricesCombined =
 				requiredProducts2 &&
 				requiredProducts2.map((i) =>
-					i.productAttributes.map((ii) => ii.priceAfterDiscount),
+					i.productAttributes.map((ii) => ii.priceAfterDiscount)
 				);
 
 			var mergedPrices = [].concat.apply([], allPricesCombined);
 
 			let uniquePrices = [
 				...new Map(
-					mergedPrices && mergedPrices.map((item) => [item, item]),
+					mergedPrices && mergedPrices.map((item) => [item, item])
 				).values(),
 			];
 
@@ -660,8 +655,8 @@ export const createOrder = (token, createOrderData, userId) => {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify({ order: createOrderData }),
-		},
+			body: JSON.stringify({order: createOrderData}),
+		}
 	)
 		.then((response) => {
 			return response.json();
@@ -718,7 +713,7 @@ export const readSingleUserHistory = (userPhone, userId, token) => {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-		},
+		}
 	)
 		.then((response) => {
 			return response.json();
@@ -734,7 +729,7 @@ export const generatingTokenPaymob = (
 	total_amount,
 	cart,
 	firstName,
-	lastName,
+	lastName
 ) => {
 	const totalAmountFinal =
 		Number(totalAmountAfterDiscounting2()) + Number(total_amount) * 0.01;
@@ -743,7 +738,7 @@ export const generatingTokenPaymob = (
 	//generate token
 	const options = {
 		method: "POST",
-		headers: { accept: "application/json", "content-type": "application/json" },
+		headers: {accept: "application/json", "content-type": "application/json"},
 		body: JSON.stringify({
 			api_key: process.env.REACT_APP_API_KEY,
 		}),

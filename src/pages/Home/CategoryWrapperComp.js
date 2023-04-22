@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
-const CategoryWrapperComp = ({ chosenLanguage, categories }) => {
+const CategoryWrapperComp = ({chosenLanguage, categories}) => {
 	return (
 		<CategoriesPics className='mt-5'>
 			<div
@@ -12,13 +12,15 @@ const CategoryWrapperComp = ({ chosenLanguage, categories }) => {
 					chosenLanguage === "Arabic"
 						? "titleOurCategories2 mb-3"
 						: "titleOurCategories mb-3"
-				}>
+				}
+			>
 				<h1
 					className={
 						chosenLanguage === "Arabic"
 							? "titleOurCategories2 text-center"
 							: "titleOurCategories text-center"
-					}>
+					}
+				>
 					{chosenLanguage === "Arabic" ? "الفئات المتاحة" : "Our Categories"}{" "}
 				</h1>
 			</div>
@@ -31,13 +33,14 @@ const CategoryWrapperComp = ({ chosenLanguage, categories }) => {
 									to={`/our-products?filterby=category&categoryName=${i.categorySlug}`}
 									className='imgAndCategoryName'
 									onClick={() => {
-										window.scrollTo({ top: 0, behavior: "smooth" });
-									}}>
+										window.scrollTo({top: 0, behavior: "smooth"});
+									}}
+								>
 									<img
 										src={i.thumbnail && i.thumbnail[0] && i.thumbnail[0].url}
 										alt={`${i.categoryName}`}
 										className='mb-4 '
-										style={{ height: "230px", width: "230px" }}
+										style={{height: "230px", width: "230px"}}
 									/>
 									{/* <div className='hamadaTest'>
 													{chosenLanguage === "Arabic"
@@ -63,10 +66,10 @@ const CategoryWrapperComp = ({ chosenLanguage, categories }) => {
 export default CategoryWrapperComp;
 
 const CategoriesPics = styled.div`
-    margin-top: 5px;
+	margin-top: 5px;
 	/* background-image: linear-gradient(white, #ececec); */
 	/* background-image: linear-gradient(white, #e2fff8); */
-    
+
 	img {
 		/* box-shadow: 1px 1px 2.5px 2.5px rgba(0, 0, 0, 0.3); */
 		border: 2px white solid;
@@ -83,8 +86,7 @@ const CategoriesPics = styled.div`
 		/* letter-spacing: 3px; */
 		/* text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.5); */
 		color: #330000;
-        text-transform: capitalize;
-
+		text-transform: capitalize;
 	}
 
 	.CategoryTextArabic {
@@ -98,7 +100,6 @@ const CategoriesPics = styled.div`
 		/* text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.5); */
 		color: #330000;
 	}
-
 
 	img:hover {
 		border-radius: 10px 10px;
@@ -116,28 +117,24 @@ const CategoriesPics = styled.div`
 		letter-spacing: 0px;
 		font-size: 2rem !important;
 		font-weight: bold;
-
 	}
 
 	.titleOurCategories2 {
 		text-transform: uppercase;
 		color: darkred;
 		text-align: left !important;
-		letter-spacing: 0px
+		letter-spacing: 0px;
 		font-size: 2rem !important;
 		font-weight: bold;
 		margin-left: 30px;
-
 	}
-
 
 	@media (max-width: 900px) {
 		text-align: center;
 
-	.row {
-		margin: auto !important;
-
-	}
+		.row {
+			margin: auto !important;
+		}
 		img {
 			/* box-shadow: 1px 1px 2.5px 2.5px rgba(0, 0, 0, 0.3); */
 			border: 2px white solid;
@@ -157,12 +154,12 @@ const CategoriesPics = styled.div`
 		}
 
 		img:hover {
-		border-radius: 10px 10px;
-		transition: 0.5s;
-		height: 205px !important;
-		width: 205px !important;
-		box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
-	}
+			border-radius: 10px 10px;
+			transition: 0.5s;
+			height: 205px !important;
+			width: 205px !important;
+			box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
+		}
 	}
 	@media (max-width: 700px) {
 		img {
@@ -182,31 +179,24 @@ const CategoriesPics = styled.div`
 		}
 
 		.CategoryTextArabic {
-		font-size: 1rem;
-		color: black;
-	}
+			font-size: 1rem;
+			color: black;
+		}
 
-	.titleOurCategories ,  .titleOurCategories2{
-		color: black;
-		text-align: center !important;
-		font-size: 1.4rem !important;
-		margin-left: 0px !important;
-
-	}
+		.titleOurCategories,
+		.titleOurCategories2 {
+			color: black;
+			text-align: center !important;
+			font-size: 1.4rem !important;
+			margin-left: 0px !important;
+		}
 
 		img:hover {
-		border-radius: 10px 10px;
-		transition: 0.5s;
-		height: 205px !important;
-		width: 205px !important;
-		box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
+			border-radius: 10px 10px;
+			transition: 0.5s;
+			height: 205px !important;
+			width: 205px !important;
+			box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
+		}
 	}
-
-	
-
-		
-		} 
-	
-
-
 `;

@@ -10,7 +10,7 @@ const CookiePolicy = () => {
 				<h1>Cookies Policy</h1>
 				<p>
 					This section refers to the cookies and web pages operated by
-					ACESPORTIVE.COM. Please note that in order to insure the proper
+					NEXTDAYEGY.COM. Please note that in order to insure the proper
 					functioning of this Website, we sometimes place small data files
 					called cookies on your device.
 				</p>

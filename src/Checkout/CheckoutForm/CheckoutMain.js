@@ -1,19 +1,19 @@
 /** @format */
 
 // eslint-disable-next-line
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-// import ReactPixel from "react-facebook-pixel";
+import ReactPixel from "react-facebook-pixel";
 // eslint-disable-next-line
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 // import "antd/dist/antd.min.css";
 // eslint-disable-next-line
-import { Steps, Button } from "antd";
+import {Steps, Button} from "antd";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
-import { Link, Redirect } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {
 	allLoyaltyPointsAndStoreStatus,
 	createOrder,
@@ -22,9 +22,9 @@ import {
 	ordersLength,
 	readUser,
 } from "../../apiCore";
-import { ShipToData } from "./ShipToData";
+import {ShipToData} from "./ShipToData";
 import CheckoutCartItems from "./CheckoutCartItems";
-import { useCartContext } from "../cart_context";
+import {useCartContext} from "../cart_context";
 import {
 	authenticate,
 	isAuthenticated,
@@ -34,9 +34,9 @@ import {
 } from "../../auth";
 import CartSummaryPhone from "./CartSummaryPhone";
 // eslint-disable-next-line
-const { Step } = Steps;
+const {Step} = Steps;
 
-const CheckoutMain = ({ match }) => {
+const CheckoutMain = ({match}) => {
 	const [current, setCurrent] = useState(1);
 
 	// eslint-disable-next-line
@@ -76,8 +76,8 @@ const CheckoutMain = ({ match }) => {
 		new Date(
 			new Date().toLocaleString("en-US", {
 				timeZone: "Africa/Cairo",
-			}),
-		),
+			})
+		)
 	);
 
 	// eslint-disable-next-line
@@ -89,7 +89,7 @@ const CheckoutMain = ({ match }) => {
 		OTNumber: "",
 	});
 
-	const { cart, total_amount, total_items, clearCart } = useCartContext();
+	const {cart, total_amount, total_items, clearCart} = useCartContext();
 
 	const gettingAllShippingOptions = () => {
 		getShippingOptions().then((data) => {
@@ -97,20 +97,20 @@ const CheckoutMain = ({ match }) => {
 				console.log(data.error);
 			} else {
 				setAllShippingOptions(
-					data.filter((i) => i.carrierName === "Aramex Express"),
+					data.filter((i) => i.carrierName === "Aramex Express")
 				);
 				setChosenShippingOption(
-					data.filter((i) => i.carrierName === "Aramex Express"),
+					data.filter((i) => i.carrierName === "Aramex Express")
 				);
 				var shippingName = data.filter(
-					(i) => i.carrierName === "Aramex Express",
+					(i) => i.carrierName === "Aramex Express"
 				)[0];
 				setCustomerDetails({
 					...customerDetails,
 					carrierName: shippingName.carrierName,
 				});
 				if (isAuthenticated() && isAuthenticated().user) {
-					const { user } = isAuthenticated();
+					const {user} = isAuthenticated();
 					setCustomerDetails({
 						...customerDetails,
 						fullName: user.name,
@@ -120,10 +120,10 @@ const CheckoutMain = ({ match }) => {
 				if (localStorage.getItem("PaidNow")) {
 					setCurrent(3);
 					const addedCustomerDetails = JSON.parse(
-						localStorage.getItem("storedData"),
+						localStorage.getItem("storedData")
 					);
 					const addedShippingOptions = JSON.parse(
-						localStorage.getItem("chosenShippingOption"),
+						localStorage.getItem("chosenShippingOption")
 					);
 					setCustomerDetails({
 						fullName: addedCustomerDetails.fullName,
@@ -182,7 +182,7 @@ const CheckoutMain = ({ match }) => {
 				}
 
 				if (isAuthenticated() && isAuthenticated().user) {
-					const { user, token } = isAuthenticated();
+					const {user, token} = isAuthenticated();
 
 					readUser(user._id, token).then((data3) => {
 						if (data3.error) {
@@ -227,10 +227,10 @@ const CheckoutMain = ({ match }) => {
 						if (localStorage.getItem("PaidNow")) {
 							setCurrent(3);
 							const addedCustomerDetails = JSON.parse(
-								localStorage.getItem("storedData"),
+								localStorage.getItem("storedData")
 							);
 							const addedShippingOptions = JSON.parse(
-								localStorage.getItem("chosenShippingOption"),
+								localStorage.getItem("chosenShippingOption")
 							);
 							setCustomerDetails({
 								fullName: addedCustomerDetails.fullName,
@@ -278,7 +278,7 @@ const CheckoutMain = ({ match }) => {
 		) {
 			return Number(
 				Number(totalWithoutCOD) -
-					(Number(total_amount) * Number(appliedCoupon.discount)) / 100,
+					(Number(total_amount) * Number(appliedCoupon.discount)) / 100
 			).toFixed(2);
 		} else {
 			return Number(totalWithoutCOD);
@@ -314,7 +314,7 @@ const CheckoutMain = ({ match }) => {
 			total_amount,
 			cart,
 			firstName,
-			lastName,
+			lastName
 		);
 
 		ordersLength().then((data) => {
@@ -330,7 +330,7 @@ const CheckoutMain = ({ match }) => {
 
 	const handleChange = (name) => (e) => {
 		const value = e.target.value;
-		setCustomerDetails({ ...customerDetails, [name]: value });
+		setCustomerDetails({...customerDetails, [name]: value});
 	};
 
 	let getGov = ShipToData.map((i) => i.GovernorateEn);
@@ -338,14 +338,14 @@ const CheckoutMain = ({ match }) => {
 	let UniqueGovernorates = [...new Set(getGov)];
 
 	const handleChangeState = (e) => {
-		setCustomerDetails({ ...customerDetails, state: e.target.value });
+		setCustomerDetails({...customerDetails, state: e.target.value});
 		setAllShippingOptions(
 			allShippingOptions.filter(
 				(i) =>
 					i.chosenShippingData
 						.map((iii) => iii.governorate)
-						.indexOf(e.target.value) > -1,
-			),
+						.indexOf(e.target.value) > -1
+			)
 		);
 	};
 
@@ -368,10 +368,10 @@ const CheckoutMain = ({ match }) => {
 	};
 
 	const handleChangeCarrier = (e) => {
-		setCustomerDetails({ ...customerDetails, carrierName: e.target.value });
+		setCustomerDetails({...customerDetails, carrierName: e.target.value});
 
 		setChosenShippingOption(
-			allShippingOptions.filter((i) => i.carrierName === e.target.value),
+			allShippingOptions.filter((i) => i.carrierName === e.target.value)
 		);
 	};
 
@@ -534,7 +534,7 @@ const CheckoutMain = ({ match }) => {
 
 	const CreatingOrder = (e) => {
 		e.preventDefault();
-		window.scrollTo({ top: 0, behavior: "smooth" });
+		window.scrollTo({top: 0, behavior: "smooth"});
 
 		ordersLength().then((data) => {
 			if (data.error) {
@@ -578,7 +578,7 @@ const CheckoutMain = ({ match }) => {
 		var today = new Date(
 			new Date().toLocaleString("en-US", {
 				timeZone: "Africa/Cairo",
-			}),
+			})
 		);
 
 		const totalAmountAfterDiscounting = () => {
@@ -593,7 +593,7 @@ const CheckoutMain = ({ match }) => {
 				return Number(
 					Number(total_amount) +
 						Number(shippingFee) +
-						-(Number(total_amount) * Number(appliedCoupon.discount)) / 100,
+						-(Number(total_amount) * Number(appliedCoupon.discount)) / 100
 				).toFixed(2);
 			} else {
 				return Number(total_amount) + Number(shippingFee);
@@ -669,7 +669,7 @@ const CheckoutMain = ({ match }) => {
 	var today = new Date(
 		new Date().toLocaleString("en-US", {
 			timeZone: "Africa/Cairo",
-		}),
+		})
 	);
 
 	const requiredURL = window.location.pathname + window.location.search;
@@ -751,15 +751,15 @@ const CheckoutMain = ({ match }) => {
 	// eslint-disable-next-line
 	const CreatingOrderPaid = (e) => {
 		const orderDataStoredLocalStor = JSON.parse(
-			localStorage.getItem("orderDataStored"),
+			localStorage.getItem("orderDataStored")
 		);
 
 		const orderDataStoredLocalStorUpdated = {
 			...orderDataStoredLocalStor,
-			paymobData: { ...orderDataStoredLocalStor.paymobData, callBackResponse },
+			paymobData: {...orderDataStoredLocalStor.paymobData, callBackResponse},
 		};
 
-		window.scrollTo({ top: 0, behavior: "smooth" });
+		window.scrollTo({top: 0, behavior: "smooth"});
 
 		if (cart.length === 0) {
 			return toast.error("Please Add Products To The Order");
@@ -798,10 +798,10 @@ const CheckoutMain = ({ match }) => {
 		if (localStorage.getItem("PaidNow")) {
 			setCurrent(3);
 			const addedCustomerDetails = JSON.parse(
-				localStorage.getItem("storedData"),
+				localStorage.getItem("storedData")
 			);
 			const addedShippingOptions = JSON.parse(
-				localStorage.getItem("chosenShippingOption"),
+				localStorage.getItem("chosenShippingOption")
 			);
 			setCustomerDetails({
 				fullName: addedCustomerDetails.fullName,
@@ -879,18 +879,18 @@ const CheckoutMain = ({ match }) => {
 		}
 	}
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<CheckoutMainWrapper>
@@ -924,7 +924,8 @@ const CheckoutMain = ({ match }) => {
 									fontWeight: "bold",
 									fontSize: "0.9rem",
 								}}
-								onClick={() => prev()}>
+								onClick={() => prev()}
+							>
 								Previous
 							</Button>
 						)}
@@ -971,7 +972,7 @@ const CheckoutMain = ({ match }) => {
 								onClick={() => {
 									next();
 
-									window.scrollTo({ top: 100, behavior: "smooth" });
+									window.scrollTo({top: 100, behavior: "smooth"});
 
 									if (user.email !== customerDetails.phone) {
 										signout(() => {
@@ -996,7 +997,8 @@ const CheckoutMain = ({ match }) => {
 											console.log("registered");
 										}
 									});
-								}}>
+								}}
+							>
 								Next
 							</Button>
 						)}
@@ -1025,8 +1027,9 @@ const CheckoutMain = ({ match }) => {
 										}
 									});
 
-									window.scrollTo({ top: 100, behavior: "smooth" });
-								}}>
+									window.scrollTo({top: 100, behavior: "smooth"});
+								}}
+							>
 								Next
 							</Button>
 						)}
@@ -1049,8 +1052,9 @@ const CheckoutMain = ({ match }) => {
 									}}
 									onClick={(e) => {
 										CreatingOrder(e);
-										window.scrollTo({ top: 0, behavior: "smooth" });
-									}}>
+										window.scrollTo({top: 0, behavior: "smooth"});
+									}}
+								>
 									Order Now
 								</Button>
 							)}
@@ -1089,7 +1093,7 @@ const CheckoutMain = ({ match }) => {
 										if (customerDetails.phone.includes("@")) {
 											setCurrent(1);
 											return toast.error(
-												"Please make sure your phone # is correct",
+												"Please make sure your phone # is correct"
 											);
 										}
 
@@ -1103,14 +1107,14 @@ const CheckoutMain = ({ match }) => {
 
 										if (notAvailableStock) {
 											return toast.error(
-												"Not Enough Stock for the product you picked",
+												"Not Enough Stock for the product you picked"
 											);
 										}
 
 										if (hasWhiteSpace(customerDetails.fullName) === false) {
 											setCurrent(1);
 											return toast.error(
-												"Please make sure you add your full name",
+												"Please make sure you add your full name"
 											);
 										}
 
@@ -1150,7 +1154,7 @@ const CheckoutMain = ({ match }) => {
 											invoiceNumber: "Not Added",
 											appliedCoupon: appliedCoupon,
 											OTNumber: `OT${new Date(
-												orderCreationDate,
+												orderCreationDate
 											).getFullYear()}${
 												new Date(orderCreationDate).getMonth() + 1
 											}${new Date(orderCreationDate).getDate()}000${
@@ -1179,7 +1183,7 @@ const CheckoutMain = ({ match }) => {
 											forAI: {
 												...forAI,
 												OTNumber: `OT${new Date(
-													orderCreationDate,
+													orderCreationDate
 												).getFullYear()}${
 													new Date(orderCreationDate).getMonth() + 1
 												}${new Date(orderCreationDate).getDate()}000${
@@ -1188,43 +1192,44 @@ const CheckoutMain = ({ match }) => {
 											},
 										};
 
-										// ReactPixel.track("Purchased Pay On Delivery", {
-										// 	content_name: "Purchased Pay On Delivery",
-										// 	content_category: "User Clicked On Pay On Delivery",
-										// 	content_type: "Purchased Pay On Delivery",
-										// 	value: total_amount,
-										// 	currency: "EGP",
-										// });
+										ReactPixel.track("Purchased Pay On Delivery", {
+											content_name: "Purchased Pay On Delivery",
+											content_category: "User Clicked On Pay On Delivery",
+											content_type: "Purchased Pay On Delivery",
+											value: total_amount,
+											currency: "EGP",
+										});
 
 										localStorage.setItem(
 											"orderDataStored",
-											JSON.stringify(orderDataTobeStored),
+											JSON.stringify(orderDataTobeStored)
 										);
 
 										//end of created Order On hold
 										localStorage.setItem(
 											"storedData",
-											JSON.stringify(customerDetails),
+											JSON.stringify(customerDetails)
 										);
 										localStorage.setItem(
 											"chosenShippingOption",
-											JSON.stringify(chosenShippingOption),
+											JSON.stringify(chosenShippingOption)
 										);
 
-										// ReactPixel.track("Purchased", {
-										// 	content_name: "Purchased",
-										// 	content_category: "User Clicked On Pay Now",
-										// 	content_type: "Purchased",
-										// 	value: total_amount,
-										// 	currency: "EGP",
-										// });
+										ReactPixel.track("Purchased", {
+											content_name: "Purchased",
+											content_category: "User Clicked On Pay Now",
+											content_type: "Purchased",
+											value: total_amount,
+											currency: "EGP",
+										});
 
 										window.location.replace(
-											`${process.env.REACT_APP_IFRAME_LINK}${paymobToken}`,
+											`${process.env.REACT_APP_IFRAME_LINK}${paymobToken}`
 										);
 
-										window.scrollTo({ top: 0, behavior: "smooth" });
-									}}>
+										window.scrollTo({top: 0, behavior: "smooth"});
+									}}
+								>
 									Pay Now
 								</Button>
 							)}

@@ -1,7 +1,7 @@
 /** @format */
 // eslint-disable-next-line
-import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link, Redirect} from "react-router-dom";
 import styled from "styled-components";
 import {
 	signup,
@@ -12,12 +12,12 @@ import {
 } from "../auth";
 // eslint-disable-next-line
 import Google from "../auth/Google";
-import { ToastContainer, toast } from "react-toastify";
+import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-// import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 // eslint-disable-next-line
 import Helmet from "react-helmet";
-// import ReactPixel from "react-facebook-pixel";
+import ReactPixel from "react-facebook-pixel";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -31,13 +31,12 @@ const Register = () => {
 		loading: false,
 	});
 
-	const { name, email, password, password2, success, misMatch, loading } =
-		values;
+	const {name, email, password, password2, success, misMatch, loading} = values;
 
 	console.log(success);
 
 	// eslint-disable-next-line
-	const { user } = isAuthenticated();
+	const {user} = isAuthenticated();
 	const handleChange = (name) => (event) => {
 		setValues({
 			...values,
@@ -51,9 +50,9 @@ const Register = () => {
 
 	// eslint-disable-next-line
 	const informParent = (response) => {
-		setValues({ ...values, error: false, loading: true });
+		setValues({...values, error: false, loading: true});
 		if (response.error) {
-			setValues({ ...values, error: response.error, loading: false });
+			setValues({...values, error: response.error, loading: false});
 			toast.error(response.error);
 		} else {
 			authenticate2(response, () => {
@@ -85,7 +84,7 @@ const Register = () => {
 			});
 			return <React.Fragment>{toast.error(MisMatchError)}</React.Fragment>;
 		} else {
-			setValues({ ...values, error: false, misMatch: false });
+			setValues({...values, error: false, misMatch: false});
 			signup({
 				name,
 				email,
@@ -95,12 +94,12 @@ const Register = () => {
 			}).then((data) => {
 				console.log(data);
 				if (data.error || data.misMatch) {
-					setValues({ ...values, error: data.error, success: false });
+					setValues({...values, error: data.error, success: false});
 					toast.error(data.error);
 				} else
-					signin({ email, password }).then((data) => {
+					signin({email, password}).then((data) => {
 						if (data.error) {
-							setValues({ ...values, error: data.error, loading: false });
+							setValues({...values, error: data.error, loading: false});
 						} else {
 							authenticate(data, () => {
 								setValues({
@@ -131,14 +130,15 @@ const Register = () => {
 							background: "white",
 							borderRadius: "10px",
 							// boxShadow: "5px 5px 5px 5px rgba(0, 0, 0, 0.2)",
-						}}>
+						}}
+					>
 						<h1 className='mb-3'>
 							Account <span className='text-primary'>Register</span>
 						</h1>
 						{/* <Google informParent={informParent} /> */}
 						<form onSubmit={clickSubmit}>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='name' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='name' style={{fontWeight: "bold"}}>
 									Full Name
 								</label>
 								<input
@@ -149,8 +149,8 @@ const Register = () => {
 									onChange={handleChange("name")}
 								/>
 							</div>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='email' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='email' style={{fontWeight: "bold"}}>
 									Phone
 								</label>
 								<input
@@ -162,8 +162,8 @@ const Register = () => {
 								/>
 							</div>
 
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='password' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='password' style={{fontWeight: "bold"}}>
 									Password
 								</label>
 								<input
@@ -174,8 +174,8 @@ const Register = () => {
 									onChange={handleChange("password")}
 								/>
 							</div>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='password2' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='password2' style={{fontWeight: "bold"}}>
 									Confirm Password
 								</label>
 								<input
@@ -198,14 +198,16 @@ const Register = () => {
 							style={{
 								fontSize: "0.9rem",
 								textAlign: "center",
-							}}>
+							}}
+						>
 							If You Already have an account, Please{" "}
 							<strong
 								style={{
 									textDecoration: "underline",
 									fontStyle: "italic",
 									fontSize: "1rem",
-								}}>
+								}}
+							>
 								<Link to='/signin' className='btn btn-sm btn-outline-primary'>
 									Login Here
 								</Link>
@@ -220,25 +222,25 @@ const Register = () => {
 
 	const MisMatchError = "Passwords Don't Match, Please Try Again!!";
 
-	// useEffect(() => {
-	// 	ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
-	// 	// To Report Page View
-	// 	ReactGA.pageview(window.location.pathname + window.location.search);
-	// 	// eslint-disable-next-line
-	// }, []);
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<WholeSignup>
@@ -247,7 +249,7 @@ const Register = () => {
 				<title>Next Day Online Shop | Account Register</title>
 				<meta
 					name='description'
-					content='ACE Online Shop Platform Developed By https://infinite-apps.com'
+					content='Next Day Shop Platform Developed By https://infinite-apps.com'
 				/>
 				<link rel='canonical' href='http://infinite-apps.com' />
 			</Helmet>

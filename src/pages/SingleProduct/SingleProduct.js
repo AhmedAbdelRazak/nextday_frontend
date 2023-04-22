@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
@@ -17,28 +17,28 @@ import {
 	getProducts,
 } from "../../apiCore";
 // eslint-disable-next-line
-import { addItem } from "../../cartHelpers";
+import {addItem} from "../../cartHelpers";
 // eslint-disable-next-line
 import StarRating from "react-star-ratings";
 // eslint-disable-next-line
-import { Modal } from "antd";
-import { toast, ToastContainer } from "react-toastify";
+import {Modal} from "antd";
+import {toast, ToastContainer} from "react-toastify";
 // import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { isAuthenticated } from "../../auth";
+import {isAuthenticated} from "../../auth";
 // eslint-disable-next-line
-import { useHistory, useParams, Link, Redirect } from "react-router-dom";
+import {useHistory, useParams, Link, Redirect} from "react-router-dom";
 // eslint-disable-next-line
 import Slider from "react-slick";
-import { showAverageRating } from "./Rating";
-import { useCartContext } from "../../Checkout/cart_context";
+import {showAverageRating} from "./Rating";
+import {useCartContext} from "../../Checkout/cart_context";
 // import Resizer from "react-image-file-resizer";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import DisplayImages from "./DisplayImages";
 import HistoricalComments from "./HistoricalComments";
 import ColorsAndSizes from "./ColorsAndSizes";
 import CardForRelatedProducts from "./CardForRelatedProducts";
 // import "antd/dist/antd.css";
-import { Collapse } from "antd";
+import {Collapse} from "antd";
 import SizeChartModal from "./SizeChartModal";
 import SigninModal from "./SigninModal/SigninModal";
 import {
@@ -48,7 +48,7 @@ import {
 	DeleteOutlined,
 	HeatMapOutlined,
 } from "@ant-design/icons";
-const { Panel } = Collapse;
+const {Panel} = Collapse;
 
 const isActive = (selectedLink, path) => {
 	if (selectedLink === path) {
@@ -116,7 +116,7 @@ const SingleProduct = (props) => {
 
 	const token = isAuthenticated() && isAuthenticated().token;
 	const user = isAuthenticated() && isAuthenticated().user;
-	const { addToCart, openSidebar } = useCartContext();
+	const {addToCart, openSidebar} = useCartContext();
 
 	useEffect(() => {
 		const productId = props.match.params && props.match.params.productId;
@@ -158,16 +158,13 @@ const SingleProduct = (props) => {
 					if (data2.error) {
 						console.log(data2.error);
 					} else {
-						var allAceProducts = data2.filter(
-							(i) =>
-								i.activeProduct === true && i.storeName.storeName === "ace",
-						);
+						var allAceProducts = data2.filter((i) => i.activeProduct === true);
 						setCategoryProducts(
 							allAceProducts.filter(
 								(iiii) =>
 									iiii.category.categoryName.toLowerCase() ===
-									data.category.categoryName,
-							),
+									data.category.categoryName
+							)
 						);
 					}
 				});
@@ -225,7 +222,7 @@ const SingleProduct = (props) => {
 
 				let uniqueColorArrayFinal = [
 					...new Map(
-						colorsAndImages.map((item) => [item["color"], item]),
+						colorsAndImages.map((item) => [item["color"], item])
 					).values(),
 				];
 
@@ -234,7 +231,7 @@ const SingleProduct = (props) => {
 
 				//consolidating All Images
 				var imagesArray = data.productAttributes.map((i) =>
-					i.productImages.map((ii) => ii.url),
+					i.productImages.map((ii) => ii.url)
 				);
 
 				var mergedimagesArray = [].concat.apply([], imagesArray);
@@ -249,10 +246,10 @@ const SingleProduct = (props) => {
 						data &&
 						data.productAttributes &&
 						data.productAttributes.filter(
-							(im) => im.color === localStorage.getItem("productColor"),
+							(im) => im.color === localStorage.getItem("productColor")
 						) &&
 						data.productAttributes.filter(
-							(im) => im.color === localStorage.getItem("productColor"),
+							(im) => im.color === localStorage.getItem("productColor")
 						)[0];
 
 					setChosenProductAttributes({
@@ -278,12 +275,12 @@ const SingleProduct = (props) => {
 	useEffect(() => {
 		if (Product && Product.ratings && user) {
 			let existingRatingObject = Product.ratings.filter(
-				(ele) => ele.ratedBy._id === user._id,
+				(ele) => ele.ratedBy._id === user._id
 			);
 			setStar(
 				existingRatingObject &&
 					existingRatingObject[existingRatingObject.length - 1] &&
-					existingRatingObject[existingRatingObject.length - 1].star,
+					existingRatingObject[existingRatingObject.length - 1].star
 			);
 		}
 		// eslint-disable-next-line
@@ -321,7 +318,7 @@ const SingleProduct = (props) => {
 		});
 	};
 	let history = useHistory();
-	let { productId, productName } = useParams();
+	let {productId, productName} = useParams();
 
 	// eslint-disable-next-line
 	const handleModal = () => {
@@ -370,7 +367,7 @@ const SingleProduct = (props) => {
 		e.preventDefault();
 		setLoading(true);
 		if (!isAuthenticated()) {
-			setError({ error: "Please signin to leave a comment" });
+			setError({error: "Please signin to leave a comment"});
 			return false;
 		}
 
@@ -418,7 +415,7 @@ const SingleProduct = (props) => {
 			<>
 				{Product && Product.comments && !loading ? (
 					<>
-						<h5 className='mt-5 mb-3' style={{ fontWeight: "bold" }}>
+						<h5 className='mt-5 mb-3' style={{fontWeight: "bold"}}>
 							Your Feedback Is Important To Us!!
 						</h5>
 						<form onSubmit={addComment}>
@@ -487,7 +484,7 @@ const SingleProduct = (props) => {
 
 	const deleteConfirmed = (comment) => {
 		let answer = window.confirm(
-			"Are you sure you want to delete your comment?",
+			"Are you sure you want to delete your comment?"
 		);
 		if (answer) {
 			deleteComment(comment);
@@ -620,7 +617,8 @@ const SingleProduct = (props) => {
 							fontSize: "2.5rem",
 							color: "gold",
 							fontWeight: "bold",
-						}}>
+						}}
+					>
 						Loading...
 					</div>
 				</>
@@ -699,7 +697,8 @@ const SingleProduct = (props) => {
 									textTransform: "uppercase",
 									fontWeight: "bold",
 									fontSize: "1.2rem",
-								}}>
+								}}
+							>
 								{Product && Product.ratings && Product.ratings.length > 0 ? (
 									<div className='mb-2'>{showAverageRating(Product)}</div>
 								) : (
@@ -710,20 +709,23 @@ const SingleProduct = (props) => {
 											// fontStyle: "italic",
 											fontWeight: "bold",
 											color: "black",
-										}}>
+										}}
+									>
 										<strong>No Ratings</strong>
 									</div>
 								)}
 								<span className='productNamePrice'>{Product.productName}</span>
 								<div
 									className='mt-2'
-									style={{ color: "darkgrey", fontSize: "0.8rem" }}>
+									style={{color: "darkgrey", fontSize: "0.8rem"}}
+								>
 									{Product && Product.category && Product.category.categoryName}
 								</div>
 
 								<div
 									className='mt-2 productNamePrice'
-									style={{ color: "black", fontSize: "1.2rem" }}>
+									style={{color: "black", fontSize: "1.2rem"}}
+								>
 									{Product &&
 										Product.productAttributes &&
 										Product.productAttributes
@@ -757,24 +759,28 @@ const SingleProduct = (props) => {
 												aria-label='Add to wishlist'
 												className='sc-Axmtr fpbHys sc-qYsuA jDsubJ'
 												fdprocessedid='zq33c7'
-												style={{ background: "lightgreen" }}
-												onClick={likeToggle}>
+												style={{background: "lightgreen"}}
+												onClick={likeToggle}
+											>
 												<div class='sc-pCPXO dbhMVG' onClick={likeToggle2}>
 													<i
 														className='sc-AxirZ bJCmFu wishlist'
-														style={{ background: "lightgreen" }}>
+														style={{background: "lightgreen"}}
+													>
 														<svg
 															width='24'
 															height='24'
 															viewBox='0 0 24 24'
 															fill='none'
 															xmlns='http://www.w3.org/2000/svg'
-															role='img'>
+															role='img'
+														>
 															<path
 																fill-rule='evenodd'
 																clip-rule='evenodd'
 																d='M4.43785 5.44294C6.35498 3.51902 9.46346 3.51902 11.3806 5.44294C11.6162 5.67942 11.8224 5.93562 12 6.20413C12.1776 5.93562 12.3829 5.68025 12.6194 5.44294C14.5365 3.51902 17.645 3.51902 19.5622 5.44294C21.4212 7.30855 21.4775 10.2984 19.7312 12.2321L19.5622 12.4103L11.9992 20L4.43785 12.4103C2.52072 10.4863 2.52072 7.36685 4.43785 5.44294ZM18.4996 6.50172C17.1687 5.16609 15.0129 5.16609 13.6819 6.50172C13.5751 6.60898 13.4758 6.72321 13.3838 6.84443L13.2512 7.0315L12 8.9236L10.7488 7.0315C10.6219 6.83962 10.4779 6.66212 10.3181 6.50172C8.98714 5.16609 6.8313 5.16609 5.50038 6.50172C4.21418 7.79248 4.16824 9.85879 5.36268 11.205L5.50049 11.3516L11.999 17.875L18.4996 11.3515C19.7858 10.0607 19.8318 7.99441 18.6374 6.64826L18.4996 6.50172Z'
-																fill='black'></path>
+																fill='black'
+															></path>
 														</svg>
 													</i>
 												</div>
@@ -789,13 +795,15 @@ const SingleProduct = (props) => {
 												if (!isAuthenticated() && !isAuthenticated().token) {
 													setModalVisible3(true);
 												}
-											}}>
+											}}
+										>
 											<button
 												id='wishlist_heart_pdp'
 												aria-label='Add to wishlist'
 												className='sc-Axmtr fpbHys sc-qYsuA jDsubJ'
 												fdprocessedid='zq33c7'
-												onClick={likeToggle}>
+												onClick={likeToggle}
+											>
 												<div className='sc-pCPXO dbhMVG' onClick={likeToggle2}>
 													<i className='sc-AxirZ bJCmFu wishlist'>
 														<svg
@@ -804,12 +812,14 @@ const SingleProduct = (props) => {
 															viewBox='0 0 24 24'
 															fill='none'
 															xmlns='http://www.w3.org/2000/svg'
-															role='img'>
+															role='img'
+														>
 															<path
 																fill-rule='evenodd'
 																clip-rule='evenodd'
 																d='M4.43785 5.44294C6.35498 3.51902 9.46346 3.51902 11.3806 5.44294C11.6162 5.67942 11.8224 5.93562 12 6.20413C12.1776 5.93562 12.3829 5.68025 12.6194 5.44294C14.5365 3.51902 17.645 3.51902 19.5622 5.44294C21.4212 7.30855 21.4775 10.2984 19.7312 12.2321L19.5622 12.4103L11.9992 20L4.43785 12.4103C2.52072 10.4863 2.52072 7.36685 4.43785 5.44294ZM18.4996 6.50172C17.1687 5.16609 15.0129 5.16609 13.6819 6.50172C13.5751 6.60898 13.4758 6.72321 13.3838 6.84443L13.2512 7.0315L12 8.9236L10.7488 7.0315C10.6219 6.83962 10.4779 6.66212 10.3181 6.50172C8.98714 5.16609 6.8313 5.16609 5.50038 6.50172C4.21418 7.79248 4.16824 9.85879 5.36268 11.205L5.50049 11.3516L11.999 17.875L18.4996 11.3515C19.7858 10.0607 19.8318 7.99441 18.6374 6.64826L18.4996 6.50172Z'
-																fill='black'></path>
+																fill='black'
+															></path>
 														</svg>
 													</i>
 												</div>
@@ -830,19 +840,21 @@ const SingleProduct = (props) => {
 											style={{
 												background: "rgb(0, 125, 181)",
 												color: "white",
-											}}>
+											}}
+										>
 											<div className='sc-pCPXO dbhMVG'>
 												<svg
 													className='Styles__CartIcon-sc-1swafzl-1 duVsMV'
 													width='18'
 													height='18'
 													color='white'
-													style={{ color: "white" }}
+													style={{color: "white"}}
 													viewBox='0 0 50 50'
 													version='1.1'
 													xmlns='http://www.w3.org/2000/svg'
 													role='img'
-													aria-labelledby='2902a1c1-d115-467c-a707-404d02345872'>
+													aria-labelledby='2902a1c1-d115-467c-a707-404d02345872'
+												>
 													<title id='2902a1c1-d115-467c-a707-404d02345872'>
 														Cart
 													</title>
@@ -850,10 +862,12 @@ const SingleProduct = (props) => {
 														stroke='none'
 														stroke-width='1'
 														fill='none'
-														fill-rule='evenodd'>
+														fill-rule='evenodd'
+													>
 														<path
 															d='M45,14.8732257 L36.081895,14.8732257 L36.081895,11.4774544 C36.081895,5.14878873 31.3357722, 0 25.5019853,0 C19.668463,0 14.9228697,5.14878873 14.9228697,11.4774544 L14.9228697,14.8732257 L6, 14.8732257 L6,50 L45,50 L45,14.8732257 Z M21,12.254649 C21,7.89394064 23.4326972,6 26.4655326, 6 C29.498368,6 32,7.89394064 32,12.254649 L32,16 L21,16 L21,12.254649 Z'
-															fill='#FFF'></path>
+															fill='#FFF'
+														></path>
 													</g>
 												</svg>
 											</div>
@@ -883,28 +897,30 @@ const SingleProduct = (props) => {
 																null,
 																1,
 																Product,
-																chosenProductAttributes,
+																chosenProductAttributes
 															);
-															// ReactPixel.track("Cart", {
-															// 	content_name: "Cart",
-															// 	content_category: "Cart",
-															// 	content_type: Product.productName,
-															// 	value: "Cart",
-															// 	currency: "",
-															// });
-														}}>
+															ReactPixel.track("Cart", {
+																content_name: "Cart",
+																content_category: "Cart",
+																content_type: Product.productName,
+																value: "Cart",
+																currency: "",
+															});
+														}}
+													>
 														<div className='sc-pCPXO dbhMVG'>
 															<svg
 																className='Styles__CartIcon-sc-1swafzl-1 duVsMV'
 																width='18'
 																height='18'
 																color='white'
-																style={{ color: "white" }}
+																style={{color: "white"}}
 																viewBox='0 0 50 50'
 																version='1.1'
 																xmlns='http://www.w3.org/2000/svg'
 																role='img'
-																aria-labelledby='2902a1c1-d115-467c-a707-404d02345872'>
+																aria-labelledby='2902a1c1-d115-467c-a707-404d02345872'
+															>
 																<title id='2902a1c1-d115-467c-a707-404d02345872'>
 																	Cart
 																</title>
@@ -912,10 +928,12 @@ const SingleProduct = (props) => {
 																	stroke='none'
 																	stroke-width='1'
 																	fill='none'
-																	fill-rule='evenodd'>
+																	fill-rule='evenodd'
+																>
 																	<path
 																		d='M45,14.8732257 L36.081895,14.8732257 L36.081895,11.4774544 C36.081895,5.14878873 31.3357722, 0 25.5019853,0 C19.668463,0 14.9228697,5.14878873 14.9228697,11.4774544 L14.9228697,14.8732257 L6, 14.8732257 L6,50 L45,50 L45,14.8732257 Z M21,12.254649 C21,7.89394064 23.4326972,6 26.4655326, 6 C29.498368,6 32,7.89394064 32,12.254649 L32,16 L21,16 L21,12.254649 Z'
-																		fill='#FFF'></path>
+																		fill='#FFF'
+																	></path>
 																</g>
 															</svg>
 														</div>
@@ -939,7 +957,8 @@ const SingleProduct = (props) => {
 										background: "rgb(245, 245, 245)",
 										borderRadius: "5px",
 										margin: "10px 5px",
-									}}>
+									}}
+								>
 									<span className=''>
 										{Product &&
 											Product.policy &&
@@ -950,7 +969,7 @@ const SingleProduct = (props) => {
 															<strong>{cc}</strong>
 														</div>
 													);
-												},
+												}
 											)}
 									</span>
 								</div>
@@ -958,25 +977,28 @@ const SingleProduct = (props) => {
 
 							<hr />
 							<Collapse
-								style={{ background: "white", margin: "0px 10px 0px 0px" }}
-								accordion>
+								style={{background: "white", margin: "0px 10px 0px 0px"}}
+								accordion
+							>
 								<Panel
 									collapsible
-									style={{ marginBottom: "5px" }}
+									style={{marginBottom: "5px"}}
 									header={
-										<span style={{ fontWeight: "bold", color: "black" }}>
+										<span style={{fontWeight: "bold", color: "black"}}>
 											Product Description
 										</span>
-									}>
+									}
+								>
 									<div className='productDescriptionWrapper'>
 										<p
 											className='single-Product-Description-Style'
-											style={{ fontSize: "0.85rem" }}>
+											style={{fontSize: "0.85rem"}}
+										>
 											<span className=''>
 												{Product &&
 													Product.description &&
 													selectedFeedbackComments(
-														Product && Product.description,
+														Product && Product.description
 													).map((cc, ii) => {
 														return (
 															<div key={ii} className='ml-3 my-2'>
@@ -993,21 +1015,23 @@ const SingleProduct = (props) => {
 									<Panel
 										collapsible
 										showArrow={true}
-										style={{ marginBottom: "5px" }}
+										style={{marginBottom: "5px"}}
 										header={
-											<span style={{ fontWeight: "bold", color: "black" }}>
+											<span style={{fontWeight: "bold", color: "black"}}>
 												Product DNA
 											</span>
-										}>
+										}
+									>
 										<div className='productDescriptionWrapper'>
 											<p
 												className='single-Product-Description-Style'
-												style={{ fontSize: "0.85rem" }}>
+												style={{fontSize: "0.85rem"}}
+											>
 												<span className=''>
 													{Product &&
 														Product.DNA &&
 														selectedFeedbackComments(
-															Product && Product.DNA,
+															Product && Product.DNA
 														).map((cc, ii) => {
 															return (
 																<div key={ii} className='ml-3 my-2'>
@@ -1025,21 +1049,23 @@ const SingleProduct = (props) => {
 									<Panel
 										collapsible
 										showArrow={true}
-										style={{ marginBottom: "5px" }}
+										style={{marginBottom: "5px"}}
 										header={
-											<span style={{ fontWeight: "bold", color: "black" }}>
+											<span style={{fontWeight: "bold", color: "black"}}>
 												Delivery & Return
 											</span>
-										}>
+										}
+									>
 										<div className='productDescriptionWrapper'>
 											<p
 												className='single-Product-Description-Style'
-												style={{ fontSize: "0.85rem" }}>
+												style={{fontSize: "0.85rem"}}
+											>
 												<span className=''>
 													{Product &&
 														Product.Specs &&
 														selectedFeedbackComments(
-															Product && Product.Specs,
+															Product && Product.Specs
 														).map((cc, ii) => {
 															return (
 																<div key={ii} className='ml-3 my-2'>
@@ -1057,21 +1083,23 @@ const SingleProduct = (props) => {
 									<Panel
 										collapsible
 										showArrow={true}
-										style={{ marginBottom: "5px" }}
+										style={{marginBottom: "5px"}}
 										header={
-											<span style={{ fontWeight: "bold", color: "black" }}>
+											<span style={{fontWeight: "bold", color: "black"}}>
 												Fit & Care
 											</span>
-										}>
+										}
+									>
 										<div className='productDescriptionWrapper'>
 											<p
 												className='single-Product-Description-Style'
-												style={{ fontSize: "0.85rem" }}>
+												style={{fontSize: "0.85rem"}}
+											>
 												<span className=''>
 													{Product &&
 														Product.fitCare &&
 														selectedFeedbackComments(
-															Product && Product.fitCare,
+															Product && Product.fitCare
 														).map((cc, ii) => {
 															return (
 																<div key={ii} className='ml-3 my-2'>
@@ -1080,19 +1108,21 @@ const SingleProduct = (props) => {
 																		.includes("washing instructions") ||
 																	cc.toLowerCase().includes("extra care") ||
 																	cc === "" ? (
-																		<h5 style={{ fontWeight: "bold" }}>{cc}</h5>
+																		<h5 style={{fontWeight: "bold"}}>{cc}</h5>
 																	) : (
 																		<ul
 																			style={{
 																				listStyle: ii > 7 ? "" : "none",
 																				marginLeft: ii > 7 ? "20px" : "0px",
-																			}}>
+																			}}
+																		>
 																			<li>
 																				<span
 																					style={{
 																						fontSize: "15px",
 																						fontWeight: "bold",
-																					}}>
+																					}}
+																				>
 																					{" "}
 																					{ii === 2 ? (
 																						<HeatMapOutlined />
@@ -1157,7 +1187,8 @@ const SingleProduct = (props) => {
 												style={isActive(selectedLink, "WEAR IT WITH")}
 												onClick={() => {
 													setSelectedLink("WEAR IT WITH");
-												}}>
+												}}
+											>
 												WEAR IT WITH
 											</h4>
 										</div>
@@ -1167,7 +1198,8 @@ const SingleProduct = (props) => {
 												style={isActive(selectedLink, "YOU MAY ALSO LIKE")}
 												onClick={() => {
 													setSelectedLink("YOU MAY ALSO LIKE");
-												}}>
+												}}
+											>
 												YOU MIGHT LIKE
 											</h4>
 										</div>
@@ -1232,7 +1264,7 @@ const SingleEmp = styled.div`
 	width: 95%;
 	overflow-x: hidden;
 	/* margin-top: 5px; */
-	font-family: font-family: Roboto, Helvetica, Arial, sans-serif !important;
+	font-family: Roboto, Helvetica, Arial, sans-serif !important;
 	/* .carousel-slider {
 		width: 75%;
 	} */
@@ -1260,16 +1292,15 @@ const SingleEmp = styled.div`
 		height: 100%;
 		object-fit: cover !important;
 	}
-	
 
 	.carousel-root .thumb {
 		/* margin-top: 20px !important; */
 		padding: 0px !important;
-		margin: 0px  !important;
+		margin: 0px !important;
 		width: 10% !important;
 	}
 
-	 .selected  {
+	.selected {
 		border: 2px lightgrey solid !important;
 		margin: 0px !important;
 		padding: 0px !important;
@@ -1279,7 +1310,6 @@ const SingleEmp = styled.div`
 		border: 1px white solid !important;
 		margin: 0px !important;
 		padding: 0px !important;
-
 	}
 
 	.buttons:hover {
@@ -1294,72 +1324,68 @@ const SingleEmp = styled.div`
 		-webkit-box-pack: center;
 		justify-content: center;
 		margin: auto 10px;
-}
+	}
 
-.fpbHys {
-    display: inline-flex;
-    position: relative;
-    font-family: Montserrat, Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    border-radius: 5rem;
-    cursor: pointer;
-    font-weight: 700;
-    outline: none;
-    border: 0px;
-    text-align: center;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    background-color: rgb(210, 210, 210);
-    font-size: 1rem;
-    padding: 0.85rem 0.85rem;
-}
+	.fpbHys {
+		display: inline-flex;
+		position: relative;
+		font-family: Montserrat, Helvetica, Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.05rem;
+		border-radius: 5rem;
+		cursor: pointer;
+		font-weight: 700;
+		outline: none;
+		border: 0px;
+		text-align: center;
+		text-decoration: none;
+		color: rgb(0, 0, 0);
+		background-color: rgb(210, 210, 210);
+		font-size: 1rem;
+		padding: 0.85rem 0.85rem;
+	}
 
-.carousel .thumbs-wrapper {
-    margin: 5px !important;
-}
+	.carousel .thumbs-wrapper {
+		margin: 5px !important;
+	}
 
 	@media (max-width: 850px) {
 		padding: 0px !important;
 		width: 100%;
 
 		.wrapperRight {
-		margin: 0px !important;
-		top: -21px;
-	}
+			margin: 0px !important;
+			top: -21px;
+		}
 
-	.imageWrapper {
-		margin: 0px !important;
-		padding-bottom: 0px !important;
-		
-	}
+		.imageWrapper {
+			margin: 0px !important;
+			padding-bottom: 0px !important;
+		}
 
 		.slider img {
 			width: 100%;
 			height: 100% !important;
 			object-fit: cover !important;
 			padding: 0px !important;
-
 		}
 		.carousel-root .thumb {
-		margin-top: 0px !important;
-		padding: 0px !important;
-		padding: 0px !important;
-		margin: 0px  !important;
-		width: 23% !important;
-	}
+			margin-top: 0px !important;
+			padding: 0px !important;
+			padding: 0px !important;
+			margin: 0px !important;
+			width: 23% !important;
+		}
 
+		.carousel-root {
+			padding: 0px !important;
+		}
 
-
-	.carousel-root {
-		padding: 0px !important;
-	}
-
-		.thumbs  {
+		.thumbs {
 			right: 50px !important;
 			top: 0px !important;
 		}
-		
+
 		h3 {
 			font-size: 15px;
 		}
@@ -1371,21 +1397,18 @@ const SingleEmp = styled.div`
 		}
 
 		.slider-wrapper {
-		width: 100%;
-		height: 100%;
-	}
-	
-	.AddToCartStyling > button {
-		font-size: 12px !important;
-		position: sticky !important;
-	}
+			width: 100%;
+			height: 100%;
+		}
 
-	.productNamePrice {
-		font-size: 1rem !important;
-	}
+		.AddToCartStyling > button {
+			font-size: 12px !important;
+			position: sticky !important;
+		}
 
-
-		
+		.productNamePrice {
+			font-size: 1rem !important;
+		}
 	}
 `;
 

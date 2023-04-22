@@ -7,28 +7,28 @@ const PrivacyPolicy = () => {
 	return (
 		<PrivacyPolicyWrapper>
 			<div className='container'>
-				<h1>ACE SPORT PRIVACY AND DATA PROTECTION POLICY</h1>
+				<h1>Next Day PRIVACY AND DATA PROTECTION POLICY</h1>
 				<p>
-					<strong>ACESPORTIVE LLC </strong>, a company registered and
-					functioning under the Egyptian laws, with headquarters in Egypt,
-					commercial register number 095478, and whose principal office is
-					located at ABou Youssef Idustrial Zone, El Agami, Alexandria, Arab
-					Republic of Egypt, having fiscal registration and VAT no. 379-456-249,
+					<strong>Next Day LLC </strong>, a company registered and functioning
+					under the Egyptian laws, with headquarters in Egypt, commercial
+					register number 095478, and whose principal office is located at ABou
+					Youssef Idustrial Zone, El Agami, Alexandria, Arab Republic of Egypt,
+					having fiscal registration and VAT no. 379-456-249,
 					gqshop2021@gmail.com , part of the international GOLDS GYM Elite group
-					of companies under the organization of ACESPORTIVE LLC. (the “Company”
-					or “We”),respects the privacy of its customers' and uses its best
-					effort to ensure the protection of their personal data and
-					information, by complying with all applicable legislation relating to
-					the protection of personal data.
+					of companies under the organization of Next Day LLC. (the “Company” or
+					“We”),respects the privacy of its customers' and uses its best effort
+					to ensure the protection of their personal data and information, by
+					complying with all applicable legislation relating to the protection
+					of personal data.
 				</p>
 				<p>
 					For this purpose, we implement the following Privacy and Data
 					Protection Policy (“Policy”), which sets out the main aspects in
-					relation to which personal data ACESPORTIVE.COM collect and process on
+					relation to which personal data NEXTDAYEGY.com collect and process on
 					our Website, for what purposes we collect and process such data, how
 					we use such information, how you can change such information, your
 					preferences for our communication with you as well as how we ensure
-					the protection of such personal data and ACESPORTIVE.COM rights
+					the protection of such personal data and NEXTDAYEGY.com rights
 					relating to your personal data.
 				</p>
 				<p>
@@ -41,30 +41,30 @@ const PrivacyPolicy = () => {
 				<p>
 					It is important to mention that this Policy applies to you
 					irrespective of the manner how you access our website, respectively it
-					covers any device through which ACESPORTIVE.COM is made accessed by
-					you (via phone, tablet, PC etc.).
+					covers any device through which NEXTDAYEGY.com is made accessed by you
+					(via phone, tablet, PC etc.).
 				</p>
 
 				<p>
-					Mention should be made that ACESPORTIVE.COM cookies policy is part of
+					Mention should be made that NEXTDAYEGY.com cookies policy is part of
 					this Policy.
 				</p>
 				<p>
 					<strong>
-						A. Acceptance of ACESPORTIVE.COM Privacy and Data Protection Policy
+						A. Acceptance of NEXTDAYEGY.com Privacy and Data Protection Policy
 					</strong>
 				</p>
 				<p>
-					Before further action on ACESPORTIVE.COM Website, we strongly
-					recommend you to read this Policy carefully.
+					Before further action on NEXTDAYEGY.com Website, we strongly recommend
+					you to read this Policy carefully.
 				</p>
 				<p>
 					If you do not agree with this Policy and you do not want your personal
 					data to be used as it is detailed herein, you should not continue to
-					use ACESPORTIVE.COM and not provide us with your personal data.
+					use NEXTDAYEGY.com and not provide us with your personal data.
 				</p>
 				<p>
-					We underline that every time you use ACESPORTIVE.COM, you are subject
+					We underline that every time you use NEXTDAYEGY.com, you are subject
 					to our Policy and by further accessing, browsing and otherwise using
 					our Website, you confirm that you have read, understood and consented
 					to this Policy.
@@ -76,10 +76,10 @@ const PrivacyPolicy = () => {
 
 				<p>
 					Personal data <br />
-					When you access or browse ACESPORTIVE.COM, as well as when you make
+					When you access or browse NEXTDAYEGY.com, as well as when you make
 					online purchases through our Website, when you subscribe to
-					ACESPORTIVE.COM e-bulletins and website which announce our services
-					and campaigns, we will collect some of your personal data to serve you
+					NEXTDAYEGY.com e-bulletins and website which announce our services and
+					campaigns, we will collect some of your personal data to serve you
 					better, such as:
 				</p>
 
@@ -96,11 +96,11 @@ const PrivacyPolicy = () => {
 
 				<p>
 					Please note that, order for you to be able to create a personal
-					account on ACESPORTIVE.COM Website and to make any online purchase, it
+					account on NEXTDAYEGY.com Website and to make any online purchase, it
 					is minimalized for you to provide us with most of the personal data
 					mentioned above. If you do not agree to provide us such personal data,
 					you will also be able to create your own personal account and/or make
-					purchases on ACESPORTIVE.COM. As you can make your orders without the
+					purchases on NEXTDAYEGY.com. As you can make your orders without the
 					long data time entry like in another websites.
 				</p>
 
@@ -135,7 +135,7 @@ const PrivacyPolicy = () => {
 					method selected by you when placing your order, All Payment Data are
 					Guranteed by Paymob as our payment partner in Egypt. As Paymob will
 					handel all your card Payments through their Systems and on
-					Acesportive.com's Own Resposibility.
+					NEXTDAYEGY.com's Own Resposibility.
 				</p>
 
 				<p>
@@ -147,7 +147,7 @@ const PrivacyPolicy = () => {
 				<p>
 					We recommend you to read these terms and conditions before selecting
 					this payment method. The credit card information used for placing your
-					order shall never be kept or stored in ACESPORTIVE.COM system.
+					order shall never be kept or stored in NEXTDAYEGY.com system.
 				</p>
 
 				<p>
@@ -159,7 +159,7 @@ const PrivacyPolicy = () => {
 				</p>
 
 				<p>
-					- To create a private account for you on Acesportive.com website (e.g.
+					- To create a private account for you on NEXTDAYEGY.com website (e.g.
 					your name, email),
 					<br />
 					- To process your orders through online services (e.g. your name,
@@ -196,16 +196,16 @@ const PrivacyPolicy = () => {
 				</p>
 				<p>
 					- To process and complete ordering processes and to ensure
-					communication with ACESPORTIVE.COM customers, in order for us to
-					fulfil our obligations deriving from any transaction concluded between
-					our customers and us,
+					communication with NEXTDAYEGY.com customers, in order for us to fulfil
+					our obligations deriving from any transaction concluded between our
+					customers and us,
 					<br />
-					- To provide you with information about ACESPORTIVE.COM products,
+					- To provide you with information about NEXTDAYEGY.com products,
 					services, campaigns, promotions and other notices and/or information,
 					<br />
 					- To gain a better understanding of our customers' shopping
 					preferences and to further offer them a personalised experience on
-					ACESPORTIVE.COM,
+					NEXTDAYEGY.com,
 					<br />
 					- To carry out trend and statistical analyses, including for marketing
 					and other intern purposes of the company,
@@ -213,7 +213,7 @@ const PrivacyPolicy = () => {
 				</p>
 
 				<p>
-					<strong>D. How ACE SPORT Share Collected Personal Data</strong>
+					<strong>D. How Next Day Share Collected Personal Data</strong>
 				</p>
 
 				<p>
@@ -234,27 +234,26 @@ const PrivacyPolicy = () => {
 				<p>
 					Other than that, your personal data is never disclosed to any third
 					parties, whether real persons or legal entities, that have no
-					commercial relationship with ACESPORTIVE.COM for the purposes of this
+					commercial relationship with NEXTDAYEGY.com for the purposes of this
 					Website and is not used or sold for any commercial purpose.
 				</p>
 
 				<p>
 					In the event another company is interest to acquire all or a part of
-					ACESPORTIVE.COM business, ACESPORTIVE.COM reserve the right to
-					disclose your personal data and other information to that company,
-					solely in connection with and for the purposes of the envisaged
-					acquisition.
+					NEXTDAYEGY.com business, NEXTDAYEGY.com reserve the right to disclose
+					your personal data and other information to that company, solely in
+					connection with and for the purposes of the envisaged acquisition.
 				</p>
 
 				<p>
-					ACESPORTIVE.COM have no control and assume no liability for the
+					NEXTDAYEGY.com have no control and assume no liability for the
 					transfers of your personal data and other information performed by
 					other partner companies that provide related services on
-					ACESPORTIVE.COM or in connection hereto.
+					NEXTDAYEGY.com or in connection hereto.
 				</p>
 
 				<p>
-					<strong>E. ACE SPORT Security and Protection of Data</strong>
+					<strong>E. Next Day Security and Protection of Data</strong>
 				</p>
 
 				<p>
@@ -263,7 +262,7 @@ const PrivacyPolicy = () => {
 					ensure the same. <br />
 					<br />
 					All physical, electronic and managerial measures are adopted to ensure
-					the security of ACESPORTIVE.COM system. All data is stored and backed
+					the security of NEXTDAYEGY.com system. All data is stored and backed
 					up in secure servers at home and abroad. The data obtained through our
 					website our transferred via SSL (Secure Socket Layer) technology that
 					ensures secure transfer of data. <br />
@@ -272,13 +271,13 @@ const PrivacyPolicy = () => {
 					will notice that its all guranteed and secured by our Payment
 					Processor ( PAYMOB ) <br />
 					<br />
-					I. The rights of ACESPORTIVE.COM customers and visitors regarding
-					their personal data <br />
+					I. The rights of NEXTDAYEGY.com customers and visitors regarding their
+					personal data <br />
 					<br />
 					It is important for us to insure you all your rights in connection
-					with your personal data, reason for which ACESPORTIVE.COM would like
-					to inform you that, according to the applicable, you have the
-					following rights: <br />
+					with your personal data, reason for which NEXTDAYEGY.com would like to
+					inform you that, according to the applicable, you have the following
+					rights: <br />
 					<br />
 					- The access right to the personal data: you have the right to obtain
 					from us, at request and free of any charge (for a request per year)
@@ -304,7 +303,7 @@ const PrivacyPolicy = () => {
 					- The right of opposition: you have the right to oppose, at any
 					moment, based on grounded and legitimate reasons regarding your
 					specific situation, any personal data concerning you to be object of
-					any processing. In case your opposition is justified, ACESPORTIVE.COM
+					any processing. In case your opposition is justified, NEXTDAYEGY.com
 					will no longer process such data. Also, you have the right to oppose
 					in any moment, free of any charge and without any justification, that
 					the personal data concerning you to be processed for marketing
@@ -337,13 +336,13 @@ const PrivacyPolicy = () => {
 
 				<p>
 					<strong>
-						F. ACE SPORT Newsletters, messages and alerts. Opting out of
+						F. Next Day Newsletters, messages and alerts. Opting out of
 						e-Bulletin Subscription
 					</strong>
 				</p>
 				<p>
-					<strong>ACESPORTIVE.COM</strong> offer you the right to control
-					whether or not to receive during your whole experience on our Website.
+					<strong>NEXTDAYEGY.com</strong> offer you the right to control whether
+					or not to receive during your whole experience on our Website.
 				</p>
 				<p>
 					In this respect, please be informed that, for the purposes of direct
@@ -365,8 +364,7 @@ const PrivacyPolicy = () => {
 					manner from the e-bulletin subscription, by clicking on the link "If
 					you do not wish to receive such emails, please click to unsubscribe"
 					appearing in e-bulletins which we send to you on a regular basis or by
-					submitting a notice to info@acesportive.com with your membership
-					email.
+					submitting a notice to info@NEXTDAYEGY.com with your membership email.
 					<br />
 					<br />
 					You can get in touch with us using the following contact details:
@@ -381,7 +379,7 @@ const PrivacyPolicy = () => {
 				</p>
 				<p>
 					This section refers to the cookies and web pages operated by
-					ACESPORTIVE.COM. Please note that in order to insure the proper
+					NEXTDAYEGY.com. Please note that in order to insure the proper
 					functioning of this Website, we sometimes place small data files
 					called cookies on your device.
 					<br />

@@ -1,9 +1,9 @@
 /** @format */
 // eslint-disable-next-line
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
 // eslint-disable-next-line
-import { Link, Redirect } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import styled from "styled-components";
 import {
 	authenticate,
@@ -14,10 +14,10 @@ import {
 } from "../../../auth";
 // eslint-disable-next-line
 import Google from "../../../auth/Google";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 // import "react-toastify/dist/ReactToastify.min.css";
 
-const Login = ({ history, setSignRegister }) => {
+const Login = ({history, setSignRegister}) => {
 	const [values, setValues] = useState({
 		email: "",
 		password: "",
@@ -26,17 +26,17 @@ const Login = ({ history, setSignRegister }) => {
 	});
 
 	// eslint-disable-next-line
-	const { email, password, loading, redirectToReferrer } = values;
+	const {email, password, loading, redirectToReferrer} = values;
 
 	const handleChange = (name) => (event) => {
-		setValues({ ...values, error: false, [name]: event.target.value });
+		setValues({...values, error: false, [name]: event.target.value});
 	};
 
 	// eslint-disable-next-line
 	const informParent = (response) => {
-		setValues({ ...values, error: false, loading: true });
+		setValues({...values, error: false, loading: true});
 		if (response.error) {
-			setValues({ ...values, error: response.error, loading: false });
+			setValues({...values, error: response.error, loading: false});
 			toast.error(response.error);
 		} else {
 			authenticate2(response, () => {
@@ -50,15 +50,15 @@ const Login = ({ history, setSignRegister }) => {
 
 	const clickSubmit = (event) => {
 		event.preventDefault();
-		setValues({ ...values, error: false, loading: true });
-		signin({ email, password }).then((data) => {
+		setValues({...values, error: false, loading: true});
+		signin({email, password}).then((data) => {
 			if (data.error) {
-				setValues({ ...values, error: data.error, loading: false });
+				setValues({...values, error: data.error, loading: false});
 				toast.error(data.error);
 			} else if (data.user.activeUser === false) {
-				setValues({ ...values, error: data.error, loading: false });
+				setValues({...values, error: data.error, loading: false});
 				return toast.error(
-					"User was deactivated, Please reach out to the admin site",
+					"User was deactivated, Please reach out to the admin site"
 				);
 			} else {
 				console.log(data);
@@ -85,7 +85,7 @@ const Login = ({ history, setSignRegister }) => {
 			<div className='container-fluid mx-auto'>
 				<div className='mx-auto text-center'>
 					<h1>
-						<span className='storeName'>ACE Online Shop</span>
+						<span className='storeName'>Next Day Online Shop</span>
 					</h1>
 				</div>
 				<div className=' mx-auto'>
@@ -96,32 +96,34 @@ const Login = ({ history, setSignRegister }) => {
 							background: "white",
 							borderRadius: "10px",
 							// boxShadow: "5px 5px 5px 5px rgba(0, 0, 0, 0.2)",
-						}}>
+						}}
+					>
 						<h1 className='mb-2 text-center'>
 							Account <span className='text-primary'>Login</span>{" "}
 						</h1>
 						{/* <Google informParent={informParent} /> */}
 
 						<form onSubmit={clickSubmit}>
-							<div className='form-group' style={{ marginTop: "25px" }}>
+							<div className='form-group' style={{marginTop: "25px"}}>
 								<div
 									className='col-md-7 mx-auto'
 									style={{
 										fontWeight: "bold",
 										textAlign: "center",
-									}}>
+									}}
+								>
 									Email Address / Phone
 								</div>
 								<input
 									className='w-50 mx-auto'
-									style={{ border: "1px #f0f0f0 solid" }}
+									style={{border: "1px #f0f0f0 solid"}}
 									type='text'
 									name='email'
 									value={email}
 									onChange={handleChange("email")}
 								/>
 							</div>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
 								<div
 									className='col-md-7 mx-auto'
 									style={{
@@ -129,12 +131,13 @@ const Login = ({ history, setSignRegister }) => {
 										textAlign: "center",
 										marginRight: "20px",
 										right: "4px",
-									}}>
+									}}
+								>
 									Password
 								</div>
 								<input
 									className='w-50 mx-auto'
-									style={{ border: "1px #f0f0f0 solid" }}
+									style={{border: "1px #f0f0f0 solid"}}
 									type='password'
 									name='password'
 									value={password}
@@ -156,14 +159,16 @@ const Login = ({ history, setSignRegister }) => {
 							style={{
 								fontSize: "0.9rem",
 								textAlign: "center",
-							}}>
+							}}
+						>
 							Don't have an account, Please
 							<strong
 								style={{
 									textDecoration: "underline",
 									fontStyle: "italic",
 									fontSize: "1rem",
-								}}>
+								}}
+							>
 								<br />
 								<Link to='#' className='btn btn-sm btn-outline-danger'>
 									Register Here

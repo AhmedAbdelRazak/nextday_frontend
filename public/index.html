@@ -81,7 +81,7 @@
 				window,
 				document,
 				"script",
-				"https://connect.facebook.net/en_US/fbevents.js",
+				"https://connect.facebook.net/en_US/fbevents.js"
 			);
 			fbq("init", "3506674879555844");
 			fbq("track", "PageView");
@@ -98,6 +98,20 @@
 		<title>NEXT DAY | ONLINE SHOP</title>
 	</head>
 	<body>
+		<!-- Google tag (gtag.js) -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-7JM36296GR"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-7JM36296GR");
+		</script>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 
 		<div id="root"></div>

@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
-const GenderLinks = ({ allGenders }) => {
+const GenderLinks = ({allGenders}) => {
 	function sortOrdersAscendingly(a, b) {
 		const TotalAppointmentsA = a.genderName;
 		const TotalAppointmentsB = b.genderName;
@@ -32,7 +32,8 @@ const GenderLinks = ({ allGenders }) => {
 										background: "#c60e0e",
 										color: "white",
 										fontWeight: "bolder",
-									}}>
+									}}
+								>
 									<Link
 										style={{
 											color: "white",
@@ -40,8 +41,9 @@ const GenderLinks = ({ allGenders }) => {
 										}}
 										to={`/our-products?filterby=gender&gendername=${g.genderName}`}
 										onClick={() =>
-											window.scrollTo({ top: 0, behavior: "smooth" })
-										}>
+											window.scrollTo({top: 0, behavior: "smooth"})
+										}
+									>
 										Shop {g.genderName}
 									</Link>
 								</div>
@@ -57,17 +59,19 @@ const GenderLinks = ({ allGenders }) => {
 							return (
 								<div
 									key={i}
-									className='col-lg-4 col-md-4 col-sm-6 col-5 p-0 imgWrapper'>
+									className='col-lg-4 col-md-4 col-sm-6 col-5 p-0 imgWrapper'
+								>
 									<Link
 										to={`/our-products?filterby=gender&gendername=${g.genderName}`}
 										onClick={() =>
-											window.scrollTo({ top: 0, behavior: "smooth" })
-										}>
+											window.scrollTo({top: 0, behavior: "smooth"})
+										}
+									>
 										<img
 											src={g.thumbnail && g.thumbnail[0] && g.thumbnail[0].url}
 											alt={g.genderName}
 											className='mb-4 text-center'
-											style={{ height: "350px", width: "350px" }}
+											style={{height: "350px", width: "350px"}}
 										/>
 										<br />
 										{/* <span className='GenderText mb-5'>{g.genderName}</span> */}
@@ -131,7 +135,7 @@ const GenderLinksWrapper = styled.div`
 		box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.1);
 	}
 
-    .GenderText {
+	.GenderText {
 		font-size: 1.1rem;
 		margin-bottom: 7px;
 		/* font-style: italic; */
@@ -139,12 +143,10 @@ const GenderLinksWrapper = styled.div`
 		/* letter-spacing: 3px; */
 		/* text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.5); */
 		color: #330000;
-        text-transform: capitalize;
-
+		text-transform: capitalize;
 	}
 
-
-    @media (max-width: 900px) {
+	@media (max-width: 900px) {
 		img {
 			/* box-shadow: 1px 1px 2.5px 2.5px rgba(0, 0, 0, 0.3); */
 			border: 2px white solid;
@@ -163,29 +165,26 @@ const GenderLinksWrapper = styled.div`
 		}
 
 		img:hover {
-		/* border-radius: 10px 10px; */
-		transition: 0.5s;
-		height: 205px !important;
-		width: 205px !important;
-		box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
-	}
+			/* border-radius: 10px 10px; */
+			transition: 0.5s;
+			height: 205px !important;
+			width: 205px !important;
+			box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
+		}
 	}
 	@media (max-width: 700px) {
-
 		.btnGender {
-		display: block;
-	}
-	
+			display: block;
+		}
+
 		.row {
-		margin: auto !important;
+			margin: auto !important;
+		}
 
-	}
+		.imgWrapper {
+			margin-left: 10px;
+		}
 
-	.imgWrapper {
-		margin-left: 10px;
-
-	}
-		
 		img {
 			/* box-shadow: 1px 1px 2.5px 2.5px rgba(0, 0, 0, 0.3); */
 			border: 2px white solid;
@@ -194,10 +193,7 @@ const GenderLinksWrapper = styled.div`
 			width: 195px !important;
 			height: 195px !important;
 			margin-right: 10px;
-		
 		}
-
-		
 
 		.GenderText {
 			font-size: 1rem;
@@ -212,35 +208,36 @@ const GenderLinksWrapper = styled.div`
 		}
 
 		img:hover {
-		/* border-radius: 10px 10px; */
-		transition: 0.5s;
-		height: 205px !important;
-		width: 205px !important;
-		box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
-	}
+			/* border-radius: 10px 10px; */
+			transition: 0.5s;
+			height: 205px !important;
+			width: 205px !important;
+			box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.5);
+		}
 
-	.title {
-		text-align: center;
-		font-size: 1.4rem;
-		margin-left: 0px !important;
-		/* letter-spacing: 7px; */
-		font-weight: bold;
-		/* color: #ffc4c4; */
-		color: black;
-		text-transform: uppercase;
-		/* text-shadow: 3px 3px 10px; */
-	}
+		.title {
+			text-align: center;
+			font-size: 1.4rem;
+			margin-left: 0px !important;
+			/* letter-spacing: 7px; */
+			font-weight: bold;
+			/* color: #ffc4c4; */
+			color: black;
+			text-transform: uppercase;
+			/* text-shadow: 3px 3px 10px; */
+		}
 
-	.titleArabic {
-		text-align: center;
-		font-size: 1.4rem;
-		/* letter-spacing: 7px; */
-		font-weight: bold;
-		color: #ffc4c4;
-		font-family: "Droid Arabic Kufi";
-		color: black;
+		.titleArabic {
+			text-align: center;
+			font-size: 1.4rem;
+			/* letter-spacing: 7px; */
+			font-weight: bold;
+			color: #ffc4c4;
+			font-family: "Droid Arabic Kufi";
+			color: black;
 
-		/* text-shadow: 3px 3px 10px; */
+			/* text-shadow: 3px 3px 10px; */
+		}
 	}
 
 	@media (max-width: 420px) {

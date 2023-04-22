@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { getColors, readSingleUserHistory, readUser } from "../../apiCore";
-import { isAuthenticated } from "../../auth";
+import {getColors, readSingleUserHistory, readUser} from "../../apiCore";
+import {isAuthenticated} from "../../auth";
 import UserHistory from "./UserHistory";
-// import ReactPixel from "react-facebook-pixel";
+import ReactPixel from "react-facebook-pixel";
 import ReactGA from "react-ga4";
 
 const UserDashboard = () => {
@@ -13,7 +13,7 @@ const UserDashboard = () => {
 	const [allColors, setAllColors] = useState([]);
 	const [useHistOrders, setUsersHistOrders] = useState([]);
 
-	const { user, token } = isAuthenticated();
+	const {user, token} = isAuthenticated();
 
 	const readingUser = () => {
 		readUser(user._id, token).then((data) => {
@@ -56,18 +56,18 @@ const UserDashboard = () => {
 		useHistOrders.length > 0 &&
 		useHistOrders[useHistOrders.length - 1];
 
-	// const options = {
-	// 	autoConfig: true,
-	// 	debug: false,
-	// };
+	const options = {
+		autoConfig: true,
+		debug: false,
+	};
 
-	// useEffect(() => {
-	// 	ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
+	useEffect(() => {
+		ReactPixel.init(process.env.REACT_APP_FACEBOOK_PIXEL_ID, options);
 
-	// 	ReactPixel.pageView();
+		ReactPixel.pageView();
 
-	// 	// eslint-disable-next-line
-	// }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
@@ -86,7 +86,8 @@ const UserDashboard = () => {
 					fontSize: "1.4rem",
 					fontWeight: "bolder",
 					color: "darkred",
-				}}>
+				}}
+			>
 				Welcome back {userDetails.name}{" "}
 			</div>
 			<div className='container'>
@@ -99,7 +100,8 @@ const UserDashboard = () => {
 							fontSize: "1.2rem",
 							fontWeight: "bolder",
 							color: "darkgrey",
-						}}>
+						}}
+					>
 						You Currently Have No Orders
 					</div>
 				) : (
@@ -109,21 +111,24 @@ const UserDashboard = () => {
 								fontWeight: "bolder",
 								fontSize: "1.2rem",
 								color: "darkgrey",
-							}}>
+							}}
+						>
 							Your last purchase details:
 							<div className='col-md-3'>
-								<hr style={{ borderBottom: "1px darkgrey solid" }} />
+								<hr style={{borderBottom: "1px darkgrey solid"}} />
 							</div>
 						</div>
 
 						<div
 							className='ml-3'
-							style={{ fontSize: "1rem", fontWeight: "bold" }}>
+							style={{fontSize: "1rem", fontWeight: "bold"}}
+						>
 							Shipping details:
 						</div>
 						<div
 							className='ml-5 row'
-							style={{ color: "#0482ff", fontWeight: "bolder" }}>
+							style={{color: "#0482ff", fontWeight: "bolder"}}
+						>
 							<div className='col-md-6 mt-2'>
 								Name:{" "}
 								{lastPurchase &&
@@ -168,32 +173,36 @@ const UserDashboard = () => {
 							</div>
 							<div
 								className='col-md-4 my-3'
-								style={{ fontSize: "1rem", color: "darkred" }}>
+								style={{fontSize: "1rem", color: "darkred"}}
+							>
 								Order Tracking Number:{" "}
-								<span style={{ color: "black" }}>
+								<span style={{color: "black"}}>
 									{lastPurchase && lastPurchase.trackingNumber}
 								</span>
 							</div>
 							<div
 								className='col-md-4 my-3'
-								style={{ fontSize: "1rem", color: "darkred" }}>
+								style={{fontSize: "1rem", color: "darkred"}}
+							>
 								Order Status:{" "}
-								<span style={{ color: "black" }}>
+								<span style={{color: "black"}}>
 									{lastPurchase && lastPurchase.status}
 								</span>
 							</div>
 							<div
 								className='col-md-4 my-3'
-								style={{ fontSize: "1rem", color: "darkred" }}>
+								style={{fontSize: "1rem", color: "darkred"}}
+							>
 								Invoice Number:{" "}
-								<span style={{ color: "black" }}>
+								<span style={{color: "black"}}>
 									{lastPurchase && lastPurchase.invoiceNumber}
 								</span>
 							</div>
 						</div>
 						<div
 							className='ml-3 mt-4'
-							style={{ fontSize: "1rem", fontWeight: "bold" }}>
+							style={{fontSize: "1rem", fontWeight: "bold"}}
+						>
 							Purchased product details:
 						</div>
 						<div className='ml-5 row'>
@@ -211,7 +220,8 @@ const UserDashboard = () => {
 																return (
 																	<div
 																		className='col-md-9 text-capitalize'
-																		key={ii}>
+																		key={ii}
+																	>
 																		<div className='row'>
 																			<div className='col-md-6'>
 																				Product Name:{" "}
@@ -219,7 +229,8 @@ const UserDashboard = () => {
 																					style={{
 																						color: "darkblue",
 																						textTransform: "capitalize",
-																					}}>
+																					}}
+																				>
 																					{pp.productName} | {pp.SubSKU} |{" "}
 																					{allColors[
 																						allColors
@@ -236,7 +247,7 @@ const UserDashboard = () => {
 																				<br />
 																				<br />
 																				Quantity:{" "}
-																				<strong style={{ color: "darkblue" }}>
+																				<strong style={{color: "darkblue"}}>
 																					{pp.OrderedQty}{" "}
 																				</strong>
 																				{Number(pp.OrderedQty) > 1
@@ -244,7 +255,7 @@ const UserDashboard = () => {
 																					: "Unit"}
 																				<br />
 																				Price:{" "}
-																				<strong style={{ color: "darkblue" }}>
+																				<strong style={{color: "darkblue"}}>
 																					{pp.pickedPrice}
 																				</strong>{" "}
 																				L.E
@@ -253,7 +264,7 @@ const UserDashboard = () => {
 																			<div className='col-md-6'>
 																				{pp.productSubSKUImage ? (
 																					<img
-																						style={{ width: "80px" }}
+																						style={{width: "80px"}}
 																						src={
 																							pp.productSubSKUImage
 																								? pp.productSubSKUImage
@@ -263,7 +274,7 @@ const UserDashboard = () => {
 																					/>
 																				) : (
 																					<img
-																						style={{ width: "80px" }}
+																						style={{width: "80px"}}
 																						src={
 																							pp.productMainImage
 																								? pp.productMainImage
@@ -279,7 +290,7 @@ const UserDashboard = () => {
 															})}
 														</React.Fragment>
 													);
-												},
+												}
 											)}
 										</div>
 									</>
@@ -287,41 +298,41 @@ const UserDashboard = () => {
 							</div>
 
 							<div className='col-md-4 mt-3'>
-								<span style={{ fontWeight: "bold" }}>Subtotal:</span>{" "}
-								<span style={{ fontWeight: "bold", color: "#737373" }}>
+								<span style={{fontWeight: "bold"}}>Subtotal:</span>{" "}
+								<span style={{fontWeight: "bold", color: "#737373"}}>
 									{Number(
 										Number(
-											lastPurchase && lastPurchase.totalAmountAfterDiscount,
-										) - Number(lastPurchase && lastPurchase.shippingFees),
+											lastPurchase && lastPurchase.totalAmountAfterDiscount
+										) - Number(lastPurchase && lastPurchase.shippingFees)
 									).toFixed(2)}{" "}
 									L.E.
 								</span>
 								<br />
-								<span style={{ fontWeight: "bold" }}>Shipping Fee:</span>{" "}
-								<span style={{ fontWeight: "bold", color: "#737373" }}>
+								<span style={{fontWeight: "bold"}}>Shipping Fee:</span>{" "}
+								<span style={{fontWeight: "bold", color: "#737373"}}>
 									{Number(lastPurchase && lastPurchase.shippingFees).toFixed(2)}{" "}
 									L.E.
 								</span>
 								<br />
-								<span style={{ fontWeight: "bold" }}>COD%:</span>{" "}
-								<span style={{ fontWeight: "bold", color: "#737373" }}>
+								<span style={{fontWeight: "bold"}}>COD%:</span>{" "}
+								<span style={{fontWeight: "bold", color: "#737373"}}>
 									1.00%
 								</span>
 								<br />
-								<span style={{ fontWeight: "bold" }}>
+								<span style={{fontWeight: "bold"}}>
 									COD surcharge rate:
 								</span>{" "}
-								<span style={{ fontWeight: "bold", color: "#737373" }}>
+								<span style={{fontWeight: "bold", color: "#737373"}}>
 									{Number(
 										(Number(lastPurchase && lastPurchase.totalAmount) -
 											Number(lastPurchase && lastPurchase.shippingFees)) *
-											0.01,
+											0.01
 									).toFixed(2)}{" "}
 									L.E.
 								</span>
 								<br />
 								<br />
-								<span style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+								<span style={{fontWeight: "bold", fontSize: "1.2rem"}}>
 									Total Amount Due:{" "}
 								</span>{" "}
 								<span
@@ -329,21 +340,22 @@ const UserDashboard = () => {
 										fontWeight: "bold",
 										color: "#737373",
 										fontSize: "1.2rem",
-									}}>
+									}}
+								>
 									{Number(
 										Number(
-											lastPurchase && lastPurchase.totalAmountAfterDiscount,
+											lastPurchase && lastPurchase.totalAmountAfterDiscount
 										) +
 											(Number(lastPurchase && lastPurchase.totalAmount) -
 												Number(lastPurchase && lastPurchase.shippingFees)) *
-												0.01,
+												0.01
 									).toFixed(2)}{" "}
 									L.E.
 								</span>
 							</div>
 						</div>
 						<div className='col-md-8 mx-auto mt-5'>
-							<hr style={{ borderBottom: "1px darkgrey solid" }} />
+							<hr style={{borderBottom: "1px darkgrey solid"}} />
 						</div>
 						<div
 							className='mt-4'
@@ -351,15 +363,17 @@ const UserDashboard = () => {
 								fontWeight: "bolder",
 								fontSize: "1.2rem",
 								color: "darkgrey",
-							}}>
+							}}
+						>
 							Your Purchase History:
 							<div className='col-md-3'>
-								<hr style={{ borderBottom: "1px darkgrey solid" }} />
+								<hr style={{borderBottom: "1px darkgrey solid"}} />
 							</div>
 						</div>
 						<div
 							className='ml-3'
-							style={{ fontSize: "1rem", fontWeight: "bold" }}>
+							style={{fontSize: "1rem", fontWeight: "bold"}}
+						>
 							You have{" "}
 							{userDetails &&
 							userDetails.history &&
@@ -367,14 +381,14 @@ const UserDashboard = () => {
 							userDetails.history.length === 1 &&
 							useHistOrders &&
 							useHistOrders.length > 0
-								? `${useHistOrders.length} order with ACE shop`
+								? `${useHistOrders.length} order with NEXT DAY shop`
 								: userDetails &&
 								  userDetails.history &&
 								  userDetails.history.length &&
 								  userDetails.history.length > 1 &&
 								  useHistOrders &&
 								  useHistOrders.length > 0
-								? `${useHistOrders.length} orders with ACE shop`
+								? `${useHistOrders.length} orders with NEXT DAY shop`
 								: "Orders"}
 							:
 						</div>

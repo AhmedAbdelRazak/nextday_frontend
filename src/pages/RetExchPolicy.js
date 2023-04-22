@@ -7,7 +7,7 @@ const RetExchPolicy = () => {
 	return (
 		<RetExchPolicyWrapper>
 			<div className='container'>
-				<h1>How do I make a return with ACE SPORT?</h1>
+				<h1>How do I make a return with NEXT DAY SPORT?</h1>
 				<ol>
 					<li>
 						You can choose the needed pieces to be returned and submit the
@@ -31,7 +31,7 @@ const RetExchPolicy = () => {
 					<li>
 						Once you have completed the above steps, you can hand over your
 						return to the courier. The related costs regarding your return will
-						be paid by ACESPORTIVE.COM.
+						be paid by NEXTDAYEGY.COM.
 					</li>
 					<li>
 						If you lost your invoice/return form, you can contact the call
@@ -42,8 +42,8 @@ const RetExchPolicy = () => {
 						track it easier.
 					</li>
 					<li>
-						It is possible to order online and return it at any ACE SPORTIVE
-						Stores only inside <strong>GOLD's GYM ELITE</strong> but{" "}
+						It is possible to order online and return it at any Next Day Stores
+						only inside <strong>GOLD's GYM ELITE</strong> but{" "}
 						<strong>please print your invoice</strong> first before going to the
 						store.
 					</li>
@@ -68,7 +68,7 @@ const RetExchPolicy = () => {
 						offer is applied.
 					</li>
 					<li>
-						We can’t refund in stores for <strong>ACE SPORT</strong> products
+						We can’t refund in stores for <strong>Next Day</strong> products
 						bought from another website or marketplace, you can return or refund
 						those products through those websites.
 					</li>
@@ -104,7 +104,7 @@ const RetExchPolicy = () => {
 					Electronic Wallet you choose. You may use it for your next orders or
 					you may transfer it into your bank account by contacting with call
 					center: +201208543945. When your refund is completed, you’ll receive a
-					confirmation email from <strong>ACE SPORT</strong> .
+					confirmation email from <strong>Next Day</strong> .
 				</p>
 			</div>
 			<br />

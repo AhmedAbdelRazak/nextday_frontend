@@ -3,10 +3,10 @@
 import React from "react";
 import styled from "styled-components";
 import EgyptianFlag from "./GeneralImages/Egypt.png";
-import { BsFacebook, BsPinterest } from "react-icons/bs";
-import { AiOutlineYoutube, AiFillTwitterCircle } from "react-icons/ai";
-import { FaTiktok } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import {BsFacebook, BsPinterest} from "react-icons/bs";
+import {AiOutlineYoutube, AiFillTwitterCircle} from "react-icons/ai";
+import {FaTiktok} from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 const Footer = () => {
 	return (
@@ -18,7 +18,8 @@ const Footer = () => {
 							color: "#3b5998",
 							fontSize: "1.7rem",
 							marginRight: "10px",
-						}}>
+						}}
+					>
 						<BsFacebook />
 					</span>{" "}
 					<span
@@ -26,7 +27,8 @@ const Footer = () => {
 							color: "red",
 							fontSize: "1.7rem",
 							marginRight: "10px",
-						}}>
+						}}
+					>
 						<AiOutlineYoutube />
 					</span>{" "}
 					<span
@@ -34,7 +36,8 @@ const Footer = () => {
 							color: "#00ACEE",
 							fontSize: "1.7rem",
 							marginRight: "10px",
-						}}>
+						}}
+					>
 						<AiFillTwitterCircle />
 					</span>{" "}
 					<span
@@ -42,7 +45,8 @@ const Footer = () => {
 							color: "darkred",
 							fontSize: "1.7rem",
 							marginRight: "10px",
-						}}>
+						}}
+					>
 						<BsPinterest />
 					</span>{" "}
 					<span
@@ -50,25 +54,28 @@ const Footer = () => {
 							color: "#00f2ea",
 							fontSize: "1.7rem",
 							marginRight: "10px",
-						}}>
+						}}
+					>
 						<FaTiktok />
 					</span>{" "}
 				</div>
 
 				<img className='flags' src={EgyptianFlag} alt='Egypt' />
-				<span style={{ fontWeight: "bold" }}>EGYPT</span>
+				<span style={{fontWeight: "bold"}}>EGYPT</span>
 				<div className='mt-4 footerLinks'>
 					{" "}
 					<Link
 						to='/privacy-policy'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						Terms & Conditions
 					</Link>
 				</div>
 				<div className='footerLinks'>
 					<Link
 						to='/privacy-policy'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						Privacy Policy
 					</Link>
 				</div>
@@ -76,14 +83,16 @@ const Footer = () => {
 					{" "}
 					<Link
 						to='/return-exchange-policy'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						Returns & Exchange Policy
 					</Link>
 				</div>
 				<div className='footerLinks'>
 					<Link
 						to='cookie-policy'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						Cookie Policy
 					</Link>{" "}
 				</div>

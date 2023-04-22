@@ -1,7 +1,7 @@
 /** @format */
 // eslint-disable-next-line
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {
 	signup,
@@ -13,11 +13,11 @@ import {
 // eslint-disable-next-line
 import Google from "../../../auth/Google";
 // eslint-disable-next-line
-import { ToastContainer, toast } from "react-toastify";
+import {ToastContainer, toast} from "react-toastify";
 // import "react-toastify/dist/ReactToastify.min.css";
 // import ReactGA from "react-ga";
 
-const Register = ({ setSignRegister }) => {
+const Register = ({setSignRegister}) => {
 	const [values, setValues] = useState({
 		name: "",
 		email: "",
@@ -29,13 +29,12 @@ const Register = ({ setSignRegister }) => {
 		loading: false,
 	});
 
-	const { name, email, password, password2, success, misMatch, loading } =
-		values;
+	const {name, email, password, password2, success, misMatch, loading} = values;
 
 	console.log(success);
 
 	// eslint-disable-next-line
-	const { user } = isAuthenticated();
+	const {user} = isAuthenticated();
 	const handleChange = (name) => (event) => {
 		setValues({
 			...values,
@@ -49,9 +48,9 @@ const Register = ({ setSignRegister }) => {
 
 	// eslint-disable-next-line
 	const informParent = (response) => {
-		setValues({ ...values, error: false, loading: true });
+		setValues({...values, error: false, loading: true});
 		if (response.error) {
-			setValues({ ...values, error: response.error, loading: false });
+			setValues({...values, error: response.error, loading: false});
 			toast.error(response.error);
 		} else {
 			authenticate2(response, () => {
@@ -83,7 +82,7 @@ const Register = ({ setSignRegister }) => {
 			});
 			return <React.Fragment>{toast.error(MisMatchError)}</React.Fragment>;
 		} else {
-			setValues({ ...values, error: false, misMatch: false });
+			setValues({...values, error: false, misMatch: false});
 			signup({
 				name,
 				email,
@@ -93,12 +92,12 @@ const Register = ({ setSignRegister }) => {
 			}).then((data) => {
 				console.log(data);
 				if (data.error || data.misMatch) {
-					setValues({ ...values, error: data.error, success: false });
+					setValues({...values, error: data.error, success: false});
 					toast.error(data.error);
 				} else
-					signin({ email, password }).then((data) => {
+					signin({email, password}).then((data) => {
 						if (data.error) {
-							setValues({ ...values, error: data.error, loading: false });
+							setValues({...values, error: data.error, loading: false});
 						} else {
 							authenticate(data, () => {
 								setValues({
@@ -116,7 +115,7 @@ const Register = ({ setSignRegister }) => {
 			<div className='container-fluid mx-auto'>
 				<div className='mx-auto text-center'>
 					<h1>
-						<span className='storeName'>ACE Online Shop</span>
+						<span className='storeName'>Next Day Online Shop</span>
 					</h1>
 				</div>
 				<div className=' mx-auto'>
@@ -127,14 +126,15 @@ const Register = ({ setSignRegister }) => {
 							background: "white",
 							borderRadius: "10px",
 							// boxShadow: "5px 5px 5px 5px rgba(0, 0, 0, 0.2)",
-						}}>
+						}}
+					>
 						<h1 className='mb-2 text-center'>
 							Account <span className='text-primary'>Register</span>{" "}
 						</h1>
 						{/* <Google informParent={informParent} /> */}
 						<form onSubmit={clickSubmit}>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='name' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='name' style={{fontWeight: "bold"}}>
 									Full Name
 								</label>
 								<input
@@ -145,8 +145,8 @@ const Register = ({ setSignRegister }) => {
 									onChange={handleChange("name")}
 								/>
 							</div>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='email' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='email' style={{fontWeight: "bold"}}>
 									Phone or Email
 								</label>
 								<input
@@ -158,8 +158,8 @@ const Register = ({ setSignRegister }) => {
 								/>
 							</div>
 
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='password' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='password' style={{fontWeight: "bold"}}>
 									Password
 								</label>
 								<input
@@ -170,8 +170,8 @@ const Register = ({ setSignRegister }) => {
 									onChange={handleChange("password")}
 								/>
 							</div>
-							<div className='form-group ' style={{ marginTop: "25px" }}>
-								<label htmlFor='password2' style={{ fontWeight: "bold" }}>
+							<div className='form-group ' style={{marginTop: "25px"}}>
+								<label htmlFor='password2' style={{fontWeight: "bold"}}>
 									Confirm Password
 								</label>
 								<input
@@ -197,14 +197,16 @@ const Register = ({ setSignRegister }) => {
 							style={{
 								fontSize: "0.9rem",
 								textAlign: "center",
-							}}>
+							}}
+						>
 							Already have an account, Please{" "}
 							<strong
 								style={{
 									textDecoration: "underline",
 									fontStyle: "italic",
 									fontSize: "1rem",
-								}}>
+								}}
+							>
 								<Link to='+' className='btn btn-sm btn-outline-primary'>
 									Login Here
 								</Link>
