@@ -14,7 +14,7 @@ app.get("*", function (req, res) {
 
 app.use(express.static(__dirname + "/public"));
 
-const PORT = process.env.PORT || 3016;
+const PORT = process.env.PORT || 3020;
 
 app.listen(PORT, () => {
 	console.log(`App is running on port ${PORT}`);
