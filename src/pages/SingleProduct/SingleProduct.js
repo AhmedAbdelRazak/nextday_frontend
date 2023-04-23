@@ -48,6 +48,7 @@ import {
 	DeleteOutlined,
 	HeatMapOutlined,
 } from "@ant-design/icons";
+import FacebookChat from "../../FacebookChat";
 const {Panel} = Collapse;
 
 const isActive = (selectedLink, path) => {
@@ -631,7 +632,6 @@ const SingleProduct = (props) => {
         "@context": "http://schema.org/",
         "@type": "Product",
         "name": "${Product.productName}",
-        "id": "${Product._id}",
         "image": "${productImage}",
         "description": "${Product.description}",
         "brand": {
@@ -644,7 +644,8 @@ const SingleProduct = (props) => {
           "price": "${Number(mainProductPrice)}",
           "availability": "InStock",
           "itemCondition": "NewCondition"
-        }
+        },
+        "productID": "${Product._id}"
       }
     `}
 						</script>
@@ -657,6 +658,7 @@ const SingleProduct = (props) => {
 						<meta property='product:price:currency' content='EGP' />
 						<meta property='product:availability' content='instock' />
 						<meta property='product:condition' content='new' />
+						<meta property='product:id' content={Product._id} />
 						<meta charSet='utf-8' />
 						<title>{titleName}</title>
 						<meta name='description' content={Product.description} />
@@ -665,6 +667,8 @@ const SingleProduct = (props) => {
 							href='http://fonts.googleapis.com/earlyaccess/droidarabickufi.css'
 						/>
 					</Helmet>
+
+					<FacebookChat />
 					<SizeChartModal
 						modalVisible2={modalVisible2}
 						setModalVisible2={setModalVisible2}

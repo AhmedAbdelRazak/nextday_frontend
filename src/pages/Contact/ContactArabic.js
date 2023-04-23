@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { Fragment, useEffect, useState } from "react";
-import { contactUs } from "../../auth/index";
-import { ToastContainer, toast } from "react-toastify";
-import { Helmet } from "react-helmet";
-import { getContacts } from "../../apiCore";
+import React, {Fragment, useEffect, useState} from "react";
+import {contactUs} from "../../auth/index";
+import {ToastContainer, toast} from "react-toastify";
+import {Helmet} from "react-helmet";
+import {getContacts} from "../../apiCore";
 import styled from "styled-components";
 import ReactGA from "react-ga";
+import FacebookChat from "../../FacebookChat";
 
 const ContactArabic = () => {
 	const [values, setValues] = useState({
@@ -19,7 +20,7 @@ const ContactArabic = () => {
 	});
 	const [contact, setContact] = useState({});
 
-	const { name, email, subject, text, loading } = values;
+	const {name, email, subject, text, loading} = values;
 
 	const handleChange = (name) => (event) => {
 		setValues({
@@ -32,11 +33,11 @@ const ContactArabic = () => {
 	const clickSubmit = (event) => {
 		event.preventDefault();
 		console.log("Form was submitted");
-		window.scrollTo({ top: 0, behavior: "smooth" });
+		window.scrollTo({top: 0, behavior: "smooth"});
 
-		contactUs({ name, email, subject, text, loading: true }).then((data) => {
+		contactUs({name, email, subject, text, loading: true}).then((data) => {
 			if (data.error) {
-				setValues({ ...values, error: data.error, success: false });
+				setValues({...values, error: data.error, success: false});
 				toast.error(data.error);
 			} else {
 				toast.success(SuccessfullySubmitted);
@@ -82,16 +83,15 @@ const ContactArabic = () => {
 				<meta charSet='utf-8' />
 				<title>Next Day | Contact Us</title>
 
-				<meta name='description' content='Ace Online Shop' />
-				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='https://acesportive.com/contact' />
+				<meta name='description' content='Next Day Online Shop' />
+				<link rel='icon' href='nextday_frontend\src\GeneralImgs\favicon.ico' />
+				<link rel='canonical' href='https://nextdayegy.com/contact' />
 			</Helmet>
+			<FacebookChat />
 			<div>
 				<div className='row mt-5 ml-3'>
 					<div className='col-md-4 my-3 textWrapper'>
-						<h3
-							style={{ color: "var(--orangePrimary)" }}
-							className='text-center'>
+						<h3 style={{color: "var(--orangePrimary)"}} className='text-center'>
 							هل لديك اي استفسار ...؟
 						</h3>
 						<p className='Contact-us-paragraph mt-5'>
@@ -100,23 +100,23 @@ const ContactArabic = () => {
 
 						<p className='Contact-us-paragraph'>
 							<div className='mt-3'>
-								<strong style={{ color: "var(--orangePrimary)" }}>
+								<strong style={{color: "var(--orangePrimary)"}}>
 									ساعات العمل:
 								</strong>{" "}
 								{contact && contact.business_hours_Arabic}.
 							</div>
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								عنوان:
 							</strong>{" "}
 							{contact && contact.address_Arabic}.
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								رقم الهاتف:
 							</strong>{" "}
 							{contact && contact.phone}.
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								بريد الالكتروني:
 							</strong>{" "}
 							{contact && contact.email}.
@@ -125,12 +125,13 @@ const ContactArabic = () => {
 
 						<div className='mt-5'>
 							<h3
-								style={{ color: "var(--orangePrimary)" }}
-								className='text-center'>
+								style={{color: "var(--orangePrimary)"}}
+								className='text-center'
+							>
 								{contact && contact.header_1_Arabic}
 							</h3>
 
-							<p className='mt-3' style={{ fontSize: "0.85rem" }}>
+							<p className='mt-3' style={{fontSize: "0.85rem"}}>
 								&nbsp;&nbsp;&nbsp;&nbsp;{" "}
 								{contact && contact.description_1_Arabic}
 							</p>
@@ -143,11 +144,10 @@ const ContactArabic = () => {
 								{
 									// boxShadow: "3px 0px 3px 3px rgba(0,0,0,0.5)",
 								}
-							}>
+							}
+						>
 							<Fragment duration={5000}>
-								<h2
-									style={{ color: "var(--mainBlue)" }}
-									className='text-center'>
+								<h2 style={{color: "var(--mainBlue)"}} className='text-center'>
 									اتصل بنا
 								</h2>
 							</Fragment>
@@ -158,7 +158,7 @@ const ContactArabic = () => {
 									<ToastContainer />
 									{/*first:  adding your name*/}
 									<div className='form-group' dir='rtl'>
-										<label style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+										<label style={{fontWeight: "bold", fontSize: "1.1rem"}}>
 											الاسم:
 										</label>
 										<input
@@ -175,7 +175,8 @@ const ContactArabic = () => {
 									<div className='form-group'>
 										<label
 											className='text-center'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											بريد الالكتروني :
 										</label>
 
@@ -193,7 +194,8 @@ const ContactArabic = () => {
 									<div className='form-group'>
 										<label
 											className='text-center'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											عنوان الاستعلام الخاص بك:
 										</label>
 
@@ -210,7 +212,8 @@ const ContactArabic = () => {
 									<div className='form'>
 										<label
 											className='text-center'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											استفسارك / شكواك:
 										</label>
 
@@ -221,7 +224,8 @@ const ContactArabic = () => {
 											value={text}
 											rows='10'
 											placeholder='Please place your message/comments here'
-											required></textarea>
+											required
+										></textarea>
 									</div>
 									{/*message */}
 									<input

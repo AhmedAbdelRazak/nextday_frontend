@@ -13,6 +13,7 @@ import SidebarFilters from "./Filters/SidebarFilters";
 import DarkBackground from "./Filters/DarkBackground";
 import {Helmet} from "react-helmet";
 import ReactGA from "react-ga4";
+import FacebookChat from "../../FacebookChat";
 
 // import { FilterTwoTone } from "@ant-design/icons";
 
@@ -124,6 +125,7 @@ const ShopPageMain = ({chosenLanguage}) => {
 				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
 				<link rel='canonical' href='https://nextdayegy.com/our-products' />
 			</Helmet>
+			<FacebookChat />
 			{isSideFilterOpen ? (
 				<DarkBackground isSideFilterOpen={isSideFilterOpen} />
 			) : null}

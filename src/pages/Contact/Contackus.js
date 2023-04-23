@@ -1,12 +1,13 @@
 /** @format */
 
-import React, { Fragment, useEffect, useState } from "react";
-import { contactUs } from "../../auth/index";
-import { ToastContainer, toast } from "react-toastify";
-import { Helmet } from "react-helmet";
-import { getContacts } from "../../apiCore";
+import React, {Fragment, useEffect, useState} from "react";
+import {contactUs} from "../../auth/index";
+import {ToastContainer, toast} from "react-toastify";
+import {Helmet} from "react-helmet";
+import {getContacts} from "../../apiCore";
 import styled from "styled-components";
 import ReactGA from "react-ga4";
+import FacebookChat from "../../FacebookChat";
 
 const Contactus = () => {
 	useEffect(() => {
@@ -24,7 +25,7 @@ const Contactus = () => {
 	});
 	const [contact, setContact] = useState({});
 
-	const { name, email, subject, text, loading } = values;
+	const {name, email, subject, text, loading} = values;
 
 	const handleChange = (name) => (event) => {
 		setValues({
@@ -37,11 +38,11 @@ const Contactus = () => {
 	const clickSubmit = (event) => {
 		event.preventDefault();
 		console.log("Form was submitted");
-		window.scrollTo({ top: 0, behavior: "smooth" });
+		window.scrollTo({top: 0, behavior: "smooth"});
 
-		contactUs({ name, email, subject, text, loading: true }).then((data) => {
+		contactUs({name, email, subject, text, loading: true}).then((data) => {
 			if (data.error) {
-				setValues({ ...values, error: data.error, success: false });
+				setValues({...values, error: data.error, success: false});
 				toast.error(data.error);
 			} else {
 				toast.success(SuccessfullySubmitted);
@@ -87,10 +88,11 @@ const Contactus = () => {
 				<meta charSet='utf-8' />
 				<title>Next Day | Contact Us</title>
 
-				<meta name='description' content='Ace Online Shop' />
-				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='https://acesportive.com/contact' />
+				<meta name='description' content='Next Day Online Shop' />
+				<link rel='icon' href='nextday_frontend\src\GeneralImgs\favicon.ico' />
+				<link rel='canonical' href='https://nextdayegy.com/contact' />
 			</Helmet>
+			<FacebookChat />
 			{/* <div className='ad-class my-3 text-center mx-auto'> */}
 			{/* add your slot id  */}
 			{/* <GoogleAds slot='8388147324' /> */}
@@ -98,9 +100,7 @@ const Contactus = () => {
 			<div>
 				<div className='row mt-5 ml-3'>
 					<div className='col-md-4 my-3'>
-						<h3
-							style={{ color: "var(--orangePrimary)" }}
-							className='text-center'>
+						<h3 style={{color: "var(--orangePrimary)"}} className='text-center'>
 							Do you have any inquiries...?
 						</h3>
 						<p className='Contact-us-paragraph mt-5'>
@@ -110,23 +110,23 @@ const Contactus = () => {
 
 						<p className='Contact-us-paragraph'>
 							<div className='mt-3'>
-								<strong style={{ color: "var(--orangePrimary)" }}>
+								<strong style={{color: "var(--orangePrimary)"}}>
 									Business Hour:
 								</strong>{" "}
 								{contact && contact.business_hours}.
 							</div>
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								Address:
 							</strong>{" "}
 							{contact && contact.address}.
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								Phone #:
 							</strong>{" "}
 							{contact && contact.phone}.
 							<br />
-							<strong style={{ color: "var(--orangePrimary)" }}>
+							<strong style={{color: "var(--orangePrimary)"}}>
 								Email:
 							</strong>{" "}
 							{contact && contact.email}.
@@ -135,12 +135,13 @@ const Contactus = () => {
 
 						<div className='mt-5'>
 							<h3
-								style={{ color: "var(--orangePrimary)" }}
-								className='text-center'>
+								style={{color: "var(--orangePrimary)"}}
+								className='text-center'
+							>
 								{contact && contact.header_1}
 							</h3>
 
-							<p className='mt-3' style={{ fontSize: "0.85rem" }}>
+							<p className='mt-3' style={{fontSize: "0.85rem"}}>
 								&nbsp;&nbsp;&nbsp;&nbsp; {contact && contact.description_1}
 							</p>
 						</div>
@@ -152,11 +153,10 @@ const Contactus = () => {
 								{
 									// boxShadow: "3px 0px 3px 3px rgba(0,0,0,0.5)",
 								}
-							}>
+							}
+						>
 							<Fragment duration={5000}>
-								<h2
-									style={{ color: "var(--mainBlue)" }}
-									className='text-center'>
+								<h2 style={{color: "var(--mainBlue)"}} className='text-center'>
 									Contact Us
 								</h2>
 							</Fragment>
@@ -172,7 +172,8 @@ const Contactus = () => {
 											style={{
 												fontWeight: "bold",
 												fontSize: "1.1rem",
-											}}>
+											}}
+										>
 											Name:
 										</label>
 										<input
@@ -189,7 +190,8 @@ const Contactus = () => {
 									<div className='form-group'>
 										<label
 											className='text-center labelStyle'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											Email Address:
 										</label>
 
@@ -207,7 +209,8 @@ const Contactus = () => {
 									<div className='form-group'>
 										<label
 											className='text-center labelStyle'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											Subject:
 										</label>
 
@@ -224,7 +227,8 @@ const Contactus = () => {
 									<div className='form'>
 										<label
 											className='text-center labelStyle'
-											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											style={{fontWeight: "bold", fontSize: "1.1rem"}}
+										>
 											Your Inquiry / Complaint:
 										</label>
 
@@ -235,7 +239,8 @@ const Contactus = () => {
 											value={text}
 											rows='10'
 											placeholder='Please place your message/comments here'
-											required></textarea>
+											required
+										></textarea>
 									</div>
 									{/*message */}
 									<input

@@ -17,6 +17,7 @@ import HeroComponent3 from "./HeroComponent3";
 import GenderNav from "../../Navbar/GenderNav";
 import {Helmet} from "react-helmet";
 import MostViewedProducts from "./MostViewedProducts";
+import FacebookChat from "../../FacebookChat";
 
 const Home = ({chosenLanguage}) => {
 	// eslint-disable-next-line
@@ -119,6 +120,7 @@ const Home = ({chosenLanguage}) => {
 				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
 				<link rel='canonical' href='https://nextdayegy.com' />
 			</Helmet>
+			<FacebookChat />
 			<>
 				<GenderNav />
 			</>
