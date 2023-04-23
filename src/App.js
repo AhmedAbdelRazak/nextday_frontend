@@ -210,12 +210,7 @@ const App = () => {
 					exact
 					component={() => <Home chosenLanguage={language} />}
 				/>
-				<Suspense fallback={<Spin className='spinning-loader' size='large' />}>
-					<Route
-						path='/product/:categoryslug/:slug/:productId'
-						component={SingleProduct}
-					/>
-				</Suspense>
+
 				<Route path='/privacy-policy' exact component={PrivacyPolicy} />
 				<Route path='/cookie-policy' exact component={CookiePolicy} />
 				<Route path='/return-exchange-policy' exact component={RetExchPolicy} />
@@ -534,6 +529,12 @@ const App = () => {
 					exact
 					component={EditContactUsPage}
 				/>
+				<Suspense fallback={<Spin className='spinning-loader' size='large' />}>
+					<Route
+						path='/product/:categoryslug/:slug/:productId'
+						component={SingleProduct}
+					/>
+				</Suspense>
 			</Switch>
 			<Footer />
 		</BrowserRouter>
