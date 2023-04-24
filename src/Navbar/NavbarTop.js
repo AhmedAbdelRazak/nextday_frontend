@@ -60,7 +60,7 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 						data[data.length - 1] &&
 						data[data.length - 1].addStoreLogo &&
 						data[data.length - 1].addStoreLogo[0] &&
-						data[data.length - 1].addStoreLogo[0]
+						data[data.length - 1].addStoreLogo[0].url
 				);
 				setOnlineStoreName(
 					data && data[data.length - 1] && data[data.length - 1].addStoreName
@@ -165,9 +165,10 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 
 	// eslint-disable-next-line
 	var finalLogoUrl =
+		storeLogo &&
 		storeLogo.substr(0, index + 6) +
-		"/e_bgremoval" +
-		storeLogo.substr(index + 6);
+			"/e_bgremoval" +
+			storeLogo.substr(index + 6);
 
 	// console.log(logoImage);
 	var checkingAvailability = [];

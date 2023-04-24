@@ -1,15 +1,15 @@
 /** @format */
 // eslint-disable-next-line
-import React, { Fragment, useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, {Fragment, useEffect, useState} from "react";
+import {Link, withRouter} from "react-router-dom";
 // eslint-disable-next-line
-import { isAuthenticated } from "../auth";
+import {isAuthenticated} from "../auth";
 // import CartButtons from "./CartButtons";
 import styled from "styled-components";
-import { useCartContext } from "../Checkout/cart_context";
-import { FaTrash, FaMinus, FaPlus, FaTimes } from "react-icons/fa";
+import {useCartContext} from "../Checkout/cart_context";
+import {FaTrash, FaMinus, FaPlus, FaTimes} from "react-icons/fa";
 import DarkBackground from "./DarkBackground";
-import { allLoyaltyPointsAndStoreStatus, getColors } from "../apiCore";
+import {allLoyaltyPointsAndStoreStatus, getColors} from "../apiCore";
 // import myLogo from "../GeneralImages/MainLogo.png";
 
 const isActive = (history, path) => {
@@ -20,7 +20,7 @@ const isActive = (history, path) => {
 			textDecoration: "underline",
 		};
 	} else {
-		return { color: "darkGrey", fontWeight: "bold" };
+		return {color: "darkGrey", fontWeight: "bold"};
 	}
 };
 
@@ -34,11 +34,11 @@ const isActive2 = (history, path) => {
 			// textDecoration: "underline",
 		};
 	} else {
-		return { color: "#ffffff", fontWeight: "bold" };
+		return {color: "#ffffff", fontWeight: "bold"};
 	}
 };
 
-const NavbarBottom = ({ history, chosenLanguage }) => {
+const NavbarBottom = ({history, chosenLanguage}) => {
 	// const [click, setClick] = useState(false);
 	//
 	const [allColors, setAllColors] = useState([]);
@@ -78,7 +78,7 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 						data[data.length - 1] &&
 						data[data.length - 1].addStoreLogo &&
 						data[data.length - 1].addStoreLogo[0] &&
-						data[data.length - 1].addStoreLogo[0],
+						data[data.length - 1].addStoreLogo[0].url
 				);
 			}
 		});
@@ -102,17 +102,19 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 				<div
 					onClick={closeSidebar}
 					className='float-right mr-3'
-					style={{ fontSize: "15px", color: "black", cursor: "pointer" }}>
+					style={{fontSize: "15px", color: "black", cursor: "pointer"}}
+				>
 					<FaTimes />
 				</div>
 				{cart && cart.length === 0 ? (
-					<div style={{ marginTop: "80px" }}>
+					<div style={{marginTop: "80px"}}>
 						<h3
 							style={{
 								textAlign: "center",
 								fontWeight: "bolder",
 								color: "darkcyan",
-							}}>
+							}}
+						>
 							Your Cart Is Empty
 						</h3>
 					</div>
@@ -123,17 +125,17 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 							cart.map((i, k) => {
 								var productColors =
 									i.allProductDetailsIncluded.productAttributes.map(
-										(iii) => iii.color,
+										(iii) => iii.color
 									);
 								var uniqueProductColors = [
 									...new Map(
-										productColors.map((item) => [item, item]),
+										productColors.map((item) => [item, item])
 									).values(),
 								];
 
 								var productSizes =
 									i.allProductDetailsIncluded.productAttributes.map(
-										(iii) => iii.size,
+										(iii) => iii.size
 									);
 								var uniqueProductSizes = [
 									...new Map(productSizes.map((item) => [item, item])).values(),
@@ -141,14 +143,14 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 
 								var chosenAttribute =
 									i.allProductDetailsIncluded.productAttributes.filter(
-										(iii) => iii.color === i.color && iii.size === i.size,
+										(iii) => iii.color === i.color && iii.size === i.size
 									)[0];
 
 								if (i.allProductDetailsIncluded.activeBackorder) {
 									checkingAvailability.push(true);
 								} else {
 									checkingAvailability.push(
-										chosenAttribute.quantity >= i.amount,
+										chosenAttribute.quantity >= i.amount
 									);
 								}
 
@@ -167,7 +169,7 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 													<img
 														src={i.image}
 														alt={i.name}
-														style={{ width: "80px", height: "80px" }}
+														style={{width: "80px", height: "80px"}}
 													/>
 												</span>
 											</div>
@@ -178,7 +180,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														fontWeight: "bold",
 														marginLeft: "14px",
 														textTransform: "capitalize",
-													}}>
+													}}
+												>
 													{i.name}
 												</div>
 												<div
@@ -188,7 +191,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														marginLeft: "14px",
 														marginTop: "3px",
 														textTransform: "capitalize",
-													}}>
+													}}
+												>
 													{i.categoryName}
 												</div>
 
@@ -201,7 +205,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														marginLeft: "14px",
 														textTransform: "capitalize",
 														color: "#7b7b7b",
-													}}>
+													}}
+												>
 													Size:{" "}
 													<select
 														className='w-50 ml-2'
@@ -215,17 +220,18 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																	(iii) =>
 																		iii.color === i.color &&
 																		iii.size.toLowerCase() ===
-																			e.target.value.toLowerCase(),
+																			e.target.value.toLowerCase()
 																)[0];
 															changeSize(
 																i.id,
 																e.target.value,
 																i.color,
 																chosenAttribute2.quantity,
-																i.size,
+																i.size
 															);
-														}}>
-														<option style={{ textTransform: "capitalize" }}>
+														}}
+													>
+														<option style={{textTransform: "capitalize"}}>
 															{i.size}
 														</option>
 
@@ -249,7 +255,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														marginLeft: "14px",
 														textTransform: "capitalize",
 														color: "#7b7b7b",
-													}}>
+													}}
+												>
 													Color:{" "}
 													<select
 														className='w-50'
@@ -260,7 +267,7 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														onChange={(e) => {
 															var chosenColorImageHelper =
 																i.allProductDetailsIncluded.productAttributes.filter(
-																	(iii) => iii.color === e.target.value,
+																	(iii) => iii.color === e.target.value
 																)[0];
 
 															var chosenColorImage =
@@ -274,7 +281,7 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																	(iii) =>
 																		iii.color.toLowerCase() ===
 																			e.target.value.toLowerCase() &&
-																		iii.size.toLowerCase() === i.size,
+																		iii.size.toLowerCase() === i.size
 																)[0];
 															changeColor(
 																i.id,
@@ -282,10 +289,11 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																i.size,
 																chosenColorImage,
 																chosenAttribute2.quantity,
-																i.color,
+																i.color
 															);
-														}}>
-														<option style={{ textTransform: "capitalize" }}>
+														}}
+													>
+														<option style={{textTransform: "capitalize"}}>
 															{allColors &&
 																allColors[
 																	allColors
@@ -328,7 +336,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														marginLeft: "14px",
 														textTransform: "capitalize",
 														color: "#7b7b7b",
-													}}>
+													}}
+												>
 													{Number(i.priceAfterDiscount * i.amount).toFixed(2)}{" "}
 													EGP
 												</div>
@@ -341,11 +350,12 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														marginTop: "10px",
 														textTransform: "capitalize",
 														color: "darkgreen",
-													}}>
+													}}
+												>
 													{i.allProductDetailsIncluded
 														.activeBackorder ? null : chosenAttribute.quantity >=
 													  i.amount ? null : (
-														<span style={{ color: "red" }}>
+														<span style={{color: "red"}}>
 															Unavailable Stock
 														</span>
 													)}
@@ -361,7 +371,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 															marginTop: "10px",
 															textTransform: "capitalize",
 															color: "darkgreen",
-														}}>
+														}}
+													>
 														<button
 															type='button'
 															className='amount-btn'
@@ -371,7 +382,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																color: "darkgrey",
 																padding: "8px 13px",
 															}}
-															onClick={decrease}>
+															onClick={decrease}
+														>
 															<FaMinus />
 														</button>
 														<span
@@ -381,7 +393,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																backgroundColor: "white",
 																color: "black",
 																padding: "9px 14px 11px 14px",
-															}}>
+															}}
+														>
 															{i.amount}
 														</span>
 														<button
@@ -393,7 +406,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 															}}
 															type='button'
 															className='amount-btn'
-															onClick={increase}>
+															onClick={increase}
+														>
 															<FaPlus />
 														</button>
 													</div>
@@ -407,7 +421,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 															marginTop: "10px",
 															textTransform: "capitalize",
 															color: "darkgreen",
-														}}>
+														}}
+													>
 														<button
 															type='button'
 															className='amount-btn'
@@ -417,7 +432,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																color: "darkgrey",
 																padding: "8px 13px",
 															}}
-															onClick={decrease}>
+															onClick={decrease}
+														>
 															<FaMinus />
 														</button>
 														<span
@@ -427,7 +443,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 																backgroundColor: "white",
 																color: "black",
 																padding: "9px 14px 11px 14px",
-															}}>
+															}}
+														>
 															{i.amount}
 														</span>
 														<button
@@ -439,7 +456,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 															}}
 															type='button'
 															className='amount-btn'
-															onClick={increase}>
+															onClick={increase}
+														>
 															<FaPlus />
 														</button>
 													</div>
@@ -453,7 +471,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 														border: "none",
 														fontWeight: "bold",
 													}}
-													onClick={() => removeItem(i.id, i.size, i.color)}>
+													onClick={() => removeItem(i.id, i.size, i.color)}
+												>
 													<FaTrash />
 												</button>
 											</div>
@@ -472,7 +491,8 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 								marginLeft: "14px",
 								marginTop: "3px",
 								textTransform: "capitalize",
-							}}>
+							}}
+						>
 							<div className='col-6'>TOTAL AMOUNT</div>
 							<div className='col-6'>{Number(total_amount).toFixed(2)} EGP</div>
 						</div>
@@ -481,24 +501,22 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 						<div className='link-container' onClick={closeSidebar}>
 							<div className='link-btn-wrapper'>
 								<Link
-									style={{ background: "#007db5" }}
+									style={{background: "#007db5"}}
 									to='/cart'
 									className='link-btn btn-block w-75 mx-auto text-center py-2'
-									onClick={() =>
-										window.scrollTo({ top: 0, behavior: "smooth" })
-									}>
+									onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+								>
 									Check Out
 								</Link>
 							</div>
 
 							<div className='link-btn-wrapper mt-2'>
 								<Link
-									style={{ background: "#5d5d5d" }}
+									style={{background: "#5d5d5d"}}
 									to='/our-products'
 									className='link-btn btn-block w-75 mx-auto text-center py-2'
-									onClick={() =>
-										window.scrollTo({ top: 0, behavior: "smooth" })
-									}>
+									onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+								>
 									continue shopping
 								</Link>
 							</div>
@@ -520,13 +538,15 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 	return (
 		<Nav
 			className=' navbar  navbar-expand-sm'
-			style={{ backgroundColor: "	white" }}>
+			style={{backgroundColor: "	white"}}
+		>
 			<div className='logo-type ml-5 logoWrapper'>
 				<Link
 					to='/'
 					onClick={() => {
-						window.scrollTo({ top: 0, behavior: "smooth" });
-					}}>
+						window.scrollTo({top: 0, behavior: "smooth"});
+					}}
+				>
 					<div className='infiniteAppsLogo p-0'>
 						<img
 							className='imgLogo p-0'
@@ -544,24 +564,28 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 			{isSidebarOpen ? <DarkBackground isSidebarOpen={isSidebarOpen} /> : null}
 			<div
 				className='collapse navbar-collapse '
-				dir={chosenLanguage === "Arabic" ? "rtl" : "ltr"}>
+				dir={chosenLanguage === "Arabic" ? "rtl" : "ltr"}
+			>
 				<ul
 					className='navbar-nav mx-auto navbar-expand '
-					style={{ backgroundColor: "	white" }}>
+					style={{backgroundColor: "	white"}}
+				>
 					<li className='nav-item'>
 						<Link
 							className='nav-link'
 							style={isActive(history, "/")}
 							to='/'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							{chosenLanguage === "Arabic" ? (
 								<span
 									style={{
 										fontFamily: "Droid Arabic Kufi",
 										letterSpacing: "0px",
-									}}>
+									}}
+								>
 									الصفحة الرئيسية
 								</span>
 							) : (
@@ -575,14 +599,16 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 							style={isActive(history, "/our-products")}
 							to='/our-products'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							{chosenLanguage === "Arabic" ? (
 								<span
 									style={{
 										fontFamily: "Droid Arabic Kufi",
 										letterSpacing: "0px",
-									}}>
+									}}
+								>
 									منتجاتنا
 								</span>
 							) : (
@@ -596,14 +622,16 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 							style={isActive(history, "/contact")}
 							to='/contact'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							{chosenLanguage === "Arabic" ? (
 								<span
 									style={{
 										fontFamily: "Droid Arabic Kufi",
 										letterSpacing: "0px",
-									}}>
+									}}
+								>
 									اتصل بنا
 								</span>
 							) : (
@@ -617,14 +645,16 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 							style={isActive(history, "/about")}
 							to='/about'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							{chosenLanguage === "Arabic" ? (
 								<span
 									style={{
 										fontFamily: "Droid Arabic Kufi",
 										letterSpacing: "0px",
-									}}>
+									}}
+								>
 									من نحن
 								</span>
 							) : (
@@ -703,26 +733,29 @@ const NavbarBottom = ({ history, chosenLanguage }) => {
 				</ul>
 			</div>
 			<span
-				style={{ color: "black", fontSize: "20px", cursor: "pointer" }}
+				style={{color: "black", fontSize: "20px", cursor: "pointer"}}
 				className='mr-3'
 				onClick={() => {
 					history.push("/cart");
-				}}>
+				}}
+			>
 				Cart
 			</span>
 			<div className='nav-cart mr-5 mt-2'>
 				{/* <FaCartPlus className="nav-icon" onClick={handleCart} /> */}
 				<div
-					style={{ cursor: "pointer" }}
+					style={{cursor: "pointer"}}
 					// to='/cart'
-					onClick={isSidebarOpen ? closeSidebar : openSidebar}>
+					onClick={isSidebarOpen ? closeSidebar : openSidebar}
+				>
 					<sup>
 						<small className='cart-badge'>{total_items}</small>
 					</sup>
 					<i
 						className='fa fa-cart-plus faaaa-bars'
-						style={{ color: "black", fontSize: "20px" }}
-						aria-hidden='true'></i>
+						style={{color: "black", fontSize: "20px"}}
+						aria-hidden='true'
+					></i>
 				</div>
 
 				{sideCart()}
