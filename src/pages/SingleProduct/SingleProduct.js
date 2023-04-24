@@ -566,6 +566,9 @@ const SingleProduct = (props) => {
 	var titleName =
 		Product && Product.productName && Product.productName.toUpperCase();
 
+	var titleName2 =
+		Product && Product.productName && Product.productName.toLowerCase();
+
 	//Margin top of the thumbnails in single product page.
 	//Make user after choosing size or color, to only offer the available stock
 	//Make our products page based on colors
@@ -608,6 +611,22 @@ const SingleProduct = (props) => {
 	const mainStoreName =
 		Product && Product.storeName && Product.storeName.storeName;
 
+	const gettingTotalProductQty = () => {
+		let totalQuantity = 0;
+
+		if (
+			Product &&
+			Product.productAttributes &&
+			Product.productAttributes.length > 0
+		) {
+			for (let i = 0; i < Product.productAttributes.length; i++) {
+				totalQuantity += Product.productAttributes[i].quantity;
+			}
+		}
+
+		return totalQuantity;
+	};
+
 	return (
 		<SingleEmp className='mx-auto'>
 			{loading && !Product ? (
@@ -631,7 +650,7 @@ const SingleProduct = (props) => {
       {
         "@context": "http://schema.org/",
         "@type": "Product",
-        "name": "${Product.productName}",
+        "name": "${titleName2}",
         "image": "${productImage}",
         "description": "${Product.description}",
         "brand": {
@@ -642,21 +661,28 @@ const SingleProduct = (props) => {
           "@type": "Offer",
           "priceCurrency": "EGP",
           "price": "${Number(mainProductPrice)}",
-          "availability": "InStock",
+          "availability": ${
+						gettingTotalProductQty() > 0 ? "InStock" : "OutOfStock"
+					},
           "itemCondition": "NewCondition"
         },
         "productID": "${Product._id}"
       }
     `}
 						</script>
-						<meta property='og:title' content={titleName} />
+						<meta property='og:title' content={titleName2} />
 						<meta property='og:description' content={Product.description} />
 						<meta property='og:image' content={productImage} />
 						<meta property='og:url' content={window.location.href} />
 						<meta property='og:type' content='product' />
 						<meta property='product:price:amount' content={mainProductPrice} />
 						<meta property='product:price:currency' content='EGP' />
-						<meta property='product:availability' content='instock' />
+						<meta
+							property='product:availability'
+							content={`${
+								gettingTotalProductQty() > 0 ? "instock" : "outofstock"
+							}`}
+						/>
 						<meta property='product:condition' content='new' />
 						<meta property='product:id' content={Product._id} />
 						<meta charSet='utf-8' />
