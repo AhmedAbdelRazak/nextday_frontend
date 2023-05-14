@@ -74,7 +74,7 @@ import {getAllAds} from "./Admin/apiAdmin";
 import AddHeroComp from "./Admin/OnlineStore/AddHeroComp";
 
 // import SingleProduct from "./pages/SingleProduct/SingleProduct";
-import ShopPageMain from "./pages/ShopPage/ShopPageMain";
+// import ShopPageMain from "./pages/ShopPage/ShopPageMain";
 import Cart from "./Checkout/Cart";
 import InvoicePDF from "./Admin/Orders/InvoicePDF";
 // eslint-disable-next-line
@@ -108,6 +108,7 @@ import Test2 from "./Admin/OnlineStore/OnsiteOrderTaking/Test2";
 import {Spin} from "antd";
 
 const SingleProduct = lazy(() => import("./pages/SingleProduct/SingleProduct"));
+const ShopPageMain = lazy(() => import("./pages/ShopPage/ShopPageMain"));
 
 const App = () => {
 	// eslint-disable-next-line
@@ -216,11 +217,7 @@ const App = () => {
 				<Route path='/return-exchange-policy' exact component={RetExchPolicy} />
 				<Route path='/user/wishlist' exact component={UserWishlist} />
 				<Route path='/signup' exact component={Register} />
-				<Route
-					path='/our-products'
-					exact
-					component={() => <ShopPageMain chosenLanguage={language} />}
-				/>
+
 				<Route
 					path='/cart'
 					exact
@@ -533,6 +530,14 @@ const App = () => {
 					<Route
 						path='/product/:categoryslug/:slug/:productId'
 						component={SingleProduct}
+					/>
+				</Suspense>
+
+				<Suspense fallback={<Spin className='spinning-loader' size='large' />}>
+					<Route
+						path='/our-products'
+						exact
+						component={() => <ShopPageMain chosenLanguage={language} />}
 					/>
 				</Suspense>
 			</Switch>
