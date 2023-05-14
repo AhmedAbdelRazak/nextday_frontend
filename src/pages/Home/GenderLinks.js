@@ -17,13 +17,17 @@ const GenderLinks = ({allGenders}) => {
 		return comparison;
 	}
 
+	const allGendersModified =
+		allGenders &&
+		allGenders.filter((i) => i.genderName.toLowerCase() !== "unisex");
+
 	return (
 		<GenderLinksWrapper>
 			<div className='btnGender mb-3'>
 				<div className='row'>
-					{allGenders &&
-						allGenders.sort(sortOrdersAscendingly) &&
-						allGenders.sort(sortOrdersAscendingly).map((g, i) => {
+					{allGendersModified &&
+						allGendersModified.sort(sortOrdersAscendingly) &&
+						allGendersModified.sort(sortOrdersAscendingly).map((g, i) => {
 							return (
 								<div
 									key={i}
@@ -54,8 +58,8 @@ const GenderLinks = ({allGenders}) => {
 
 			<div className='container mx-auto'>
 				<div className='text-center row mx-auto'>
-					{allGenders &&
-						allGenders.map((g, i) => {
+					{allGendersModified &&
+						allGendersModified.map((g, i) => {
 							return (
 								<div
 									key={i}

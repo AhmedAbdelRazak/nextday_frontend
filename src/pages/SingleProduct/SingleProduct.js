@@ -564,7 +564,7 @@ const SingleProduct = (props) => {
 	};
 
 	var titleName =
-		Product && Product.productName && Product.productName.toUpperCase();
+		Product && Product.productName && Product.productName.toLowerCase();
 
 	var titleName2 =
 		Product && Product.productName && Product.productName.toLowerCase();

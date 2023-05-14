@@ -33,11 +33,15 @@ const Home = ({chosenLanguage}) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				setAllProducts(data.filter((i) => i.activeProduct === true));
+				setAllProducts(
+					data.filter(
+						(i) => i.activeProduct === true && i.featuredProduct === true
+					)
+				);
 
 				//Categories Unique
 				var categoriesArray = data
-					.filter((i) => i.activeProduct === true)
+					.filter((i) => i.activeProduct === true && i.featuredProduct === true)
 					.map((ii) => ii.category);
 
 				let uniqueCategories = [
@@ -49,7 +53,7 @@ const Home = ({chosenLanguage}) => {
 
 				//Subcategories Unique
 				var SubcategoriesArray = data
-					.filter((i) => i.activeProduct === true)
+					.filter((i) => i.activeProduct === true && i.featuredProduct === true)
 					.map((ii) => ii.subcategory);
 
 				var mergedSubcategories = [].concat.apply([], SubcategoriesArray);
@@ -62,7 +66,7 @@ const Home = ({chosenLanguage}) => {
 
 				//Gender Unique
 				var genderUnique = data
-					.filter((i) => i.activeProduct === true)
+					.filter((i) => i.activeProduct === true && i.featuredProduct === true)
 					.map((ii) => ii.gender)
 					.filter((iii) => iii !== null);
 

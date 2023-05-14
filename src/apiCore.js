@@ -329,9 +329,11 @@ export const gettingAllProducts = (
 		if (data.error) {
 			console.log(data.error);
 		} else {
-			const requiredProductsInitial = data;
+			const requiredProductsInitial = data.filter(
+				(i) => i.featuredProduct === true
+			);
 
-			const requiredProducts2 = data;
+			const requiredProducts2 = data.filter((i) => i.featuredProduct === true);
 
 			var allProductsAdded =
 				requiredProductsInitial &&
