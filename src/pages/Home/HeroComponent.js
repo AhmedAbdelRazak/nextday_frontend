@@ -1,7 +1,7 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 // import { isAuthenticated, getSingleUser } from "../../auth/index";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getAllHeros } from "../../apiCore";
+import {getAllHeros} from "../../apiCore";
 
 const HeroComponent = () => {
 	const [homePage, setHomePage] = useState({});
@@ -112,7 +112,8 @@ const HeroComponent = () => {
 				<div className='heroPicMain deskTopBanner'>
 					<Link
 						to='/our-products'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						<img
 							src={
 								homePage &&
@@ -133,7 +134,8 @@ const HeroComponent = () => {
 				<div className='heroPicMain phoneBanner'>
 					<Link
 						to='/our-products'
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+						onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
+					>
 						<img
 							src={
 								homePage &&
@@ -147,15 +149,6 @@ const HeroComponent = () => {
 							className='mt-3'
 						/>
 					</Link>
-					<h3 className='headerPhone'>
-						DO THIS <span>FOR YOU</span>
-					</h3>
-					<div
-						className='textPhone col-12'
-						style={{ textAlign: "left", margin: "0px 35px", color: "black" }}>
-						When you are looking for high quality sportswear at an affordable
-						price. you will find it here
-					</div>
 				</div>
 			)}
 			<br />

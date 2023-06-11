@@ -1,9 +1,9 @@
 /** @format */
 
 import Slider from "react-slick";
-import React, { useState, useEffect, Fragment } from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import styled from "styled-components";
-import { getAllAds } from "../apiCore";
+import {getAllAds} from "../apiCore";
 
 const NavbarAds = () => {
 	const [allAdsCombined, setAllAdsCombined] = useState([]);
@@ -14,7 +14,7 @@ const NavbarAds = () => {
 				console.log(data.error);
 			} else {
 				setAllAdsCombined(
-					data[data.length - 1] && data[data.length - 1].ad_Name,
+					data[data.length - 1] && data[data.length - 1].ad_Name
 				);
 			}
 		});
@@ -39,7 +39,7 @@ const NavbarAds = () => {
 	};
 
 	return (
-		<NavbarAdsWrapper style={{ backgroundColor: "", padding: "" }}>
+		<NavbarAdsWrapper style={{backgroundColor: "", padding: ""}}>
 			{" "}
 			<div className='mx-auto'>
 				<div className='nav-item mainMessages mx-auto text-center'>
@@ -68,8 +68,8 @@ const NavbarAdsWrapper = styled.nav`
 	padding: 10px 0px !important;
 	width: 50%;
 	/* box-shadow: 8px 10px 5px 0px rgba(0, 0, 0, 0.02); */
-	background: #c60e0e !important;
-	border: 1px #c60e0e solid;
+	background: #152f48 !important;
+	border: 1px #152f48 solid;
 	text-align: center;
 	margin: auto;
 

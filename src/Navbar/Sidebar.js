@@ -1,10 +1,10 @@
 /** @format */
 
-import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {Fragment, useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
-import { isAuthenticated, signout } from "../auth";
-import { useCartContext } from "../Checkout/cart_context";
+import {isAuthenticated, signout} from "../auth";
+import {useCartContext} from "../Checkout/cart_context";
 import MostViewedSideBar from "./MostViewedSideBar";
 
 const isActive = (history, path, gendersLength) => {
@@ -19,7 +19,7 @@ const isActive = (history, path, gendersLength) => {
 		return {
 			color: "darkGrey",
 			fontWeight: "bold",
-			margin: gendersLength === 2 ? "0px 30px" : "0px 15px",
+			margin: gendersLength === 2 ? "0px 50px" : "0px 15px",
 		};
 	}
 };
@@ -33,7 +33,7 @@ const isActive2 = (history, allGenders) => {
 			borderBottom: "1px solid black",
 			position: "absolute",
 			top: genderIndex === 0 ? "-15px" : "-15px",
-			left: genderIndex === 0 ? "70px" : "182px",
+			left: genderIndex === 0 ? "135px" : "135px",
 		};
 	} else {
 		return {
@@ -54,13 +54,13 @@ const Sidebar = ({
 	const [pageScrolled, setPageScrolled] = useState(false);
 	const [offset, setOffset] = useState(0);
 
-	const { openSidebar2, closeSidebar2, isSidebarOpen2 } = useCartContext();
+	const {openSidebar2, closeSidebar2, isSidebarOpen2} = useCartContext();
 
 	useEffect(() => {
 		const onScroll = () => setOffset(window.pageYOffset);
 		// clean up code
 		window.removeEventListener("scroll", onScroll);
-		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("scroll", onScroll, {passive: true});
 		if (window.pageYOffset > 0) {
 			setPageScrolled(true);
 		} else {
@@ -69,6 +69,11 @@ const Sidebar = ({
 		return () => window.removeEventListener("scroll", onScroll);
 	}, [offset]);
 
+	const allGendersModified =
+		allGenders &&
+		allGenders.length > 0 &&
+		allGenders.filter((i) => i.genderName.toLowerCase() === "men");
+
 	return (
 		<>
 			<SideWrapper show={isSidebarOpen2} show2={pageScrolled}>
@@ -76,14 +81,18 @@ const Sidebar = ({
 					<li
 						className='mt-3 genderWrapper'
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						{allGenders &&
-							allGenders.map((g, i) => {
-								if (
-									g.genderName.toLowerCase() === "men" ||
-									g.genderName.toLowerCase() === "women"
-								) {
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
+						<div
+							className='float-right mr-3'
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
+							<i className='fa-solid fa-xmark'></i>
+						</div>
+						{allGendersModified &&
+							allGendersModified.map((g, i) => {
+								if (g.genderName.toLowerCase() === "men") {
 									return (
 										<Link
 											// to={`/our-products?filterby=gender&gendername=${g.genderName}`}
@@ -93,10 +102,15 @@ const Sidebar = ({
 											// 	margin: allGenders.length === 2 ? "0px 20px" : "0px 15px",
 											// }}
 
-											style={isActive(genderClicked, g, allGenders.length)}
+											style={isActive(
+												genderClicked,
+												g,
+												allGendersModified.length
+											)}
 											key={i}
 											// onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
-											onClick={() => setGenderClicked(g)}>
+											onClick={() => setGenderClicked(g)}
+										>
 											{g.genderName}
 										</Link>
 									);
@@ -110,7 +124,7 @@ const Sidebar = ({
 						<hr />
 						<hr
 							className='col-2 mx-auto'
-							style={isActive2(genderClicked, allGenders)}
+							style={isActive2(genderClicked, allGendersModified)}
 						/>
 					</div>
 
@@ -133,8 +147,9 @@ const Sidebar = ({
 					<li
 						className='mt-3'
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
 						<Link
 							to='/'
 							className='sik'
@@ -144,7 +159,8 @@ const Sidebar = ({
 								fontWeight: "bolder",
 								color: "#c60e0e",
 							}}
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							Sale
 						</Link>
 						<br />
@@ -158,7 +174,8 @@ const Sidebar = ({
 								marginLeft: "10px",
 								color: "black",
 							}}
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							All Products
 						</Link>
 						{allCategories &&
@@ -174,7 +191,8 @@ const Sidebar = ({
 											marginLeft: "10px",
 											// fontWeight: "bolder",
 										}}
-										onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+										onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+									>
 										{c.categoryName}
 									</Link>
 								);
@@ -190,12 +208,14 @@ const Sidebar = ({
 					<li
 						className='mt-3'
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
 						<Link
 							to='/'
 							className='sidebar-link'
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							<Fragment>
 								<i className='fas fa-home fontawesome-icons'></i>
 								<>
@@ -210,12 +230,14 @@ const Sidebar = ({
 					</li>
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
 						<Link
 							to='/our-products'
 							className='sidebar-link'
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							<Fragment>
 								<i className='fas fa-box-open fontawesome-icons'></i>
 
@@ -231,12 +253,14 @@ const Sidebar = ({
 					</li>
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
 						<Link
 							to='/about'
 							className='sidebar-link'
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							<Fragment>
 								<i className='fas fa-comment-alt fontawesome-icons'></i>
 								<>
@@ -251,19 +275,21 @@ const Sidebar = ({
 					</li>
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
+							window.scrollTo({top: 0, behavior: "smooth"});
+						}}
+					>
 						<Link
 							to='/contact'
 							className='sidebar-link'
-							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+							onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+						>
 							<Fragment>
 								<i className='fas fa-envelope fontawesome-icons'></i>
 								<>
 									{language === "Arabic" ? (
 										<span className='sidebarArabic'>اتصل بنا</span>
 									) : (
-										"Contact Us"
+										"Customer Service"
 									)}
 								</>
 							</Fragment>
@@ -274,12 +300,14 @@ const Sidebar = ({
 						<li
 							className='nav-item mt-3'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							<Link
 								className='nav-link fontawesome-icons myAccount '
 								to='/user/dashboard'
-								onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+								onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+							>
 								My Account/Dashboard
 							</Link>
 						</li>
@@ -290,24 +318,28 @@ const Sidebar = ({
 							<li
 								className='nav-item mt-3'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
-								}}>
+									window.scrollTo({top: 0, behavior: "smooth"});
+								}}
+							>
 								<Link
 									className='nav-link fontawesome-icons myAccount '
 									to='/admin/dashboard'
-									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+								>
 									Admin Dashboard
 								</Link>
 							</li>
 							<li
 								className='nav-item mt-3'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
-								}}>
+									window.scrollTo({top: 0, behavior: "smooth"});
+								}}
+							>
 								<Link
 									className='nav-link fontawesome-icons myAccount'
 									to='/user/dashboard'
-									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+								>
 									My Account/Dashboard
 								</Link>
 							</li>
@@ -319,12 +351,14 @@ const Sidebar = ({
 							<li
 								className='nav-item mt-3'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
-								}}>
+									window.scrollTo({top: 0, behavior: "smooth"});
+								}}
+							>
 								<Link
 									className='nav-link fontawesome-icons '
 									to='/signin'
-									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+								>
 									Login
 								</Link>
 							</li>
@@ -332,12 +366,14 @@ const Sidebar = ({
 							<li
 								className='nav-item mt-3'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
-								}}>
+									window.scrollTo({top: 0, behavior: "smooth"});
+								}}
+							>
 								<Link
 									className='nav-link fontawesome-icons'
 									to='/signup'
-									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}>
+									onClick={isSidebarOpen2 ? closeSidebar2 : openSidebar2}
+								>
 									Register
 								</Link>
 							</li>
@@ -348,8 +384,9 @@ const Sidebar = ({
 						<li
 							className='nav-item'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
-							}}>
+								window.scrollTo({top: 0, behavior: "smooth"});
+							}}
+						>
 							<span>
 								<span
 									className='signoutbutton nav-link mt-3 '
@@ -367,7 +404,8 @@ const Sidebar = ({
 											localStorage.removeItem("userHistoryPurchases");
 											localStorage.removeItem("order");
 										})
-									}>
+									}
+								>
 									<span className='myAccount'>Signout</span>
 								</span>
 							</span>
@@ -471,6 +509,12 @@ const SideWrapper = styled.nav`
 	.sidebarArabic {
 		font-family: "Droid Arabic Kufi";
 		letter-spacing: 0px;
+	}
+
+	i {
+		color: red;
+		font-weight: bolder;
+		font-size: 20px;
 	}
 	@media (min-width: 600px) {
 		width: 20rem;

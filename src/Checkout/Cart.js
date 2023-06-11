@@ -1,23 +1,23 @@
 /** @format */
-import React, { useState, useEffect, Fragment } from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import styled from "styled-components";
-import { useCartContext } from "./cart_context";
-import { Link } from "react-router-dom";
+import {useCartContext} from "./cart_context";
+import {Link} from "react-router-dom";
 // eslint-disable-next-line
-import { isAuthenticated } from "../auth/index";
+import {isAuthenticated} from "../auth/index";
 import {
 	allLoyaltyPointsAndStoreStatus,
 	getColors,
 	getProducts,
 	readProduct,
 } from "../apiCore";
-import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
-import { Helmet } from "react-helmet";
+import {FaTrash, FaMinus, FaPlus} from "react-icons/fa";
+import {Helmet} from "react-helmet";
 import CardForRelatedProducts from "../pages/SingleProduct/CardForRelatedProducts";
 import Slider from "react-slick";
 // import CardForRelatedProducts from "../SingleProduct/CardForRelatedProducts";
 
-const Cart = ({ chosenLanguage }) => {
+const Cart = ({chosenLanguage}) => {
 	const [relatedProducts, setRelatedProducts] = useState([]);
 	const [categoryProducts, setCategoryProducts] = useState([]);
 	// eslint-disable-next-line
@@ -91,21 +91,21 @@ const Cart = ({ chosenLanguage }) => {
 
 	const CartItem = (i, id, image, name, price, amount, nameArabic) => {
 		var productColors = i.allProductDetailsIncluded.productAttributes.map(
-			(iii) => iii.color,
+			(iii) => iii.color
 		);
 		var uniqueProductColors = [
 			...new Map(productColors.map((item) => [item, item])).values(),
 		];
 
 		var productSizes = i.allProductDetailsIncluded.productAttributes.map(
-			(iii) => iii.size,
+			(iii) => iii.size
 		);
 		var uniqueProductSizes = [
 			...new Map(productSizes.map((item) => [item, item])).values(),
 		];
 
 		var chosenAttribute = i.allProductDetailsIncluded.productAttributes.filter(
-			(iii) => iii.color === i.color && iii.size === i.size,
+			(iii) => iii.color === i.color && iii.size === i.size
 		)[0];
 
 		if (i.allProductDetailsIncluded.activeBackorder) {
@@ -124,13 +124,10 @@ const Cart = ({ chosenLanguage }) => {
 		return (
 			<WrapperCartItem
 				className='row '
-				dir={chosenLanguage === "Arabic" ? "rtl" : "ltr"}>
+				dir={chosenLanguage === "Arabic" ? "rtl" : "ltr"}
+			>
 				<div className='col-md-2 mx-auto text-center my-auto'>
-					<img
-						src={image}
-						alt={name}
-						style={{ width: "80px", height: "80px" }}
-					/>
+					<img src={image} alt={name} style={{width: "80px", height: "80px"}} />
 				</div>
 				<div
 					className='col-md-4 mx-auto text-center my-auto'
@@ -138,11 +135,10 @@ const Cart = ({ chosenLanguage }) => {
 						fontSize: "0.7rem",
 						fontWeight: "bold",
 						textTransform: "capitalize",
-					}}>
+					}}
+				>
 					{chosenLanguage === "Arabic" ? nameArabic : name}
-					<div style={{ color: "darkgray" }}>
-						Available Items: {i.max} items
-					</div>
+					<div style={{color: "darkgray"}}>Available Items: {i.max} items</div>
 
 					<div className='my-2'>
 						<span className='mr-1'>Size: </span>
@@ -157,17 +153,18 @@ const Cart = ({ chosenLanguage }) => {
 									i.allProductDetailsIncluded.productAttributes.filter(
 										(iii) =>
 											iii.color === i.color &&
-											iii.size.toLowerCase() === e.target.value.toLowerCase(),
+											iii.size.toLowerCase() === e.target.value.toLowerCase()
 									)[0];
 								changeSize(
 									i.id,
 									e.target.value,
 									i.color,
 									chosenAttribute2.quantity,
-									i.size,
+									i.size
 								);
-							}}>
-							<option style={{ textTransform: "capitalize" }}>{i.size}</option>
+							}}
+						>
+							<option style={{textTransform: "capitalize"}}>{i.size}</option>
 
 							{uniqueProductSizes &&
 								uniqueProductSizes.map((ss, ii) => {
@@ -190,7 +187,7 @@ const Cart = ({ chosenLanguage }) => {
 							onChange={(e) => {
 								var chosenColorImageHelper =
 									i.allProductDetailsIncluded.productAttributes.filter(
-										(iii) => iii.color === e.target.value,
+										(iii) => iii.color === e.target.value
 									)[0];
 
 								var chosenColorImage =
@@ -204,7 +201,7 @@ const Cart = ({ chosenLanguage }) => {
 										(iii) =>
 											iii.color.toLowerCase() ===
 												e.target.value.toLowerCase() &&
-											iii.size.toLowerCase() === i.size,
+											iii.size.toLowerCase() === i.size
 									)[0];
 								changeColor(
 									i.id,
@@ -212,10 +209,11 @@ const Cart = ({ chosenLanguage }) => {
 									i.size,
 									chosenColorImage,
 									chosenAttribute2.quantity,
-									i.color,
+									i.color
 								);
-							}}>
-							<option style={{ textTransform: "capitalize" }}>
+							}}
+						>
+							<option style={{textTransform: "capitalize"}}>
 								{allColors &&
 									allColors[allColors.map((ii) => ii.hexa).indexOf(i.color)] &&
 									allColors[allColors.map((ii) => ii.hexa).indexOf(i.color)]
@@ -241,20 +239,23 @@ const Cart = ({ chosenLanguage }) => {
 					<span
 						type='button'
 						className='amount-btn py-2'
-						style={{ border: "solid #f1f1f1 1px", width: "100%" }}
-						onClick={decrease}>
+						style={{border: "solid #f1f1f1 1px", width: "100%"}}
+						onClick={decrease}
+					>
 						<FaMinus />
 					</span>
 					<span
-						style={{ border: "solid #f1f1f1 1px", width: "100%" }}
-						className='amount py-2'>
+						style={{border: "solid #f1f1f1 1px", width: "100%"}}
+						className='amount py-2'
+					>
 						{amount}
 					</span>
 					<span
 						type='button'
 						className='amount-btn py-2'
-						style={{ border: "solid #f1f1f1 1px", width: "100%" }}
-						onClick={increase}>
+						style={{border: "solid #f1f1f1 1px", width: "100%"}}
+						onClick={increase}
+					>
 						<FaPlus />
 					</span>
 				</div>
@@ -265,7 +266,8 @@ const Cart = ({ chosenLanguage }) => {
 							fontWeight: "bold",
 							letterSpacing: "3px",
 							color: "goldenrod",
-						}}>
+						}}
+					>
 						{price * amount} L.E.
 					</span>
 				</div>
@@ -279,7 +281,8 @@ const Cart = ({ chosenLanguage }) => {
 							border: "none",
 							fontWeight: "bold",
 						}}
-						onClick={() => removeItem(id, i.size, i.color)}>
+						onClick={() => removeItem(id, i.size, i.color)}
+					>
 						<FaTrash />
 					</button>
 				</div>
@@ -292,7 +295,8 @@ const Cart = ({ chosenLanguage }) => {
 			<WrapperCartColumns
 				dir={chosenLanguage === "Arabic" ? "rtl" : "ltr"}
 				className='row my-auto'
-				style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+				style={{fontSize: "0.85rem", fontWeight: "bold"}}
+			>
 				<div className='col-md-2 mx-auto text-center my-auto'>
 					{chosenLanguage === "Arabic" ? "المنتجات" : "Item"}
 				</div>
@@ -355,16 +359,13 @@ const Cart = ({ chosenLanguage }) => {
 					if (data2.error) {
 						console.log(data2.error);
 					} else {
-						var allAceProducts = data2.filter(
-							(i) =>
-								i.activeProduct === true && i.storeName.storeName === "ace",
-						);
+						var allAceProducts = data2.filter((i) => i.activeProduct === true);
 						setCategoryProducts(
 							allAceProducts.filter(
 								(iiii) =>
 									iiii.category.categoryName.toLowerCase() ===
-									data.category.categoryName,
-							),
+									data.category.categoryName
+							)
 						);
 					}
 				});
@@ -421,7 +422,7 @@ const Cart = ({ chosenLanguage }) => {
 		<CartV2Styling>
 			<Helmet>
 				<meta charSet='utf-8' />
-				<title>ACE SPORTS WEAR | ONLINE SHOP CART</title>
+				<title>Next Day | ONLINE SHOP CART</title>
 
 				<meta name='description' content='THE BEST SPORTS WEAR IN THE MARKET' />
 				<link
@@ -438,7 +439,8 @@ const Cart = ({ chosenLanguage }) => {
 						fontWeight: "bold",
 						marginTop: "50px",
 						marginLeft: "110px",
-					}}>
+					}}
+				>
 					Your Cart Is Empty
 					<br />
 					<Link
@@ -447,7 +449,8 @@ const Cart = ({ chosenLanguage }) => {
 							fontSize: "1.5rem",
 							fontWeight: "bold",
 							// background: "grey",
-						}}>
+						}}
+					>
 						Continue Shopping
 					</Link>
 				</div>
@@ -468,7 +471,7 @@ const Cart = ({ chosenLanguage }) => {
 											i.name,
 											i.priceAfterDiscount,
 											i.amount,
-											i.nameArabic,
+											i.nameArabic
 										)}
 									</span>
 									<hr />
@@ -480,7 +483,8 @@ const Cart = ({ chosenLanguage }) => {
 							<Link
 								to='/our-products'
 								className='link-btn btn-primary'
-								style={{ borderRadius: "10px", background: "grey" }}>
+								style={{borderRadius: "10px", background: "grey"}}
+							>
 								continue shopping
 							</Link>
 							<Link
@@ -503,7 +507,7 @@ const Cart = ({ chosenLanguage }) => {
 						{cart.map((i, k) => {
 							var productColors =
 								i.allProductDetailsIncluded.productAttributes.map(
-									(iii) => iii.color,
+									(iii) => iii.color
 								);
 							var uniqueProductColors = [
 								...new Map(productColors.map((item) => [item, item])).values(),
@@ -511,7 +515,7 @@ const Cart = ({ chosenLanguage }) => {
 
 							var productSizes =
 								i.allProductDetailsIncluded.productAttributes.map(
-									(iii) => iii.size,
+									(iii) => iii.size
 								);
 							var uniqueProductSizes = [
 								...new Map(productSizes.map((item) => [item, item])).values(),
@@ -519,7 +523,7 @@ const Cart = ({ chosenLanguage }) => {
 
 							var chosenAttribute =
 								i.allProductDetailsIncluded.productAttributes.filter(
-									(iii) => iii.color === i.color && iii.size === i.size,
+									(iii) => iii.color === i.color && iii.size === i.size
 								)[0];
 
 							if (i.allProductDetailsIncluded.activeBackorder) {
@@ -543,7 +547,7 @@ const Cart = ({ chosenLanguage }) => {
 												<img
 													src={i.image}
 													alt={i.name}
-													style={{ width: "80px", height: "80px" }}
+													style={{width: "80px", height: "80px"}}
 												/>
 											</span>
 										</div>
@@ -554,7 +558,8 @@ const Cart = ({ chosenLanguage }) => {
 													fontWeight: "bold",
 													marginLeft: "0px",
 													textTransform: "uppercase",
-												}}>
+												}}
+											>
 												{chosenLanguage === "Arabic" ? i.nameArabic : i.name}
 											</div>
 											<div className='my-2'>
@@ -571,17 +576,18 @@ const Cart = ({ chosenLanguage }) => {
 																(iii) =>
 																	iii.color === i.color &&
 																	iii.size.toLowerCase() ===
-																		e.target.value.toLowerCase(),
+																		e.target.value.toLowerCase()
 															)[0];
 														changeSize(
 															i.id,
 															e.target.value,
 															i.color,
 															chosenAttribute2.quantity,
-															i.size,
+															i.size
 														);
-													}}>
-													<option style={{ textTransform: "capitalize" }}>
+													}}
+												>
+													<option style={{textTransform: "capitalize"}}>
 														{i.size}
 													</option>
 
@@ -606,7 +612,7 @@ const Cart = ({ chosenLanguage }) => {
 													onChange={(e) => {
 														var chosenColorImageHelper =
 															i.allProductDetailsIncluded.productAttributes.filter(
-																(iii) => iii.color === e.target.value,
+																(iii) => iii.color === e.target.value
 															)[0];
 
 														var chosenColorImage =
@@ -620,7 +626,7 @@ const Cart = ({ chosenLanguage }) => {
 																(iii) =>
 																	iii.color.toLowerCase() ===
 																		e.target.value.toLowerCase() &&
-																	iii.size.toLowerCase() === i.size,
+																	iii.size.toLowerCase() === i.size
 															)[0];
 														changeColor(
 															i.id,
@@ -628,10 +634,11 @@ const Cart = ({ chosenLanguage }) => {
 															i.size,
 															chosenColorImage,
 															chosenAttribute2.quantity,
-															i.color,
+															i.color
 														);
-													}}>
-													<option style={{ textTransform: "capitalize" }}>
+													}}
+												>
+													<option style={{textTransform: "capitalize"}}>
 														{allColors &&
 															allColors[
 																allColors.map((ii) => ii.hexa).indexOf(i.color)
@@ -665,7 +672,8 @@ const Cart = ({ chosenLanguage }) => {
 													color: "goldenrod",
 													// marginLeft: "70px",
 													marginTop: "10px",
-												}}>
+												}}
+											>
 												{i.priceAfterDiscount * i.amount} L.E.
 											</div>
 											<div
@@ -677,7 +685,8 @@ const Cart = ({ chosenLanguage }) => {
 													marginTop: "10px",
 													textTransform: "capitalize",
 													color: "darkgreen",
-												}}>
+												}}
+											>
 												<button
 													type='button'
 													className='amount-btn'
@@ -687,7 +696,8 @@ const Cart = ({ chosenLanguage }) => {
 														color: "darkgrey",
 														padding: "13px",
 													}}
-													onClick={decrease}>
+													onClick={decrease}
+												>
 													<FaMinus />
 												</button>
 												<span
@@ -697,7 +707,8 @@ const Cart = ({ chosenLanguage }) => {
 														backgroundColor: "white",
 														color: "black",
 														padding: "3.3px 14px 3.3px 14px",
-													}}>
+													}}
+												>
 													{i.amount}
 												</span>
 												<button
@@ -709,8 +720,9 @@ const Cart = ({ chosenLanguage }) => {
 													}}
 													type='button'
 													className='amount-btn'
-													onClick={increase}>
-													<FaPlus style={{ fontSize: "1.2rem" }} />
+													onClick={increase}
+												>
+													<FaPlus style={{fontSize: "1.2rem"}} />
 												</button>
 											</div>
 										</div>
@@ -724,7 +736,7 @@ const Cart = ({ chosenLanguage }) => {
 							<div className='row'>
 								<div className='col-8'>Subtotal:</div>
 
-								<div className='col-4' style={{ fontWeight: "bold" }}>
+								<div className='col-4' style={{fontWeight: "bold"}}>
 									EGP {total_amount}
 								</div>
 
@@ -732,16 +744,17 @@ const Cart = ({ chosenLanguage }) => {
 
 								<div
 									className='col-4'
-									style={{ fontWeight: "bold", fontSize: "0.7rem" }}>
+									style={{fontWeight: "bold", fontSize: "0.7rem"}}
+								>
 									Continue To Checkout to know your shipping fee
 								</div>
 							</div>
 							<hr />
-							<div style={{ fontSize: "1rem" }}>
+							<div style={{fontSize: "1rem"}}>
 								<div className='row'>
 									<div className='col-8'>Total </div>
 
-									<div className='col-4' style={{ fontWeight: "bolder" }}>
+									<div className='col-4' style={{fontWeight: "bolder"}}>
 										EGP {Number(total_amount)}
 									</div>
 								</div>
@@ -776,7 +789,8 @@ const Cart = ({ chosenLanguage }) => {
 										textDecoration: "underline",
 										color: "black",
 										// background: "grey",
-									}}>
+									}}
+								>
 									Continue Shopping
 								</Link>
 							</div>

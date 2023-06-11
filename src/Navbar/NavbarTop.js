@@ -86,15 +86,20 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 					).values(),
 				];
 				setAllGenders(uniqueGenders);
-				setGenderClicked(uniqueGenders[0]);
+				const allGendersModified =
+					uniqueGenders &&
+					uniqueGenders.length > 0 &&
+					uniqueGenders.filter((i) => i.genderName.toLowerCase() === "men");
+
+				setGenderClicked(allGendersModified[0]);
 
 				//Categories Unique
 				var categoriesArray = data
 					.filter(
 						(i) =>
 							i.activeProduct === true &&
-							genderClicked.genderName.toLowerCase() === i.gender &&
-							i.gender.genderName.toLowerCase()
+							i.gender &&
+							i.gender.genderName.toLowerCase() === "men"
 					)
 					.map((ii) => ii.category);
 
@@ -113,36 +118,6 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 		gettingAllProducts();
 		// eslint-disable-next-line
 	}, []);
-
-	const gettingAllProductsCategories = () => {
-		getProducts().then((data) => {
-			if (data.error) {
-				console.log(data.error);
-			} else {
-				//Categories Unique
-				var categoriesArray = data
-					.filter(
-						(i) =>
-							i.activeProduct === true &&
-							genderClicked.genderName.toLowerCase() === i.gender &&
-							i.gender.genderName.toLowerCase()
-					)
-					.map((ii) => ii.category);
-
-				let uniqueCategories = [
-					...new Map(
-						categoriesArray.map((item) => [item["categoryName"], item])
-					).values(),
-				];
-				setAllCategories(uniqueCategories);
-			}
-		});
-	};
-
-	useEffect(() => {
-		gettingAllProductsCategories();
-		// eslint-disable-next-line
-	}, [genderClicked]);
 
 	const gettingAllColors = () => {
 		getColors().then((data) => {
@@ -878,6 +853,16 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 						></i>
 					</div>
 				) : null}
+
+				<div
+					className='col-2  my-auto  cellPhoneLogo p-0'
+					// style={{ border: "1px black solid" }}
+				>
+					<Link to='/'>
+						<img className='imgLogo2' src={finalLogoUrl} alt='Infinite Apps' />
+					</Link>
+				</div>
+
 				{!isSidebarOpen2 ? (
 					<div
 						className='col-1 my-auto'
@@ -889,15 +874,6 @@ const NavbarTop = ({history, language, setLanguage, chosenLanguage}) => {
 						></i>
 					</div>
 				) : null}
-
-				<div
-					className='col-2  my-auto  cellPhoneLogo p-0'
-					// style={{ border: "1px black solid" }}
-				>
-					<Link to='/'>
-						<img className='imgLogo2' src={finalLogoUrl} alt='Infinite Apps' />
-					</Link>
-				</div>
 				<div className={window.screen.width >= 363 ? "col-2" : "col-2"}></div>
 				<div
 					// className='col-7 my-auto'

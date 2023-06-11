@@ -32,6 +32,7 @@ const ShopPageMain = ({chosenLanguage}) => {
 	const [usedFilters, setUsedFilters] = useState([]);
 	const [allColors, setAllColors] = useState([]);
 	const [selectedPriceRange, setSelectedPriceRange] = useState(0);
+	const [loadMoreButton, setLoadMoreButton] = useState(15);
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
 
@@ -201,18 +202,33 @@ const ShopPageMain = ({chosenLanguage}) => {
 					>
 						{allProducts &&
 							allProducts.map((product, i) => (
-								<CardForShop
-									i={i}
-									product={product}
-									key={i}
-									chosenLanguage={chosenLanguage}
-								/>
+								<React.Fragment key={i}>
+									{i <= loadMoreButton ? (
+										<CardForShop
+											i={i}
+											product={product}
+											chosenLanguage={chosenLanguage}
+										/>
+									) : null}
+								</React.Fragment>
 							))}
 					</div>
 
 					<hr />
 				</div>
 			</div>
+			{allProducts && allProducts.length <= loadMoreButton ? null : (
+				<div className='mx-auto text-center col-md-3 mb-5'>
+					<button
+						className='btn btn-info mx-2 my-4 btn-block text-center'
+						onClick={() => {
+							setLoadMoreButton(Number(loadMoreButton) + 12);
+						}}
+					>
+						Load More....
+					</button>
+				</div>
+			)}
 		</ShopPageMainWrapper>
 	);
 };

@@ -1,12 +1,12 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 // import AboutPhoto from "../imgs/traffic-3098747_1920.jpg";
 // import AboutPhoto from "../Navbar/RCHDIGIMP_Logo.jpg";
 import ReactGA from "react-ga4";
 import Helmet from "react-helmet";
-import { getAbouts } from "../../apiCore";
+import {getAbouts} from "../../apiCore";
 
 const About = () => {
 	const [aboutus, setAboutUs] = useState({});
@@ -38,24 +38,16 @@ const About = () => {
 			<Helmet>
 				<meta charSet='utf-8' />
 				<title>Next Day Online Shop | About Us</title>
-				<meta name='description' content='Ace Online Store' />
+				<meta name='description' content='Next Day Store' />
 				<link rel='icon' href='gq_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='https://acesportive.com/about' />
+				<link rel='canonical' href='https://nextdayegy.com/about' />
 			</Helmet>
-			<div className='container my-5'>
-				<h1 className='title text-center '>ABOUT US</h1>
-				<div className='col-md-5 mx-auto mb-5'>
-					<br />
-					<div className='horizLine'></div>
-				</div>
-				<div className='row'>
-					<div className='col-md-6 about-us'>
-						<p className='about-title'>{aboutus && aboutus.header_1}</p>
-						<ul>
-							<li>{aboutus && aboutus.description_1}</li>
-						</ul>
-					</div>
-					{aboutus ? (
+			<div className='my-5'>
+				<div className='text-center mx-auto'>
+					{aboutus &&
+					aboutus.thumbnail &&
+					aboutus.thumbnail[0] &&
+					aboutus.thumbnail[0].url ? (
 						<div className='col-md-6 imgdiv  my-5'>
 							<img
 								src={
@@ -64,11 +56,37 @@ const About = () => {
 									aboutus.thumbnail[0] &&
 									aboutus.thumbnail[0].url
 								}
-								className='img-fluid'
-								alt='Infinite-Apps'
+								decoding='async'
+								alt='Powered By infinite-apps.com'
+								width='1728'
+								height='565'
+								style={{marginTop: "0px", objectFit: "cover", padding: "0px"}}
 							/>
 						</div>
-					) : null}
+					) : (
+						<img
+							decoding='async'
+							alt='Powered By infinite-apps.com'
+							width='1728'
+							height='565'
+							style={{marginTop: "0px", objectFit: "cover", padding: "0px"}}
+							src='https://reydemos.b-cdn.net/london/wp-content/uploads/sites/8/2019/04/our-story-01.jpg'
+						/>
+					)}
+				</div>
+				<h1 className='title text-center mt-5'>ABOUT US</h1>
+				<div className='col-md-3 mx-auto mb-0'>
+					<br />
+					<div className='horizLine'></div>
+				</div>
+
+				<div className='row'>
+					<div className='col-md-6 about-us mx-auto'>
+						<p className='about-title'>{aboutus && aboutus.header_1}</p>
+						<ul className='mx-auto'>
+							<li>{aboutus && aboutus.description_1}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</AboutPageWrapper>

@@ -1,9 +1,9 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
-import { getProducts } from "../apiCore";
+import React, {useEffect, useState} from "react";
+import {getProducts} from "../apiCore";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const GenderNav = () => {
 	const [allGenders, setAllGenders] = useState([]);
@@ -15,16 +15,21 @@ const GenderNav = () => {
 			} else {
 				//Gender Unique
 				var genderUnique = data
-					.filter(
-						(i) => i.activeProduct === true && i.storeName.storeName === "ace",
-					)
-					.map((ii) => ii.gender);
+					.filter((i) => i.activeProduct === true)
+					.map((ii) => ii.gender)
+					.filter((iii) => iii !== null);
 
 				let uniqueGenders = [
 					...new Map(
-						genderUnique.map((item) => [item["genderName"], item]),
+						genderUnique.map((item) => [item["genderName"], item])
 					).values(),
 				];
+
+				uniqueGenders.sort((a, b) => {
+					if (a.genderName.toLowerCase() === "men") return -1;
+					if (b.genderName.toLowerCase() === "men") return 1;
+					return 0;
+				});
 				setAllGenders(uniqueGenders);
 			}
 		});
@@ -39,8 +44,7 @@ const GenderNav = () => {
 	}, []);
 
 	return (
-		<GenderNavWrapper
-			style={{ display: allGenders.length === 1 ? "none" : "" }}>
+		<GenderNavWrapper style={{display: allGenders.length === 1 ? "none" : ""}}>
 			<div className='row mx-auto'>
 				{allGenders &&
 					allGenders.map((g, i) => {
@@ -58,12 +62,14 @@ const GenderNav = () => {
 											: "col-6 mx-auto genderItem"
 									}
 									key={i}
-									style={{ textTransform: "uppercase" }}>
+									style={{textTransform: "uppercase"}}
+								>
 									<Link
 										to={`/our-products?filterby=gender&gendername=${g.genderName}`}
 										onClick={() =>
-											window.scrollTo({ top: 0, behavior: "smooth" })
-										}>
+											window.scrollTo({top: 0, behavior: "smooth"})
+										}
+									>
 										SHOP {g.genderName}
 									</Link>
 								</div>

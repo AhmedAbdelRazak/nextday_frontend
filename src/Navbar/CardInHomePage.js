@@ -1,14 +1,14 @@
 /** @format */
 
-import React, { useState, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {useState, Fragment} from "react";
+import {Link, Redirect} from "react-router-dom";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import {Carousel} from "react-responsive-carousel";
 // eslint-disable-next-line
-import { useCartContext } from "../Checkout/cart_context";
-import { viewsCounter } from "../apiCore";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import {useCartContext} from "../Checkout/cart_context";
+import {viewsCounter} from "../apiCore";
+import {ShoppingCartOutlined} from "@ant-design/icons";
 // import ReactPixel from "react-facebook-pixel";
 
 const CardInHomePage = ({
@@ -40,7 +40,7 @@ const CardInHomePage = ({
 		// window.scrollTo(0, 0);
 	};
 
-	const { addToCart, openSidebar } = useCartContext();
+	const {addToCart, openSidebar} = useCartContext();
 
 	const shouldRedirect = (redirect) => {
 		if (redirect) {
@@ -73,10 +73,11 @@ const CardInHomePage = ({
 														null,
 														1,
 														product,
-														chosenProductAttributes,
+														chosenProductAttributes
 													)
 												}
-												className='btn btn-warning mt-2 mb-2 card-btn-1  cartoptions2'>
+												className='btn btn-warning mt-2 mb-2 card-btn-1  cartoptions2'
+											>
 												أضف إلى السلة
 											</span>
 										</span>
@@ -86,7 +87,8 @@ const CardInHomePage = ({
 								<Fragment>
 									<button
 										className='btn btn-warning mt-2 mb-2 card-btn-1 cartoptions2'
-										disabled>
+										disabled
+									>
 										أضف إلى السلة
 									</button>
 								</Fragment>
@@ -105,10 +107,11 @@ const CardInHomePage = ({
 														null,
 														1,
 														product,
-														chosenProductAttributes,
+														chosenProductAttributes
 													)
 												}
-												className='btn btn-warning mt-2 mb-2 card-btn-1  cartoptions'>
+												className='btn btn-warning mt-2 mb-2 card-btn-1  cartoptions'
+											>
 												Add to Cart
 											</span>
 										</span>
@@ -118,7 +121,8 @@ const CardInHomePage = ({
 								<Fragment>
 									<button
 										className='btn btn-warning mt-2 mb-2 card-btn-1 cartoptions'
-										disabled>
+										disabled
+									>
 										Add to Cart
 									</button>
 								</Fragment>
@@ -130,7 +134,7 @@ const CardInHomePage = ({
 		);
 	};
 
-	const ShowImage = ({ item }) => (
+	const ShowImage = ({item}) => (
 		<div className='product-wrapper'>
 			<span onClick={openSidebar}>
 				<span
@@ -144,7 +148,8 @@ const CardInHomePage = ({
 						// 	currency: "",
 						// });
 					}}
-					className='btn'>
+					className='btn'
+				>
 					<ShoppingCartOutlined />
 				</span>
 			</span>
@@ -160,15 +165,17 @@ const CardInHomePage = ({
 						interval={5000}
 						showStatus={false}
 						showIndicators={false}
-						showThumbs={false}>
+						showThumbs={false}
+					>
 						{item.thumbnailImage[0].images.map((i) => (
 							<Link
 								key={i.public_id}
 								to={`/product/${product.category.categorySlug}/${product.slug}/${product._id}`}
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({top: 0, behavior: "smooth"});
 									SettingViews();
-								}}>
+								}}
+							>
 								<img
 									className=' rounded mx-auto d-block product-imgs'
 									alt={item.productName}
@@ -194,16 +201,17 @@ const CardInHomePage = ({
 		<ProductWrapper className='my-3'>
 			<Fragment>
 				<div className='card '>
-					<div className='card-body  ' style={{ marginLeft: "5px" }}>
+					<div className='card-body  ' style={{marginLeft: "5px"}}>
 						{shouldRedirect(redirect)}
 						<div className='card-img-top center'>
 							<ImageFeat>
 								<Link
 									to={`/product/${product.category.categorySlug}/${product.slug}/${product._id}`}
 									onClick={() => {
-										window.scrollTo({ top: 0, behavior: "smooth" });
+										window.scrollTo({top: 0, behavior: "smooth"});
 										SettingViews();
-									}}>
+									}}
+								>
 									<ShowImage item={product} />
 								</Link>
 							</ImageFeat>
@@ -216,17 +224,16 @@ const CardInHomePage = ({
 							<div className='row'>
 								<div className='col-md-8 productname col-7'>
 									{productPrice <= productPriceAfterDsicount ? null : (
-										<div className='' style={{ fontWeight: "bold" }}>
+										<div className='' style={{fontWeight: "bold"}}>
 											<span
 												style={{
 													color: "darkred",
 													fontSize: "10px",
-												}}>
+												}}
+											>
 												<i className='fa fa-tag' aria-hidden='true'></i>{" "}
 											</span>
-											<span
-												className='discountText'
-												style={{ color: "darkred" }}>
+											<span className='discountText' style={{color: "darkred"}}>
 												{(
 													100 -
 													(
@@ -243,7 +250,8 @@ const CardInHomePage = ({
 											style={{
 												fontFamily: "Droid Arabic Kufi",
 												letterSpacing: "0px",
-											}}>
+											}}
+										>
 											{product.productName_Arabic.slice(0, 20)}
 										</div>
 									) : (
@@ -255,17 +263,17 @@ const CardInHomePage = ({
 								</div>
 								<div className='col-md-4 col-5'>
 									{productPrice <= productPriceAfterDsicount ? (
-										<span style={{ fontWeight: "bold" }}>
+										<span style={{fontWeight: "bold"}}>
 											{productPrice} L.E.
 										</span>
 									) : (
 										<span>
 											<div className='mt-2'>
-												<s style={{ fontWeight: "bold", color: "red" }}>
+												<s style={{fontWeight: "bold", color: "red"}}>
 													{productPrice} L.E.
 												</s>
 											</div>
-											<div style={{ fontWeight: "bold" }}>
+											<div style={{fontWeight: "bold"}}>
 												{productPriceAfterDsicount} L.E.
 											</div>
 										</span>

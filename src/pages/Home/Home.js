@@ -11,6 +11,8 @@ import CategoryWrapperComp from "./CategoryWrapperComp";
 import FeaturedProducts from "./FeaturedProducts";
 // eslint-disable-next-line
 import OurBrandsComp from "./OurBrandsComp";
+
+// eslint-disable-next-line
 import GenderLinks from "./GenderLinks";
 import HeroComponent2 from "./HeroComponent2";
 import HeroComponent3 from "./HeroComponent3";
@@ -18,6 +20,7 @@ import GenderNav from "../../Navbar/GenderNav";
 import {Helmet} from "react-helmet";
 import MostViewedProducts from "./MostViewedProducts";
 import FacebookChat from "../../FacebookChat";
+import TrendingCategories from "./TrendingCategories";
 
 const Home = ({chosenLanguage}) => {
 	// eslint-disable-next-line
@@ -26,6 +29,8 @@ const Home = ({chosenLanguage}) => {
 	const [allCategories, setAllCategories] = useState([]);
 	// eslint-disable-next-line
 	const [allSubcategories, setAllSubcategories] = useState([]);
+
+	// eslint-disable-next-line
 	const [allGenders, setAllGenders] = useState([]);
 
 	const gettingAllProducts = () => {
@@ -130,7 +135,9 @@ const Home = ({chosenLanguage}) => {
 			</>
 			<HeroComponent />
 
-			<GenderLinks allGenders={allGenders} />
+			{/* <GenderLinks allGenders={allGenders} /> */}
+
+			<TrendingCategories allCategories={allCategories} />
 
 			<div className='my-5'>
 				<FeaturedProducts
